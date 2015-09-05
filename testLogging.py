@@ -20,6 +20,8 @@ class TestLogging(object):
         self._level = logLevel
         if self._level == "DEBUG":
             logging.basicConfig(level=logging.DEBUG)
+        elif self._level == "ERROR":
+            logging.basicConfig(level=logging.ERROR)
         else:
             logging.basicConfig(level=logging.WARNING)
 
@@ -51,4 +53,17 @@ class TestLogging(object):
         """
         self._testName = testName
         log = logging.getLogger(self._testName)
-        log.warning("FAILURE\n")
+        if self._level == "ERROR":
+            log.exception("FAILURE\n")
+        else:
+            log.warning("FAILURE\n")
+
+    def printTestFailureException(self, testName):
+        """
+        @param testName: Name of test being run
+
+        Prints an exception block for failure if the test fails.
+        """
+        self._testName = testName
+        log = logging.getLogger(self._testName)
+        log.exception("FAILURE\n")

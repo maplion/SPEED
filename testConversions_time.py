@@ -13,7 +13,7 @@ log = testLogging.TestLogging()
 con_Time = convert.Time()
 
 class TestConversions_time(unittest.TestCase):
-    
+
     def test_secondToMinute(self):
         """
         Are seconds correctly converted to minutes?

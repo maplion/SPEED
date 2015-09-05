@@ -16,13 +16,32 @@ class TestConversions_length(unittest.TestCase):
 
     def meterToMillimeter(self):
         """
-        Is Energy flux correctly converting to the amount of Water Evaporated?
+        Are meters correctly converted to millimeters?
         """
         testName = "meterToMillimeter"
         try:
             log.printTestBegin(testName)
             # ------------------------------------
+            meters = 1
+            millimeters = con_Length.meterToMillimeter(meters)
+            self.assertEquals(millimeters, 1000)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
+    def millimeterToMeter(self):
+        """
+        Are millimeters correctly converted to meters?
+        """
+        testName = "millimeterToMeter"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            millimeters = 1000
+            meters = con_Length.millimeterToMeter(millimeters)
+            self.assertEquals(meters, 1)
             # ------------------------------------
             log.printTestSuccess(testName)
         except:
@@ -36,5 +55,6 @@ def suite():
     """
     _suite = unittest.TestSuite()
     _suite.addTest(TestConversions_length('meterToMillimeter'))
+    _suite.addTest(TestConversions_length('millimeterToMeter'))
     return _suite
 

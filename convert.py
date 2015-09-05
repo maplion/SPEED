@@ -24,11 +24,13 @@ class Length(Convert): #subclass, inherits from Convert
     These are conversions commonly used for Length calculations.
     """
 
-    def __init__(self):
+    def __init__(self, printFormula="false", numberOfDecimals=6):
         """
         Initializes superclass Convert
         """
         super(Convert, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._printFormula = printFormula
 
     def meterToMillimeter(self, meters):
         """
@@ -42,7 +44,27 @@ class Length(Convert): #subclass, inherits from Convert
             Number of meters * 1000 = Number of millimeters
         """
         self._meters = meters
-        return self._meters * 1000.0
+        _result = self._meters * 1000.0
+        if self._printFormula == "true":
+            print ("{1:{0}} m * 1000.0 = {2:{0}} mm".format(self._df, self._meters, _result))
+        return _result
+
+    def millimeterToMeter(self, millimeters):
+        """
+        Converts millimeters to meters
+
+        @param millimeters: Number of millimeters
+
+        @returns: Number of meters
+
+        Formula:
+            Number of millimeters / 1000 = Number of meters
+        """
+        self._millimeters = millimeters
+        _result = self._millimeters / 1000.0
+        if self._printFormula == "true":
+            print ("{1:{0}} m / 1000.0 = {2:{0}} mm".format(self._df, self._millimeters, _result))
+        return _result
 
 #############################################################################################################
 class Time(Convert): #subclass, inherits from Convert
@@ -93,7 +115,7 @@ class Time(Convert): #subclass, inherits from Convert
         self._minutes = minutes
         _result = self._minutes * 60.0
         if self._printFormula == "true":
-            print ("{1:{0}} min * 60.0 = {2:{0}} s".format(self._df, minutes, _result))
+            print ("{1:{0}} min * 60.0 = {2:{0}} s".format(self._df, self._minutes, _result))
         return _result
 
     def minuteToHour(self, minutes):
@@ -108,7 +130,10 @@ class Time(Convert): #subclass, inherits from Convert
             Number of minutes / 60 = Number of hours
         """
         self._minutes = minutes
-        return self._minutes / 60.0
+        _result = self._minutes / 60.0
+        if self._printFormula == "true":
+            print ("{1:{0}} min / 60.0 = {2:{0}} hr".format(self._df, self._minutes, _result))
+        return _result
 
     def hourToMinute(self, hours):
         """
@@ -122,7 +147,10 @@ class Time(Convert): #subclass, inherits from Convert
             Number of hours * 60 = Number of minutes
         """
         self._hours = hours
-        return self._hours * 60.0
+        _result = self._hours * 60.0
+        if self._printFormula == "true":
+            print ("{1:{0}} min * 60.0 = {2:{0}} min".format(self._df, self._hours, _result))
+        return _result
 
     def secondToHour(self, seconds):
         """
@@ -133,10 +161,12 @@ class Time(Convert): #subclass, inherits from Convert
         @returns: Number of hours
 
         Formula:
-            Number of seconds / 3600
+            Number of seconds / 3600 = Number of Hours
         """
         self._seconds = seconds
         _result = self._seconds / 3600.0
+        if self._printFormula == "true":
+            print ("{1:{0}} s / 3600.0 = {2:{0}} hr".format(self._df, self._seconds, _result))
         return _result
 
 
@@ -149,10 +179,12 @@ class Time(Convert): #subclass, inherits from Convert
         @returns: Number of seconds
 
         Formula:
-            Number of hours * 3600
+            Number of hours * 3600 = Number of seconds
         """
         self._hours = hours
         _result = self._hours * 3600.0
+        if self._printFormula == "true":
+            print ("{1:{0}} hr * 3600.0 = {2:{0}} s".format(self._df, self._hours, _result))
         return _result
 
 #############################################################################################################
@@ -163,11 +195,13 @@ class ET(Convert): #subclass, inherits from Convert
     These are conversions commonly used for ET calculations.
     """
 
-    def __init__(self):
+    def __init__(self, printFormula="false", numberOfDecimals=6):
         """
         Initializes superclass Convert
         """
         super(Convert, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._printFormula = printFormula
         
     def energyFluxToWaterEvaporated(self, energyFluxValue, waterDensity=1000.0):
         """
