@@ -5,7 +5,6 @@ Created on Fri Sep 04 18:47:31 2015
 @author: Ryan Dammrose aka MapLion
 """
 import unittest
-import testLogging
 import testConversions_time
 import testConversions_length
 import testConversions_ET

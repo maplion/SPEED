@@ -14,6 +14,23 @@ con_ET = convert.ET()
 
 class TestConversions_ET(unittest.TestCase):
 
+    def test_massFluxToWaterEvaporated(self):
+        """
+        Is mass flux correctly converting to the amount of Water Evaporated?
+        """
+        testName = "test_massFluxToWaterEvaporated"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
+            ET_mm_per_day = con_ET.massFluxToWaterEvaporated(ET_mf)
+            self.assertEquals(round(ET_mm_per_day, 6), 2.592000)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
     def test_energyFluxToWaterEvaporated(self):
         """
         Is Energy flux correctly converting to the amount of Water Evaporated?
@@ -22,7 +39,7 @@ class TestConversions_ET(unittest.TestCase):
         try:
             log.printTestBegin(testName)
             # ------------------------------------
-            # ET_mf = 3.0e-5 # mass flux rate in kg/(m^2*s)
+            # ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
             # ET_mm_per_day = con_ET.energyFluxToWaterEvaporated(ET_mf)
             # self.assertEquals(ET_mm_per_day, 2.592000)
             # ------------------------------------
@@ -37,6 +54,6 @@ def suite():
     Gather all the tests from this module in a test suite.
     """
     _suite = unittest.TestSuite()
-    _suite.addTest(TestConversions_ET('test_energyFluxToWaterEvaporated'))
+    _suite.addTest(TestConversions_ET('test_massFluxToWaterEvaporated'))
     return _suite
 

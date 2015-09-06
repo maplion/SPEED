@@ -3,6 +3,11 @@
 Created on Fri Sep 04 22:29:58 2015
 
 @author: Ryan Dammrose aka MapLion
+
+Note: As there are far more advanced [further abstraction, more dynamic, more feature-rich] libraries out there
+for unit conversion, this was just done as an exercise to familiarize myself with certain constructs
+that I am used to from other languages (e.g. Java/C#), help meet specific needs for a class and get
+general practice at making something from scratch.
 """
 
 class Convert(object): #superclass, inherits from default object
@@ -187,6 +192,40 @@ class Time(Convert): #subclass, inherits from Convert
             print ("{1:{0}} hr * 3600.0 = {2:{0}} s".format(self._df, self._hours, _result))
         return _result
 
+    def secondToDay(self, seconds):
+        """
+        Converts seconds to days
+
+        @param seconds: Number of seconds
+
+        @returns: Number of days
+
+        Formula:
+            Number of seconds / 86400 = Number of days
+        """
+        self._seconds = seconds
+        _result = self._seconds / 86400.0
+        if self._printFormula == "true":
+            print ("{1:{0}} s / 86400.0 = {2:{0}} days".format(self._df, self._seconds, _result))
+        return _result
+
+    def dayToSecond(self, days):
+        """
+        Converts days to seconds
+
+        @param days: Number of days
+
+        @returns: Number of seconds
+
+        Formula:
+            Number of days * 86400 = Number of seconds
+        """
+        self._days = days
+        _result = self._days * 86400.0
+        if self._printFormula == "true":
+            print ("{1:{0}} days * 86400.0 = {2:{0}} s".format(self._df, self._days, _result))
+        return _result
+
 #############################################################################################################
 class ET(Convert): #subclass, inherits from Convert
     """
@@ -209,14 +248,47 @@ class ET(Convert): #subclass, inherits from Convert
         energy flux (W/m^2) to units of equivalent depth of water
         evaporated per day (mm/day)
         
-        @param energyFluxValue: mass flux rate in kg/(m^2*s) [W/m^2]
+        @param energyFluxValue: mass flux rate in kg/(m^2*s)
         @param waterDensity: density value for water; defaults to 1000 kg/m^3
             
         @returns: Amount of Water Evaporated (in mm/day)
         
-        Formula: 
+        Formula:
+            Long route:
+            1 W/m^2 = 1 J/(s*m^2)
+            1 J/(s*m^2) = 1 N/(m*s)
+            1 MegaJoule = 1000000 * 1 N/(m*s)
+            TODO:
+
+            MegaJoules conversion factor: 1 mm/day = 2.45 MJ*m^(-2)/day
+            energyFluxValue conversion factor: 1 Wm^(-2) = 0.0864 MJ*m^(-2)/day
+            conversion factor = 2.45 MJ m^(-2)/day / 0.0864 0.0864 MJ*m^(-2)/day = ~28.35648148
+            waterEvaporated = energyFluxValue / conversion factor
         """
-        self._energyFluxValue = energyFluxValue
-        self._rho = waterDensity #Density of water in kg/m^3
-        
-        
+        self._ET_ef = energyFluxValue
+        self._rho = waterDensity  # Density of water in kg/m^3
+        _result = (self._ET_ef / (28.35648148/self._rho*1000))
+        if self._printFormula == "true":
+            print ("({1:{0}} W/m^2 / (28.35648148/waterDensity*1000)) = {2:{0}} mm/day".format(self._df, self._ET_ef, _result))
+        return _result
+
+    def massFluxToWaterEvaporated(self, massFluxValue, waterDensity=1000.0):
+        """
+        Converts the values of evapotranspiration (ET) given in mass flux
+        units of kg/(m^2*s) to units of equivalent depth of water
+        evaporated per day in mm/day
+
+        @param massFluxValue: mass flux rate in kg/(m^2*s)
+        @param waterDensity: density value for water; defaults to 1000 kg/m^3
+
+        @returns: Amount of Water Evaporated in mm/day
+
+        Formula:
+            massFluxValue * (1.0/waterDensity) * 1000 * 3600 * 24
+        """
+        self._ET_mf = massFluxValue
+        self._rho = waterDensity  # Density of water in kg/m^3
+        _result = self._ET_mf * (1.0/self._rho) * 1000 * 3600 * 24
+        if self._printFormula == "true":
+            print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr = {2:{0}} mm/day".format(self._df, self._ET_mf, _result, self._rho))
+        return _result

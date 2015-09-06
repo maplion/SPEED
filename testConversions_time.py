@@ -115,6 +115,40 @@ class TestConversions_time(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
+    def test_secondToDay(self):
+        """
+        Are hours correctly converted to seconds?
+        """
+        testName = "test_secondToDay"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            seconds = 86400
+            days = con_Time.secondToDay(seconds)
+            self.assertEquals(days, 1)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
+    def test_dayToSecond(self):
+        """
+        Are hours correctly converted to seconds?
+        """
+        testName = "test_dayToSecond"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            days = 1
+            seconds = con_Time.dayToSecond(days)
+            self.assertEquals(seconds, 86400)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 def suite():
     """
@@ -127,5 +161,7 @@ def suite():
     _suite.addTest(TestConversions_time('test_hourToMinute'))
     _suite.addTest(TestConversions_time('test_secondToHour'))
     _suite.addTest(TestConversions_time('test_hourToSecond'))
+    _suite.addTest(TestConversions_time('test_secondToDay'))
+    _suite.addTest(TestConversions_time('test_dayToSecond'))
     return _suite
 
