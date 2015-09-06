@@ -45,7 +45,7 @@ class Length(Convert): #subclass, inherits from Convert
 
         @returns: Number of millimeters
 
-        Formula:
+        Formula::
             Number of meters * 1000 = Number of millimeters
         """
         self._meters = meters
@@ -62,7 +62,7 @@ class Length(Convert): #subclass, inherits from Convert
 
         @returns: Number of meters
 
-        Formula:
+        Formula::
             Number of millimeters / 1000 = Number of meters
         """
         self._millimeters = millimeters
@@ -97,7 +97,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of minutes
 
-        Formula:
+        Formula::
             Number of seconds / 60 = Number of minutes
         """
         self._seconds = seconds
@@ -114,7 +114,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of seconds
 
-        Formula:
+        Formula::
             Number of minutes * 60 = Number of seconds
         """
         self._minutes = minutes
@@ -131,7 +131,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of hours
 
-        Formula:
+        Formula::
             Number of minutes / 60 = Number of hours
         """
         self._minutes = minutes
@@ -148,7 +148,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of minutes
 
-        Formula:
+        Formula::
             Number of hours * 60 = Number of minutes
         """
         self._hours = hours
@@ -165,7 +165,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of hours
 
-        Formula:
+        Formula::
             Number of seconds / 3600 = Number of Hours
         """
         self._seconds = seconds
@@ -183,7 +183,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of seconds
 
-        Formula:
+        Formula::
             Number of hours * 3600 = Number of seconds
         """
         self._hours = hours
@@ -200,7 +200,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of days
 
-        Formula:
+        Formula::
             Number of seconds / 86400 = Number of days
         """
         self._seconds = seconds
@@ -217,7 +217,7 @@ class Time(Convert): #subclass, inherits from Convert
 
         @returns: Number of seconds
 
-        Formula:
+        Formula::
             Number of days * 86400 = Number of seconds
         """
         self._days = days
@@ -253,13 +253,12 @@ class ET(Convert): #subclass, inherits from Convert
             
         @returns: Amount of Water Evaporated (in mm/day)
         
-        Formula:
+        Formula::
             Long route:
             1 W/m^2 = 1 J/(s*m^2)
             1 J/(s*m^2) = 1 N/(m*s)
             1 MegaJoule = 1000000 * 1 N/(m*s)
             TODO:
-
             MegaJoules conversion factor: 1 mm/day = 2.45 MJ*m^(-2)/day
             energyFluxValue conversion factor: 1 Wm^(-2) = 0.0864 MJ*m^(-2)/day
             conversion factor = 2.45 MJ m^(-2)/day / 0.0864 0.0864 MJ*m^(-2)/day = ~28.35648148
@@ -283,7 +282,7 @@ class ET(Convert): #subclass, inherits from Convert
 
         @returns: Amount of Water Evaporated in mm/day
 
-        Formula:
+        Formula::
             massFluxValue * (1.0/waterDensity) * 1000 * 3600 * 24
         """
         self._ET_mf = massFluxValue
