@@ -13,4 +13,4 @@ con_ET = convert.ET(printFormula="true")
 con_Length = convert.Length(printFormula="true")
 
 con_ET.massFluxToWaterEvaporated(3.0e-5)
-con_ET.energyFluxToWaterEvaporated(100)
+con_ET.energyFluxToWaterEvaporated(120)
