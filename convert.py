@@ -10,7 +10,9 @@ that I am used to from other languages (e.g. Java/C#), help meet specific needs 
 general practice at making something from scratch.
 """
 
-class Convert(object): #superclass, inherits from default object
+import math
+
+class Convert(object):  # superclass, inherits from default object
     """
     Class for making conversions of different types.
     """
@@ -22,7 +24,7 @@ class Convert(object): #superclass, inherits from default object
         pass
 
 #############################################################################################################
-class Length(Convert): #subclass, inherits from Convert
+class Length(Convert):  # subclass, inherits from Convert
     """
     Subclass for Length created for the purpose
     of organization within the Convert superclass;
@@ -72,7 +74,7 @@ class Length(Convert): #subclass, inherits from Convert
         return _result
 
 #############################################################################################################
-class Time(Convert): #subclass, inherits from Convert
+class Time(Convert):  # subclass, inherits from Convert
     """
     Subclass for Time created for the purpose
     of organization within the Convert superclass;
@@ -227,7 +229,7 @@ class Time(Convert): #subclass, inherits from Convert
         return _result
 
 #############################################################################################################
-class ET(Convert): #subclass, inherits from Convert
+class ET(Convert):  # subclass, inherits from Convert
     """
     Subclass for evapotranspiration(ET) created for the purpose
     of organization within the Convert superclass;
@@ -291,3 +293,46 @@ class ET(Convert): #subclass, inherits from Convert
         if self._printFormula == "true":
             print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr = {2:{0}} mm/day".format(self._df, self._ET_mf, _result, self._rho))
         return _result
+
+#############################################################################################################
+class Pressure(Convert):  # subclass, inherits from Convert
+    """
+    Subclass for Pressure created for the purpose
+    of organization within the Convert superclass;
+    These are conversions commonly used for Pressure calculations.
+    """
+
+    def __init__(self, printFormula="false", numberOfDecimals=6):
+        """
+        Initializes superclass Convert
+        """
+        super(Convert, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._printFormula = printFormula
+
+
+    def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
+        """
+        @param temperatureCelsius: Degrees Celsius
+        @param waterPhase: takes "liquid" and "ice" as parameters; defaults to "liquid"
+        @param resultPascal: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
+        @return: saturation vapor pressure (e*) in Pascals (Pa)
+        """
+        self._resultPascal = resultPascal.lower()
+        self._T = temperatureCelsius
+        if waterPhase == "ice":
+            _const1 = 21.87
+            _const2 = 265.5
+            _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
+        else:
+            _const1 = 17.27
+            _const2 = 237.3
+            _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
+        if resultPascal == "kpa":
+            _eStar = _eStar / 1000.0
+        elif resultPascal == "hpa":
+            _eStar = _eStar / 100.0
+        _result = _eStar
+        if self._printFormula == "true":
+            print ("611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {4:{0}} [Pa]".format(self._df, self._T, _const1, _const2, _result))
+        return _result  # Saturation Vapor Pressure

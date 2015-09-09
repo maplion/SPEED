@@ -7,7 +7,6 @@ Created on Fri Sep 04 22:29:58 2015
 
 import convert
 
-con = convert.Convert()
 con_Time = convert.Time(printFormula="true")
 con_ET = convert.ET(printFormula="true")
 con_Length = convert.Length(printFormula="true")
