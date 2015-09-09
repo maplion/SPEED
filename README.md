@@ -6,7 +6,7 @@ This code was created specifically for the purposes of the SPEED class, run by [
 It is likely there are better approaches to solving specific problems and even more likely that there are libraries already out there that solve the given problems in a superior manner.  That being said, the code can be useful to someone that is just learning to program to familiarize themselves with the way things function.
 
 ## Organization ##
-The projects were divided up into Modules.  I tried to abstract away, from the Module requirements themselves, code that could be reused.  I put this code into their own modules.  The actual assignment code can be found in the modules titled Mod3-Mod14.
+The projects were divided up into Modules.  I tried to abstract away, from the Module requirements themselves, code that could be reused.  I put this code into their own modules.  The actual assignment code can be found in the modules titled Mod02-Mod14.
 
 ## Documentation ##
 In an effort to practice using Python's Docstrings and a Javadoc-like program (in this case, [Epydocs](http://epydoc.sourceforge.net/ "Epydocs")), I have provided generated documentation of my various classes and methods.
