@@ -320,9 +320,10 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         @param resultPascal: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
         @return: saturation vapor pressure (e*) in Pascals (Pa)
         """
-        self._resultPascal = resultPascal.lower()
+        self._resultPascal = resultPascal
         self._T = temperatureCelsius
-        if waterPhase == "ice":
+        self._waterPhase = waterPhase
+        if self._waterPhase == "ice":
             _const1 = 21.87
             _const2 = 265.5
             _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
@@ -330,11 +331,12 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             _const1 = 17.27
             _const2 = 237.3
             _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
-        if resultPascal == "kpa":
+        if self._resultPascal.lower() == "kpa":
             _eStar = _eStar / 1000.0
-        elif resultPascal == "hpa":
+        elif self._resultPascal.lower() == "hpa":
             _eStar = _eStar / 100.0
         _result = _eStar
         if self._printFormula == "true":
-            print ("611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {4:{0}} [Pa]".format(self._df, self._T, _const1, _const2, _result))
+            print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
+                self._df, self._T, _const1, _const2, self._resultPascal, waterPhase, _result))
         return _result  # Saturation Vapor Pressure

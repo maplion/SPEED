@@ -8,4 +8,4 @@ Created on Fri Sep 09 22:40:00 2015
 import speedcalc
 
 sc_Pressure = speedcalc.Pressure(printFormula="true")
-sc_Pressure.saturationVaporPressure(10, resultPascal="kpa")
+sc_Pressure.saturationVaporPressure(10, resultPascal="kPa")
