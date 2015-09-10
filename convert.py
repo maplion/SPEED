@@ -314,7 +314,7 @@ class Pressure(Convert):  # subclass, inherits from Convert
     def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
         """
         Calculates Saturation Vapor Pressure from a given Temperature in Celsius.
-        
+
         @param temperatureCelsius: Degrees Celsius
         @param waterPhase: takes "liquid" and "ice" as parameters; defaults to "liquid"
         @param resultPascal: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
