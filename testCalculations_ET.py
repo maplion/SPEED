@@ -10,7 +10,7 @@ import speedcalc
 import testLogging
 
 log = testLogging.TestLogging()
-con_ET = speedcalc.ET()
+sc_ET = speedcalc.ET()
 
 class TestCalculations_ET(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class TestCalculations_ET(unittest.TestCase):
             log.printTestBegin(testName)
             # ------------------------------------
             ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
-            ET_mm_per_day = con_ET.massFluxToWaterEvaporated(ET_mf)
+            ET_mm_per_day = sc_ET.massFluxToWaterEvaporated(ET_mf)
             self.assertEquals(round(ET_mm_per_day, 6), 2.592000)
             # ------------------------------------
             log.printTestSuccess(testName)
@@ -40,7 +40,7 @@ class TestCalculations_ET(unittest.TestCase):
             log.printTestBegin(testName)
             # ------------------------------------
             # ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
-            # ET_mm_per_day = con_ET.energyFluxToWaterEvaporated(ET_mf)
+            # ET_mm_per_day = sc_ET.energyFluxToWaterEvaporated(ET_mf)
             # self.assertEquals(ET_mm_per_day, 2.592000)
             # ------------------------------------
             log.printTestSuccess(testName)

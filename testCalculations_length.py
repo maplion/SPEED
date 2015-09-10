@@ -10,7 +10,7 @@ import speedcalc
 import testLogging
 
 log = testLogging.TestLogging()
-con_Length = speedcalc.Length()
+sc_Length = speedcalc.Length()
 
 class TestCalculations_length(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class TestCalculations_length(unittest.TestCase):
             log.printTestBegin(testName)
             # ------------------------------------
             meters = 1
-            millimeters = con_Length.meterToMillimeter(meters)
+            millimeters = sc_Length.meterToMillimeter(meters)
             self.assertEquals(millimeters, 1000)
             # ------------------------------------
             log.printTestSuccess(testName)
@@ -40,7 +40,7 @@ class TestCalculations_length(unittest.TestCase):
             log.printTestBegin(testName)
             # ------------------------------------
             millimeters = 1000
-            meters = con_Length.millimeterToMeter(millimeters)
+            meters = sc_Length.millimeterToMeter(millimeters)
             self.assertEquals(meters, 1)
             # ------------------------------------
             log.printTestSuccess(testName)
