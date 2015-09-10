@@ -6,13 +6,13 @@ Created on Fri Sep 04 18:47:31 2015
 """
 
 import unittest
-import convert
+import speedcalc
 import testLogging
 
 log = testLogging.TestLogging()
-con_Length = convert.Length()
+con_Length = speedcalc.Length()
 
-class TestConversions_length(unittest.TestCase):
+class TestCalculations_length(unittest.TestCase):
 
     def meterToMillimeter(self):
         """
@@ -54,7 +54,7 @@ def suite():
     Gather all the tests from this module in a test suite.
     """
     _suite = unittest.TestSuite()
-    _suite.addTest(TestConversions_length('meterToMillimeter'))
-    _suite.addTest(TestConversions_length('millimeterToMeter'))
+    _suite.addTest(TestCalculations_length('meterToMillimeter'))
+    _suite.addTest(TestCalculations_length('millimeterToMeter'))
     return _suite
 

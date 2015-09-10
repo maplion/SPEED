@@ -6,13 +6,13 @@ Created on Fri Sep 04 18:47:31 2015
 """
 
 import unittest
-import convert
+import speedcalc
 import testLogging
 
 log = testLogging.TestLogging()
-con_Time = convert.Time()
+con_Time = speedcalc.Time()
 
-class TestConversions_time(unittest.TestCase):
+class TestCalculations_time(unittest.TestCase):
 
     def test_secondToMinute(self):
         """
@@ -155,13 +155,13 @@ def suite():
     Gather all the tests from this module in a test suite.
     """
     _suite = unittest.TestSuite()
-    _suite.addTest(TestConversions_time('test_secondToMinute'))
-    _suite.addTest(TestConversions_time('test_minuteToSecond'))
-    _suite.addTest(TestConversions_time('test_minuteToHour'))
-    _suite.addTest(TestConversions_time('test_hourToMinute'))
-    _suite.addTest(TestConversions_time('test_secondToHour'))
-    _suite.addTest(TestConversions_time('test_hourToSecond'))
-    _suite.addTest(TestConversions_time('test_secondToDay'))
-    _suite.addTest(TestConversions_time('test_dayToSecond'))
+    _suite.addTest(TestCalculations_time('test_secondToMinute'))
+    _suite.addTest(TestCalculations_time('test_minuteToSecond'))
+    _suite.addTest(TestCalculations_time('test_minuteToHour'))
+    _suite.addTest(TestCalculations_time('test_hourToMinute'))
+    _suite.addTest(TestCalculations_time('test_secondToHour'))
+    _suite.addTest(TestCalculations_time('test_hourToSecond'))
+    _suite.addTest(TestCalculations_time('test_secondToDay'))
+    _suite.addTest(TestCalculations_time('test_dayToSecond'))
     return _suite
 

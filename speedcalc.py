@@ -12,7 +12,7 @@ general practice at making something from scratch.
 
 import math
 
-class Convert(object):  # superclass, inherits from default object
+class SpeedCalc(object):  # superclass, inherits from default object
     """
     Class for making conversions of different types.
     """
@@ -24,18 +24,18 @@ class Convert(object):  # superclass, inherits from default object
         pass
 
 #############################################################################################################
-class Length(Convert):  # subclass, inherits from Convert
+class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Length created for the purpose
-    of organization within the Convert superclass;
+    of organization within the SpeedCalc superclass;
     These are conversions commonly used for Length calculations.
     """
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass Convert
+        Initializes superclass SpeedCalc
         """
-        super(Convert, self).__init__()
+        super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
 
@@ -74,20 +74,20 @@ class Length(Convert):  # subclass, inherits from Convert
         return _result
 
 #############################################################################################################
-class Time(Convert):  # subclass, inherits from Convert
+class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Time created for the purpose
-    of organization within the Convert superclass;
+    of organization within the SpeedCalc superclass;
     These are conversions commonly used for Time calculations.
     """
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass Convert
+        Initializes superclass SpeedCalc
 
         @param numberOfDecimals: number of decimals when printing formulas
         """
-        super(Convert, self).__init__()
+        super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
 
@@ -229,18 +229,18 @@ class Time(Convert):  # subclass, inherits from Convert
         return _result
 
 #############################################################################################################
-class ET(Convert):  # subclass, inherits from Convert
+class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for evapotranspiration(ET) created for the purpose
-    of organization within the Convert superclass;
+    of organization within the SpeedCalc superclass;
     These are conversions commonly used for ET calculations.
     """
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass Convert
+        Initializes superclass SpeedCalc
         """
-        super(Convert, self).__init__()
+        super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         
@@ -295,18 +295,18 @@ class ET(Convert):  # subclass, inherits from Convert
         return _result
 
 #############################################################################################################
-class Pressure(Convert):  # subclass, inherits from Convert
+class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Pressure created for the purpose
-    of organization within the Convert superclass;
+    of organization within the SpeedCalc superclass;
     These are conversions commonly used for Pressure calculations.
     """
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass Convert
+        Initializes superclass SpeedCalc
         """
-        super(Convert, self).__init__()
+        super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
 

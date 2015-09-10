@@ -5,13 +5,14 @@ Created on Fri Sep 04 18:47:31 2015
 @author: Ryan Dammrose aka MapLion
 """
 import unittest
-import testConversions_time
-import testConversions_length
-import testConversions_ET
+import testCalculations_time
+import testCalculations_length
+import testCalculations_ET
 
-time_suite = testConversions_time.suite()
-length_suite = testConversions_length.suite()
-ET_suite = testConversions_ET.suite()
+time_suite = testCalculations_time.suite()
+length_suite = testCalculations_length.suite()
+ET_suite = testCalculations_ET.suite()
+
 
 """
 Run Tests

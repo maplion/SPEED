@@ -6,13 +6,13 @@ Created on Fri Sep 04 18:47:31 2015
 """
 
 import unittest
-import convert
+import speedcalc
 import testLogging
 
 log = testLogging.TestLogging()
-con_ET = convert.ET()
+con_ET = speedcalc.ET()
 
-class TestConversions_ET(unittest.TestCase):
+class TestCalculations_ET(unittest.TestCase):
 
     def test_massFluxToWaterEvaporated(self):
         """
@@ -54,6 +54,6 @@ def suite():
     Gather all the tests from this module in a test suite.
     """
     _suite = unittest.TestSuite()
-    _suite.addTest(TestConversions_ET('test_massFluxToWaterEvaporated'))
+    _suite.addTest(TestCalculations_ET('test_massFluxToWaterEvaporated'))
     return _suite
 
