@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>exceptions.AssertionError</title>
+  <title>speedcalc.Length</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -39,9 +39,8 @@
   <tr valign="top">
     <td width="100%">
       <span class="breadcrumbs">
-        exceptions ::
-        AssertionError ::
-        Class&nbsp;AssertionError
+        <a href="speedcalc-module.html">Module&nbsp;speedcalc</a> ::
+        Class&nbsp;Length
       </span>
     </td>
     <td>
@@ -51,28 +50,26 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="exceptions.AssertionError-class.html"
+            >]&nbsp;|&nbsp;<a href="speedcalc.Length-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class AssertionError</h1><p class="nomargin-top"></p>
+<h1 class="epydoc">Class Length</h1><p class="nomargin-top"><span class="codelink"><a href="speedcalc-pysrc.html#Length">source&nbsp;code</a></span></p>
 <pre class="base-tree">
-   object --+            
-            |            
-BaseException --+        
-                |        
-        Exception --+    
-                    |    
-        StandardError --+
-                        |
-                       <strong class="uidshort">AssertionError</strong>
+object --+    
+         |    
+ <a href="speedcalc.SpeedCalc-class.html">SpeedCalc</a> --+
+             |
+            <strong class="uidshort">Length</strong>
 </pre>
 
 <hr />
-<p>Assertion failed.</p>
+<p>Subclass for Length created for the purpose of organization within the
+  SpeedCalc superclass; These are conversions commonly used for Length 
+  calculations.</p>
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -97,10 +94,12 @@ BaseException --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="exceptions.AssertionError-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">...</span>)</span><br />
-      x.__init__(...) initializes x; see help(type(x)) for signature</td>
+          <td><span class="summary-sig"><a href="speedcalc.Length-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">printFormula</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">numberOfDecimals</span>=<span class="summary-sig-default">6</span>)</span><br />
+      Initializes superclass SpeedCalc</td>
           <td align="right" valign="top">
-            
+            <span class="codelink"><a href="speedcalc-pysrc.html#Length.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -110,15 +109,33 @@ BaseException --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">a new object with type S, a subtype of T</span>
+      <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="exceptions.AssertionError-class.html#__new__" class="summary-sig-name">__new__</a>(<span class="summary-sig-arg">T</span>,
-        <span class="summary-sig-arg">S</span>,
-        <span class="summary-sig-arg">...</span>)</span></td>
+          <td><span class="summary-sig"><a href="speedcalc.Length-class.html#meterToMillimeter" class="summary-sig-name">meterToMillimeter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">meters</span>)</span><br />
+      Converts meters to millimeters</td>
           <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Length.meterToMillimeter">source&nbsp;code</a></span>
             
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Length-class.html#millimeterToMeter" class="summary-sig-name">millimeterToMeter</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">millimeters</span>)</span><br />
+      Converts millimeters to meters</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Length.millimeterToMeter">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -128,23 +145,18 @@ BaseException --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>BaseException</code></b>:
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
+      <code>__format__</code>,
       <code>__getattribute__</code>,
-      <code>__getitem__</code>,
-      <code>__getslice__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
       <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
       <code>__repr__</code>,
       <code>__setattr__</code>,
-      <code>__setstate__</code>,
-      <code>__str__</code>,
-      <code>__unicode__</code>
-      </p>
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
-      <code>__format__</code>,
-      <code>__hash__</code>,
-      <code>__reduce_ex__</code>,
       <code>__sizeof__</code>,
+      <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
     </td>
@@ -169,10 +181,6 @@ BaseException --+
 </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>BaseException</code></b>:
-      <code>args</code>,
-      <code>message</code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__class__</code>
       </p>
@@ -204,15 +212,17 @@ BaseException --+
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">...</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">printFormula</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">numberOfDecimals</span>=<span class="sig-default">6</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    >&nbsp;
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Length.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>x.__init__(...) initializes x; see help(type(x)) for signature</p>
+  <p>Initializes superclass SpeedCalc</p>
   <dl class="fields">
     <dt>Overrides:
         object.__init__
@@ -220,28 +230,63 @@ BaseException --+
   </dl>
 </td></tr></table>
 </div>
-<a name="__new__"></a>
+<a name="meterToMillimeter"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__new__</span>(<span class="sig-arg">T</span>,
-        <span class="sig-arg">S</span>,
-        <span class="sig-arg">...</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">meterToMillimeter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">meters</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    >&nbsp;
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Length.meterToMillimeter">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>Converts meters to millimeters</p>
   <dl class="fields">
-    <dt>Returns: a new object with type S, a subtype of T</dt>
-    <dt>Overrides:
-        object.__new__
-    </dt>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>meters</code></strong> - Number of meters</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Number of millimeters
+          <p>Formula:</p>
+<pre class="literalblock">
+   Number of meters * 1000 = Number of millimeters
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="millimeterToMeter"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">millimeterToMeter</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">millimeters</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Length.millimeterToMeter">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts millimeters to meters</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>millimeters</code></strong> - Number of millimeters</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>Number of meters
+          <p>Formula:</p>
+<pre class="literalblock">
+   Number of millimeters / 1000 = Number of meters
+</pre></dd>
   </dl>
 </td></tr></table>
 </div>
