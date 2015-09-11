@@ -38,6 +38,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
+        self._numberOfDecimals = numberOfDecimals
 
     def meterToMillimeter(self, meters):
         """
@@ -54,7 +55,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._meters * 1000.0
         if self._printFormula == "true":
             print ("{1:{0}} m * 1000.0 = {2:{0}} mm".format(self._df, self._meters, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def millimeterToMeter(self, millimeters):
         """
@@ -71,7 +72,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._millimeters / 1000.0
         if self._printFormula == "true":
             print ("{1:{0}} m / 1000.0 = {2:{0}} mm".format(self._df, self._millimeters, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
 #############################################################################################################
 class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
@@ -90,6 +91,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
+        self._numberOfDecimals = numberOfDecimals
 
     def secondToMinute(self, seconds):
         """
@@ -106,7 +108,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._seconds / 60.0
         if self._printFormula == "true":
             print ("{1:{0}} s / 60.0 = {2:{0}} min".format(self._df, seconds, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def minuteToSecond(self, minutes):
         """
@@ -123,7 +125,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._minutes * 60.0
         if self._printFormula == "true":
             print ("{1:{0}} min * 60.0 = {2:{0}} s".format(self._df, self._minutes, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def minuteToHour(self, minutes):
         """
@@ -140,7 +142,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._minutes / 60.0
         if self._printFormula == "true":
             print ("{1:{0}} min / 60.0 = {2:{0}} hr".format(self._df, self._minutes, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def hourToMinute(self, hours):
         """
@@ -157,7 +159,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._hours * 60.0
         if self._printFormula == "true":
             print ("{1:{0}} min * 60.0 = {2:{0}} min".format(self._df, self._hours, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def secondToHour(self, seconds):
         """
@@ -174,7 +176,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._seconds / 3600.0
         if self._printFormula == "true":
             print ("{1:{0}} s / 3600.0 = {2:{0}} hr".format(self._df, self._seconds, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
 
     def hourToSecond(self, hours):
@@ -192,7 +194,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._hours * 3600.0
         if self._printFormula == "true":
             print ("{1:{0}} hr * 3600.0 = {2:{0}} s".format(self._df, self._hours, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def secondToDay(self, seconds):
         """
@@ -209,7 +211,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._seconds / 86400.0
         if self._printFormula == "true":
             print ("{1:{0}} s / 86400.0 = {2:{0}} days".format(self._df, self._seconds, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
     def dayToSecond(self, days):
         """
@@ -226,7 +228,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._days * 86400.0
         if self._printFormula == "true":
             print ("{1:{0}} days * 86400.0 = {2:{0}} s".format(self._df, self._days, _result))
-        return _result
+        return round(_result, self._numberOfDecimals)
 
 #############################################################################################################
 class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
@@ -243,41 +245,40 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
+        self._numberOfDecimals = numberOfDecimals
         
     def energyFluxToWaterEvaporated(self, energyFluxValue, waterDensity=1000.0):
         """
         Converts the values of evapotranspiration (ET) given in units of
         energy flux (W/m^2) to units of equivalent depth of water
-        evaporated per day (mm/day)
-        
-        @param energyFluxValue: mass flux rate in kg/(m^2*s)
+        evaporated per day (mm/day).
+
+        In other words, it is a conversion of the evaporation of water in units of
+        power per unit area of earth surface to volume of water evaporated per unit area
+        of earth surface, per unit time.
+
+        @param energyFluxValue: energy flux rate in W/m^2
         @param waterDensity: density value for water; defaults to 1000 kg/m^3
             
         @returns: Amount of Water Evaporated (in mm/day)
         
         Formula::
-            Long route:
-            1 W/m^2 = 1 J/(s*m^2)
-            1 J/(s*m^2) = 1 N/(m*s)
-            1 MegaJoule = 1000000 * 1 N/(m*s)
-            TODO:
-            MegaJoules conversion factor: 1 mm/day = 2.45 MJ*m^(-2)/day
-            energyFluxValue conversion factor: 1 Wm^(-2) = 0.0864 MJ*m^(-2)/day
-            conversion factor = 2.45 MJ m^(-2)/day / 0.0864 0.0864 MJ*m^(-2)/day = ~28.35648148
-            waterEvaporated = energyFluxValue / conversion factor
+            (energyFluxValue W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * waterDensity kg)
+        OR  massFluxValue kg/(m^2*s) / 2.26E6 J
         """
-        self._ET_ef = energyFluxValue
-        self._rho = waterDensity  # Density of water in kg/m^3
-        _result = (self._ET_ef / (28.35648148/self._rho*1000))
+        self._energyFluxValue = energyFluxValue
+        self._waterDensity = waterDensity  # Density of water in kg/m^3
+        _result = ((self._energyFluxValue * 3600.0 * 24.0 * 1000) / (2.26e6 * self._waterDensity))
         if self._printFormula == "true":
-            print ("({1:{0}} W/m^2 / (28.35648148/waterDensity*1000)) = {2:{0}} mm/day".format(self._df, self._ET_ef, _result))
-        return _result
+            print ("({1:{0}} W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * {3} kg "
+                   "= {2:{0}} mm/day".format(self._df, self._energyFluxValue, _result, self._waterDensity))
+        return round(_result, self._numberOfDecimals)
 
     def massFluxToWaterEvaporated(self, massFluxValue, waterDensity=1000.0):
         """
         Converts the values of evapotranspiration (ET) given in mass flux
         units of kg/(m^2*s) to units of equivalent depth of water
-        evaporated per day in mm/day
+        evaporated per day in mm/day.
 
         @param massFluxValue: mass flux rate in kg/(m^2*s)
         @param waterDensity: density value for water; defaults to 1000 kg/m^3
@@ -287,12 +288,13 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         Formula::
             massFluxValue * (1.0/waterDensity) * 1000 * 3600 * 24
         """
-        self._ET_mf = massFluxValue
-        self._rho = waterDensity  # Density of water in kg/m^3
-        _result = self._ET_mf * (1.0/self._rho) * 1000 * 3600 * 24
+        self._massFluxValue = massFluxValue
+        self._waterDensity = waterDensity  # Density of water in kg/m^3
+        _result = self._massFluxValue * (1.0/self._waterDensity) * 1000 * 3600 * 24
         if self._printFormula == "true":
-            print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr = {2:{0}} mm/day".format(self._df, self._ET_mf, _result, self._rho))
-        return _result
+            print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr "
+                   "= {2:{0}} mm/day".format(self._df, self._massFluxValue, _result, self._waterDensity))
+        return round(_result, self._numberOfDecimals)
 
 #############################################################################################################
 class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
@@ -309,6 +311,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
+        self._numberOfDecimals = numberOfDecimals
 
 
     def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
@@ -339,4 +342,4 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         if self._printFormula == "true":
             print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
                 self._df, self._T, _const1, _const2, self._resultPascal, waterPhase, _result))
-        return _result  # Saturation Vapor Pressure
+        return round(_result, self._numberOfDecimals)  # Saturation Vapor Pressure

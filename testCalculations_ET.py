@@ -39,9 +39,12 @@ class TestCalculations_ET(unittest.TestCase):
         try:
             log.printTestBegin(testName)
             # ------------------------------------
-            # ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
-            # ET_mm_per_day = sc_ET.energyFluxToWaterEvaporated(ET_mf)
-            # self.assertEquals(ET_mm_per_day, 2.592000)
+            ET_ef = 30  # energy flux rate in W/m^2
+            ET_ef_2 = 100  # energy flux rate in W/m^2
+            ET_mm_per_day = sc_ET.energyFluxToWaterEvaporated(ET_ef)
+            ET_mm_per_day_2 = sc_ET.energyFluxToWaterEvaporated(ET_ef_2)
+            self.assertEquals(round(ET_mm_per_day, 2), 1.15)
+            self.assertEquals(round(ET_mm_per_day_2, 2), 3.82)
             # ------------------------------------
             log.printTestSuccess(testName)
         except:
@@ -55,5 +58,6 @@ def suite():
     """
     _suite = unittest.TestSuite()
     _suite.addTest(TestCalculations_ET('test_massFluxToWaterEvaporated'))
+    _suite.addTest(TestCalculations_ET('test_energyFluxToWaterEvaporated'))
     return _suite
 

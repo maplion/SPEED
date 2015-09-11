@@ -30,7 +30,13 @@ I created a small "Hello World!" script that meets the requirements as well as t
 ----------
 
 ### Module 3 ###
-banana banana banana
+**Requirements:**
+>In your first scientific programming exercise you will develop a  program to convert an input latent heat flux (i.e., evaporation of water in units of power per unit area of earth surface) to units of equivalent depth (i.e., volume of water evaporated per unit area of earth surface, per unit time). You will develop a code that takes as input evaporation as an energy flux in units of W/m2, and convert it to evaporation as a mass flux in units of mm/day.
+
+**Solution:**
+For this Module, I chose to make two conversion methods within an ET class (subclass of SpeedCalc), one for mass flux to amount of water evaporated and one for energy flux to amount of water evaporated.  These calculate the result from variables that are passed to them from the Mod03 module.
+
+Tests were written for the methods within the ET class to ensure proper calculation.
 
 ----------
 
