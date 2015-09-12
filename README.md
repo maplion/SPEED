@@ -12,7 +12,9 @@ The projects were divided up into Modules.  I tried to abstract away, from the M
 In an effort to practice using Python's Docstrings and a Javadoc-like program (in this case, [Epydocs](http://epydoc.sourceforge.net/ "Epydocs")), I have provided generated documentation of my various classes and methods.
 
 ## Code ##
-While I value coding standards and I try to hold to PEP8 as much as possible, I do deviate from PEP8, particularly in the naming of classes and functions and arguments passed into them.  I have my own naming style [more Java/C#-based] that I adhere to and it mostly involves CamelCase (as I really think a bunch of underscores looks ugly). 
+While I value [coding standards](http://web.archive.org/web/20111010053227/http://jaynes.colorado.edu/PythonGuidelines.html#module_formatting "Useful Guideline for Python Style") and [I try to hold to PEP8](https://www.python.org/dev/peps/pep-0008/ "Python PEP8 Standards") as much as possible, I do deviate from PEP8, particularly in the naming of classes and functions and arguments passed into them.  
+
+I have my own naming style [more Java/C#-based] that I have developed over time and adhere to and it mostly involves CamelCase [I really think a bunch of underscores looks ugly].  I try to remain consistent and make things readable, regardless of what I choose to do. 
 
 ## Modules ##
 I shall be adding to this document throughout the semester [end of 2015] to document the goals of each Module and what to look for if you download and run it.
