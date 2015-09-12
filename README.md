@@ -36,12 +36,22 @@ I created a small "Hello World!" script that meets the requirements as well as t
 **Solution:**
 For this Module, I chose to make two conversion methods within an ET class (subclass of SpeedCalc), one for mass flux to amount of water evaporated and one for energy flux to amount of water evaporated.  These calculate the result from variables that are passed to them from the Mod03 module.
 
-Tests were written for the methods within the ET class to ensure proper calculation.
+Tests were written for the methods within the ET class to ensure proper calculation, as will be the case for all future calculation methods.
 
 ----------
 
 ### Module 4 ###
-banana banana banana
+**Requirements:**
+>In the Programming Activity for this module, you will be computing the saturated vapor pressure for a wide range of air temperatures and printing the pairs of temperatures and saturation vapor pressures to the screen. The saturation vapor pressure is the partial pressure of water vapor in air when that air is at 100% relative humidity (i.e., saturated). It is used ubiquitously in ecology and hydrology when we need to calculate or model the rate of evaporation or transpiration. The equation for computing the saturation vapor pressure is the well known Clausius-Clapeyron equation and it is a function of temperature only. We will introduce the Clausius-Clapeyron equation in a subsequent activity. For now, it suffices to know that it is just one equation that is a function of temperature.
+
+>Write a Python script to perform the calculation of saturation vapor pressure for values ranging from and air temperature of T = -15 °C to T = 35 °C in increments of 0.01 °C. For each value of temperature, the code should write out the temperature and value of saturation vapor pressure. The print statement should be something like "T = 20 deg. C, esat = 3.169 kPa."
+
+**Solution:**
+For this Module, I created a Pressure class (as a subclass of SpeedCalc) and created a saturationVaporPressure() method for it.  I used the Clausius-Clapeyron equation to design the method and made parameters not only for temperature, but for the water phase as well [liquid/ice; defaults to liquid] so that one could run the calculation for either phase.  The method defaults in Pascals, but can also currently be calculated in hPa and kPa if desired.
+
+I also wanted to be able to see my results in more than a  console print out, so I incorporated matplotlib and created a plot of the values.
+
+As a result of wanting more control over my result values and the number of decimals displayed, I included a constructor control for each subclass within SpeedCalc to determine the maximum number of (rounded) decimals that one wants to see their result values in.
 
 ----------
 
