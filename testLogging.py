@@ -7,6 +7,7 @@ Created on Fri Sep 04 18:47:31 2015
 
 import logging
 
+
 class TestLogging(object):
 
     def __init__(self, logLevel="WARNING"):

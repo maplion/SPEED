@@ -12,6 +12,7 @@ import testLogging
 log = testLogging.TestLogging()
 con_Time = speedcalc.Time()
 
+
 class TestCalculations_time(unittest.TestCase):
 
     def test_secondToMinute(self):
@@ -150,6 +151,8 @@ class TestCalculations_time(unittest.TestCase):
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
+
+
 def suite():
     """
     Gather all the tests from this module in a test suite.
@@ -164,4 +167,3 @@ def suite():
     _suite.addTest(TestCalculations_time('test_secondToDay'))
     _suite.addTest(TestCalculations_time('test_dayToSecond'))
     return _suite
-

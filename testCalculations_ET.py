@@ -12,6 +12,7 @@ import testLogging
 log = testLogging.TestLogging()
 sc_ET = speedcalc.ET()
 
+
 class TestCalculations_ET(unittest.TestCase):
 
     def test_massFluxToWaterEvaporated(self):
@@ -50,8 +51,9 @@ class TestCalculations_ET(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
-    
 ##########################################################################################
+
+
 def suite():
     """
     Gather all the tests from this module in a test suite.
@@ -60,4 +62,3 @@ def suite():
     _suite.addTest(TestCalculations_ET('test_massFluxToWaterEvaporated'))
     _suite.addTest(TestCalculations_ET('test_energyFluxToWaterEvaporated'))
     return _suite
-

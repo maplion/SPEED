@@ -12,6 +12,7 @@ import testLogging
 log = testLogging.TestLogging()
 sc_Pressure = speedcalc.Pressure()
 
+
 class TestCalculations_pressure(unittest.TestCase):
 
     def test_saturationVaporPressure(self):
@@ -34,8 +35,9 @@ class TestCalculations_pressure(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
-    
 ##########################################################################################
+
+
 def suite():
     """
     Gather all the tests from this module in a test suite.
@@ -43,4 +45,3 @@ def suite():
     _suite = unittest.TestSuite()
     _suite.addTest(TestCalculations_pressure('test_saturationVaporPressure'))
     return _suite
-

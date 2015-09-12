@@ -12,6 +12,7 @@ import testLogging
 log = testLogging.TestLogging()
 sc_Length = speedcalc.Length()
 
+
 class TestCalculations_length(unittest.TestCase):
 
     def meterToMillimeter(self):
@@ -47,8 +48,9 @@ class TestCalculations_length(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
-
 ##########################################################################################
+
+
 def suite():
     """
     Gather all the tests from this module in a test suite.
@@ -57,4 +59,3 @@ def suite():
     _suite.addTest(TestCalculations_length('meterToMillimeter'))
     _suite.addTest(TestCalculations_length('millimeterToMeter'))
     return _suite
-

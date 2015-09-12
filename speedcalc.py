@@ -12,6 +12,7 @@ general practice at making something from scratch.
 
 import math
 
+
 class SpeedCalc(object):  # superclass, inherits from default object
     """
     Class for making conversions of different types.
@@ -22,8 +23,9 @@ class SpeedCalc(object):  # superclass, inherits from default object
         The Constructor
         """
         pass
-
 #############################################################################################################
+
+
 class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Length created for the purpose
@@ -73,8 +75,9 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         if self._printFormula == "true":
             print ("{1:{0}} m / 1000.0 = {2:{0}} mm".format(self._df, self._millimeters, _result))
         return round(_result, self._numberOfDecimals)
-
 #############################################################################################################
+
+
 class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Time created for the purpose
@@ -229,8 +232,9 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         if self._printFormula == "true":
             print ("{1:{0}} days * 86400.0 = {2:{0}} s".format(self._df, self._days, _result))
         return round(_result, self._numberOfDecimals)
-
 #############################################################################################################
+
+
 class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for evapotranspiration(ET) created for the purpose
@@ -295,8 +299,9 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr "
                    "= {2:{0}} mm/day".format(self._df, self._massFluxValue, _result, self._waterDensity))
         return round(_result, self._numberOfDecimals)
-
 #############################################################################################################
+
+
 class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Pressure created for the purpose
@@ -312,7 +317,6 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         self._numberOfDecimals = numberOfDecimals
-
 
     def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
         """
