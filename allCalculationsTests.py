@@ -1,14 +1,21 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 04 18:47:31 2015
+SPEED: Runs all unittest suites
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
+
 import unittest
 import testCalculations_time
 import testCalculations_length
 import testCalculations_ET
 import testCalculations_pressure
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 time_suite = testCalculations_time.suite()
 length_suite = testCalculations_length.suite()

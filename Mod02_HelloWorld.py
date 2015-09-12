@@ -1,13 +1,17 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Sun Sep 09 20:13:41 2015
+SPEED: Module 02: "Hello, World"
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
-
-GEOS597 SPEED
-Module 2 Assignment
 """
+
 from __future__ import print_function  # Import to demonstrate Python 3 Print Function
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 name = "Ryan"
 characteristic = "the MapLion"

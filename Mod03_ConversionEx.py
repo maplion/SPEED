@@ -1,11 +1,17 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 04 22:29:58 2015
+SPEED: Module 03: Unit Conversions for mass flux and energy flux
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
 import speedcalc
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 sc_Time = speedcalc.Time()
 sc_ET = speedcalc.ET()

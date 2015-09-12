@@ -1,11 +1,17 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 04 18:47:31 2015
+Module for logging tests and verbose logging
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
 import logging
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 
 class TestLogging(object):
@@ -25,6 +31,9 @@ class TestLogging(object):
             logging.basicConfig(level=logging.ERROR)
         else:
             logging.basicConfig(level=logging.WARNING)
+
+        # Initialize Instance Attributes that are used later
+        self._testName = 'None'
 
     def printTestBegin(self, testName):
         """

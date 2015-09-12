@@ -1,16 +1,24 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 04 22:29:58 2015
+Scientific Programming for Earth and Ecological Discovery (SPEED) Calculation module created for the class.
 
-@author: Ryan Dammrose aka MapLion
+This contains the core calculations and code for all SPEED Modules.
 
 Note: As there are far more advanced [further abstraction, more dynamic, more feature-rich] libraries out there
 for unit conversion, this was just done as an exercise to familiarize myself with certain constructs
 that I am used to from other languages (e.g. Java/C#), help meet specific needs for a class and get
 general practice at making something from scratch.
+
+GitHub repository: https://github.com/maplion/SPEED
+@author: Ryan Dammrose aka MapLion
 """
 
 import math
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 
 class SpeedCalc(object):  # superclass, inherits from default object
@@ -35,12 +43,16 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass SpeedCalc
+        Initializes subclass Length
         """
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Attributes that are used later
+        self._meters = 'None'
+        self._millimeters = 'None'
 
     def meterToMillimeter(self, meters):
         """
@@ -87,7 +99,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass SpeedCalc
+        Initializes subclass Time
 
         @param numberOfDecimals: number of decimals when printing formulas
         """
@@ -95,6 +107,12 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Attributes that are used later
+        self._seconds = 'None'
+        self._minutes = 'None'
+        self._hours = 'None'
+        self._days = 'None'
 
     def secondToMinute(self, seconds):
         """
@@ -181,7 +199,6 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} s / 3600.0 = {2:{0}} hr".format(self._df, self._seconds, _result))
         return round(_result, self._numberOfDecimals)
 
-
     def hourToSecond(self, hours):
         """
         Converts hours to seconds
@@ -244,13 +261,18 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass SpeedCalc
+        Initializes subclass ET
         """
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         self._numberOfDecimals = numberOfDecimals
-        
+
+        # Initialize Instance Attributes that are used later
+        self._energyFluxValue = 'None'
+        self._massFluxValue = 'None'
+        self._waterDensity = 'None'
+
     def energyFluxToWaterEvaporated(self, energyFluxValue, waterDensity=1000.0):
         """
         Converts the values of evapotranspiration (ET) given in units of
@@ -311,12 +333,17 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
 
     def __init__(self, printFormula="false", numberOfDecimals=6):
         """
-        Initializes superclass SpeedCalc
+        Initializes subclass Pressure
         """
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._printFormula = printFormula
         self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Attributes that are used later
+        self._resultPascal = 'None'
+        self._T = 'None'
+        self._waterPhase = 'None'
 
     def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
         """
@@ -331,19 +358,19 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._T = temperatureCelsius
         self._waterPhase = waterPhase
         if self._waterPhase == "ice":
-            _const1 = 21.87
-            _const2 = 265.5
-            _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
+            _CONST1 = 21.87
+            _CONST2 = 265.5
+            _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
         else:
-            _const1 = 17.27
-            _const2 = 237.3
-            _eStar = 611.0 * math.exp((_const1 * self._T)/(self._T + _const2))
+            _CONST1 = 17.27
+            _CONST2 = 237.3
+            _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
         if self._resultPascal.lower() == "kpa":
-            _eStar = _eStar / 1000.0
+            _eStar /= 1000.0
         elif self._resultPascal.lower() == "hpa":
-            _eStar = _eStar / 100.0
+            _eStar /= 100.0
         _result = _eStar
         if self._printFormula == "true":
             print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
-                self._df, self._T, _const1, _const2, self._resultPascal, waterPhase, _result))
+                self._df, self._T, _CONST1, _CONST2, self._resultPascal, waterPhase, _result))
         return round(_result, self._numberOfDecimals)  # Saturation Vapor Pressure

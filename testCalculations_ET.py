@@ -1,13 +1,19 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 04 18:47:31 2015
+SPEED: Tests calculations for evapotranspiration calculations; those in the ET subclass in speedcalc.py
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
 import unittest
 import speedcalc
 import testLogging
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 log = testLogging.TestLogging()
 sc_ET = speedcalc.ET()

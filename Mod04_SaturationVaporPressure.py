@@ -1,12 +1,18 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Created on Fri Sep 09 22:40:00 2015
+SPEED: Module 04: Saturation Vapor Pressure calculations from temperature
 
+GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import speedcalc
 import matplotlib.pyplot as plt
+import speedcalc
+
+__author__ = "Ryan Dammrose"
+__copyright__ = "Copyright 2015"
+__license__ = "MIT"
 
 sc_Pressure = speedcalc.Pressure(numberOfDecimals=2)
 
