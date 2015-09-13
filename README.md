@@ -3,15 +3,15 @@ Scientific Programming for Earth and Ecological Discovery (SPEED)
 
 This code was created specifically for the purposes of the SPEED class, run by [Alejandro Flores at Boise State University](https://earth.boisestate.edu/people/alejandro-n-flores/ "Lejo Flores").  As a result, the code is geared towards specific assignments and was written for the purpose of learning [in short, it was practice for me].  
 
-It is likely there are better approaches to solving specific problems and even more likely that there are libraries already out there that solve the given problems in a superior manner.  That being said, the code can be useful to someone that is just learning to program to familiarize themselves with the way things function.
+It is likely there are better approaches to solving specific problems and even more likely that there are libraries already out there that solve the given problems in a superior manner.  That being said, the code can be useful to someone that is just learning to program to familiarize themselves with the way things function and hopefully offers a demonstration of quality code.
 
 ## Organization ##
 The projects were divided up into Modules.  I tried to abstract away, from the Module requirements themselves, code that could be reused.  I put this code into their own modules.  The actual assignment code can be found in the modules titled Mod02-Mod14.
 
 ## Documentation ##
-In an effort to practice using Python's Docstrings and a Javadoc-like program (in this case, [Epydocs](http://epydoc.sourceforge.net/ "Epydocs")), I have provided generated documentation of my various classes and methods.
+In an effort to practice using Python's Docstrings and a Javadoc-like program (in this case, [Epydocs](http://epydoc.sourceforge.net/ "Epydocs")), I have provided generated documentation of my various classes and methods.  It may lag behind the actual code sometimes, but I try to keep it relatively up-to-date.
 
-## Code ##
+## Code Style ##
 While I value [coding standards](http://web.archive.org/web/20111010053227/http://jaynes.colorado.edu/PythonGuidelines.html#module_formatting "Useful Guideline for Python Style") and [I try to hold to PEP8](https://www.python.org/dev/peps/pep-0008/ "Python PEP8 Standards") as much as possible, I do deviate from PEP8, particularly in the naming of classes and functions and arguments passed into them.  
 
 I have my own naming style [more Java/C#-based] that I have developed over time and adhere to and it mostly involves CamelCase [I really think a bunch of underscores looks ugly].  I try to remain consistent and make things readable, regardless of what I choose to do. 
