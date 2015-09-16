@@ -30,8 +30,8 @@ class TestCalculations_pressure(unittest.TestCase):
             log.printTestBegin(testName)
             # ------------------------------------
             tenC_pa = sc_Pressure.saturationVaporPressure(10)
-            twentyC_kpa = sc_Pressure.saturationVaporPressure(20, resultPascal="kpa")
-            thirtyC_hpa = sc_Pressure.saturationVaporPressure(30, resultPascal="hpa")
+            twentyC_kpa = sc_Pressure.saturationVaporPressure(20, units="kpa")
+            thirtyC_hpa = sc_Pressure.saturationVaporPressure(30, units="hpa")
 
             self.assertEquals(round(tenC_pa, 0), 1228)
             self.assertEquals(round(twentyC_kpa, 3), 2.339)

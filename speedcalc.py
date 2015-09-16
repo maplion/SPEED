@@ -341,23 +341,23 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._numberOfDecimals = numberOfDecimals
 
         # Initialize Instance Attributes that are used later
-        self._resultPascal = 'None'
+        self._units = 'None'
         self._T = 'None'
-        self._waterPhase = 'None'
+        self._phase = 'None'
 
-    def saturationVaporPressure(self, temperatureCelsius, waterPhase="liquid", resultPascal="Pa"):
+    def saturationVaporPressure(self, temperatureCelsius, phase="liquid", units="Pa"):
         """
         Calculates Saturation Vapor Pressure from a given Temperature in Celsius.
 
         @param temperatureCelsius: Degrees Celsius
-        @param waterPhase: takes "liquid" and "ice" as parameters; defaults to "liquid"
-        @param resultPascal: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
+        @param phase: takes "liquid" and "ice" as parameters; defaults to "liquid"
+        @param units: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
         @return: saturation vapor pressure (e*) in Pascals (Pa)
         """
-        self._resultPascal = resultPascal
+        self._units = units
         self._T = temperatureCelsius
-        self._waterPhase = waterPhase
-        if self._waterPhase == "ice":
+        self._phase = phase
+        if self._phase == "ice":
             _CONST1 = 21.87
             _CONST2 = 265.5
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
@@ -365,12 +365,12 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             _CONST1 = 17.27
             _CONST2 = 237.3
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
-        if self._resultPascal.lower() == "kpa":
+        if self._units.lower() == "kpa":
             _eStar /= 1000.0
-        elif self._resultPascal.lower() == "hpa":
+        elif self._units.lower() == "hpa":
             _eStar /= 100.0
         _result = _eStar
         if self._printFormula == "true":
             print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
-                self._df, self._T, _CONST1, _CONST2, self._resultPascal, waterPhase, _result))
+                self._df, self._T, _CONST1, _CONST2, self._units, phase, _result))
         return round(_result, self._numberOfDecimals)  # Saturation Vapor Pressure
