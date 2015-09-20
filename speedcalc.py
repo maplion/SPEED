@@ -30,7 +30,18 @@ class SpeedCalc(object):  # superclass, inherits from default object
         """
         The Constructor
         """
-        pass
+        self._inputString = 'None'
+
+    def isInteger(self, string):
+        """
+        Checks if a string is an integer.
+        """
+        try:
+            self._inputString = string
+            int(string)
+            return True
+        except ValueError:
+            return False
 #############################################################################################################
 
 
@@ -331,31 +342,50 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Pressure calculations.
     """
 
-    def __init__(self, formula="false", numberOfDecimals=6):
+    def __init__(self, formula="false", units="Pa", numberOfDecimals=6):
         """
         Initializes subclass Pressure
+
+        @param formula: set formula to true to have the calculations print the formulas as they are calculated
+        @param units: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
+        @param numberOfDecimals: sets the number of decimals the result values will return
         """
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
         self._numberOfDecimals = numberOfDecimals
 
+        # Set up units
+        self._units = units
+        if self._units.lower() == "kpa":
+            self._multiplier = 0.001
+        elif self._units.lower() == "hpa":
+            self._multiplier = 0.01
+        else:
+            self._multiplier = 1.0
+
         # Initialize Instance Attributes that are used later
-        self._units = 'None'
         self._T = 'None'
         self._phase = 'None'
+        self._relativeHumidity = 'None'
+        self._saturationVaporPressure = 'None'
+        self._vaporPressure = 'None'
 
-    def saturationVaporPressure(self, temperatureCelsius, phase="liquid", units="Pa"):
+    def vaporPressure_fromTemperature(self, temperature, phase="liquid"):
         """
-        Calculates Saturation Vapor Pressure from a given Temperature in Celsius.
+        Calculates Vapor Pressure from a given Temperature in Celsius.
+        For Saturation Vapor Pressure, put in the temperature.
+        For vapor Pressure, enter the Dewpoint Temperature.
 
-        @param temperatureCelsius: Degrees Celsius
+        @param temperature: Degrees Celsius
         @param phase: takes "liquid" and "ice" as parameters; defaults to "liquid"
-        @param units: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
         @return: saturation vapor pressure (e*) in Pascals (Pa)
+
+        Formula::
+            liquid:
+            611.0 * exp(temperature * 17.27)/(temperature + 237.3)  [Pa]
         """
-        self._units = units
-        self._T = temperatureCelsius
+        self._T = temperature
         self._phase = phase
         if self._phase == "ice":
             _CONST1 = 21.87
@@ -365,12 +395,108 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             _CONST1 = 17.27
             _CONST2 = 237.3
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
+
+        # Apply unit multiplier
         if self._units.lower() == "kpa":
             _eStar /= 1000.0
         elif self._units.lower() == "hpa":
             _eStar /= 100.0
+
         _result = _eStar
         if self._formula == "true":
-            print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
-                self._df, self._T, _CONST1, _CONST2, self._units, phase, _result))
-        return round(_result, self._numberOfDecimals)  # Saturation Vapor Pressure
+            print ("Phase: {5}\n{7} * 611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
+                self._df, self._T, _CONST1, _CONST2, self._units, phase, _result, self._multiplier))
+        return round(_result, self._numberOfDecimals)
+
+    def relativeHumidity(self, vaporPressure, saturationVaporPressure, units="Pa"):
+        """
+        Calculates the relative humidity from the vapor pressure (e) and saturation vapor pressure (e*)
+
+        @param vaporPressure:  The vapor pressure (e); defaults in Pa
+        @param saturationVaporPressure: The saturation vapor pressure (e*); defaults in Pa
+        @return: returns the relative humidity
+
+        Formula::
+            relativeHumidity = vaporPressure/saturationVaporPressure
+        """
+        self._vaporPressure = vaporPressure
+        self._saturationVaporPressure = saturationVaporPressure
+        self._units = units
+
+        _relativeHumidity = self._vaporPressure / self._saturationVaporPressure
+
+        # Apply unit multiplier
+        if self._units.lower() == "kpa":
+            _relativeHumidity /= 1000.0
+        elif self._units.lower() == "hpa":
+            _relativeHumidity /= 100.0
+
+        _result = _relativeHumidity
+        if self._formula == "true":
+            print ("{5} * ({1} / {2}) = {3:{0}} [{4}]".format(
+                self._df, self._vaporPressure, self._saturationVaporPressure,
+                _result, self._units, self._multiplier))
+        return round(_result, self._numberOfDecimals)
+
+    def vaporPressure_fromRelativeHumidity(self, relativeHumidity, saturationVaporPressure, units="Pa"):
+        """
+        Calculates the vapor pressure using the relative humidity equation.
+
+        @param relativeHumidity:  The relative humidity value in decimal form (e.g. 50% => 0.5) [divides by 100 if not]
+        @param saturationVaporPressure: The saturation vapor pressure (often symbolized as "e*"); defaults in Pa
+        @return: returns the vapor pressure
+
+        Formula::
+            vaporPressure_fromRelativeHumidity = relativeHumidity * saturationVaporPressure
+        """
+        self._relativeHumidity = relativeHumidity
+        self._saturationVaporPressure = saturationVaporPressure
+        self._units = units
+
+        if self.isInteger(str(self._relativeHumidity)):
+            self._relativeHumidity /= 100.0
+
+        _vaporPressure = self._relativeHumidity * self._saturationVaporPressure
+
+        # Apply unit multiplier
+        if self._units.lower() == "kpa":
+            _vaporPressure /= 1000.0
+        elif self._units.lower() == "hpa":
+            _vaporPressure /= 100.0
+
+        _result = _vaporPressure
+        if self._formula == "true":
+            print ("{5} * ({1} * {2}) = {3:{0}} [{4}]".format(
+                self._df, self._relativeHumidity, self._saturationVaporPressure,
+                _result, self._units, self._multiplier))
+        return round(_result, self._numberOfDecimals)
+
+    def vaporPressureDeficit(self, saturationVaporPressure, vaporPressure, units="Pa"):
+        """
+        Calculates the vapor pressure deficit (VPD).
+
+        @param saturationVaporPressure: The saturation vapor pressure (e*); defaults in Pa
+        @param vaporPressure: The vapor pressure (e); defaults in Pa
+        @return: returns the vapor pressure deficit
+
+        Formula::
+            vaporPressureDeficit = saturationVaporPressure - vaporPressure
+        """
+        self._saturationVaporPressure = saturationVaporPressure
+        self._vaporPressure = vaporPressure
+        self._units = units
+
+        _vaporPressureDeficit = self._saturationVaporPressure - self._vaporPressure
+
+        # Apply unit multiplier
+        if self._units.lower() == "kpa":
+            _vaporPressureDeficit /= 1000.0
+        elif self._units.lower() == "hpa":
+            _vaporPressureDeficit /= 100.0
+
+        _result = _vaporPressureDeficit
+        if self._formula == "true":
+            print ("{5} * ({1} - {2}) = {3:{0}} [{4}]".format(
+                self._df, self._saturationVaporPressure, self._vaporPressure,
+                _result, self._units, self._multiplier))
+        return round(_result, self._numberOfDecimals)

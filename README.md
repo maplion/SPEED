@@ -52,7 +52,7 @@ Tests were written for the methods within the ET class to ensure proper calculat
 >Write a Python script to perform the calculation of saturation vapor pressure for values ranging from and air temperature of T = -15 °C to T = 35 °C in increments of 0.01 °C. For each value of temperature, the code should write out the temperature and value of saturation vapor pressure. The print statement should be something like "T = 20 deg. C, esat = 3.169 kPa."
 
 **Solution:**
-For this Module, I created a Pressure class (as a subclass of SpeedCalc) and created a saturationVaporPressure() method for it.  I used the Clausius-Clapeyron equation to design the method and made parameters not only for temperature, but for the water phase as well [liquid/ice; defaults to liquid] so that one could run the calculation for either phase.  The method defaults in Pascals, but can also currently be calculated in hPa and kPa if desired.
+For this Module, I created a Pressure class (as a subclass of SpeedCalc) and created a vaporPressure_fromTemperature() method for it.  I used the Clausius-Clapeyron equation to design the method and made parameters not only for temperature, but for the water phase as well [liquid/ice; defaults to liquid] so that one could run the calculation for either phase.  The method defaults in Pascals, but can also currently be calculated in hPa and kPa if desired.
 
 I also wanted to be able to see my results in more than a  console print out, so I incorporated matplotlib and created a plot of the values.
 
@@ -61,7 +61,16 @@ As a result of wanting more control over my result values and the number of deci
 ----------
 
 ### Module 5 ###
-banana banana banana
+**Requirements:**
+>Write a Python code that has the following three functions defined in it:
+
+>getSatVaporPressure → Inputs: temperature
+
+>getVaporPressure → Inputs: temperature, relative humidity; should call getSatVaporPressure
+
+>getVPD → Inputs: temperature, relative humidity; should call getVaporPressureAND getSatVaporPressure
+
+>Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
 
 ----------
 
