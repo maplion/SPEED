@@ -31,15 +31,13 @@ class TestCalculations_pressure(unittest.TestCase):
         try:
             log.printTestBegin(testName)
             # ------------------------------------
-            tenC_pa = sc_Pressure.vaporPressure_fromTemperature(10.0)
-            sc_Pressure2 = speedcalc.Pressure(units="kpa")
-            sc_Pressure3 = speedcalc.Pressure(units="hpa")
-            twentyC_kpa = sc_Pressure2.vaporPressure_fromTemperature(20.0)
-            thirtyC_hpa = sc_Pressure3.vaporPressure_fromTemperature(30.0)
+            tenC = sc_Pressure.vaporPressure_fromTemperature(10.0)
+            twentyC = sc_Pressure.vaporPressure_fromTemperature(20.0)
+            thirtyC = sc_Pressure.vaporPressure_fromTemperature(30.0)
 
-            self.assertEquals(round(tenC_pa, 0), 1228.0)
-            self.assertEquals(round(twentyC_kpa, 3), 2.339)
-            self.assertEquals(round(thirtyC_hpa, 2), 42.44)
+            self.assertEquals(round(tenC, 0), 1228.0)
+            self.assertEquals(round(twentyC, 0), 2339.0)
+            self.assertEquals(round(thirtyC, 0), 4244.0)
             # ------------------------------------
             log.printTestSuccess(testName)
         except:
@@ -105,6 +103,48 @@ class TestCalculations_pressure(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
+    def test_pascalsTo_kiloPascals(self):
+        """
+        Is the vapor pressure deficit correctly calculated?
+        """
+        testName = "test_pascalsTo_kiloPascals"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            Pressure1 = 1228.0
+            Pressure2 = 872.0
+            kPa1 = sc_Pressure.pascalsTo_kiloPascals(Pressure1)
+            kPa2 = sc_Pressure.pascalsTo_kiloPascals(Pressure2)
+
+            self.assertEquals(round(kPa1, 3), 1.228)
+            self.assertEquals(round(kPa2, 3), 0.872)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
+    def test_pascalsTo_hectoPascals(self):
+        """
+        Is the vapor pressure deficit correctly calculated?
+        """
+        testName = "test_pascalsTo_hectoPascals"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            Pressure1 = 1228.0
+            Pressure2 = 872.0
+            hPa1 = sc_Pressure.pascalsTo_hectoPascals(Pressure1)
+            hPa2 = sc_Pressure.pascalsTo_hectoPascals(Pressure2)
+
+            self.assertEquals(round(hPa1, 3), 12.280)
+            self.assertEquals(round(hPa2, 3), 8.720)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 
 
@@ -117,4 +157,6 @@ def suite():
     _suite.addTest(TestCalculations_pressure('test_relativeHumidity'))
     _suite.addTest(TestCalculations_pressure('test_vaporPressure_fromRelativeHumidity'))
     _suite.addTest(TestCalculations_pressure('test_vaporPressureDeficit'))
+    _suite.addTest(TestCalculations_pressure('test_pascalsTo_kiloPascals'))
+    _suite.addTest(TestCalculations_pressure('test_pascalsTo_hectoPascals'))
     return _suite

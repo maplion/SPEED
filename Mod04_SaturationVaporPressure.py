@@ -21,6 +21,7 @@ temperatureList = []
 temperature = -15.0
 while temperature < 35.01:
     vaporPressure = sc_Pressure.vaporPressure_fromTemperature(temperature, units="kPa")
+    vaporPressure = sc_Pressure.pascalsTo_kiloPascals(vaporPressure)
     print("T = {0} deg. C, esat = {1} kPa".format(temperature, vaporPressure))
     vaporPressureList.append(vaporPressure)
     temperatureList.append(temperature)
