@@ -14,7 +14,7 @@ __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-sc_Pressure = speedcalc.Pressure(numberOfDecimals=2, formula="true")
+sc_Pressure = speedcalc.Pressure(numberOfDecimals=3)
 
 vaporPressureList = []
 temperatureList = []
