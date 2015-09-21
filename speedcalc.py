@@ -347,7 +347,6 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         Initializes subclass Pressure
 
         @param formula: set formula to true to have the calculations print the formulas as they are calculated
-        @param units: takes "Pa", "hPa", and "kPa"; defaults to "Pa"
         @param numberOfDecimals: sets the number of decimals the result values will return
         """
         super(SpeedCalc, self).__init__()
@@ -357,7 +356,6 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         # Initialize Instance Attributes that are used later
         self._T = 'None'
-        self._phase = 'None'
         self._relativeHumidity = 'None'
         self._saturationVaporPressure = 'None'
         self._vaporPressure = 'None'
@@ -381,14 +379,15 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             611.0 * exp(temperature * 17.27)/(temperature + 237.3)  [Pa]
         """
         self._T = temperature
-        self._phase = phase
         self._units = units
 
-        if self._phase == "ice":
+        if self._T < 0:
+            _phase = "ice"
             _CONST1 = 21.87
             _CONST2 = 265.5
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
         else:
+            _phase = "liquid"
             _CONST1 = 17.27
             _CONST2 = 237.3
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
@@ -396,7 +395,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = _eStar
         if self._formula == "true":
             print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
-                self._df, self._T, _CONST1, _CONST2, self._units, phase, _result))
+                self._df, self._T, _CONST1, _CONST2, self._units, _phase, _result))
         return round(_result, self._numberOfDecimals)
 
     def relativeHumidity(self, vaporPressure, saturationVaporPressure, units="Pa"):
@@ -507,5 +506,5 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = self._multiplier * self._pascalValue
         if self._formula == "true":
             print ("{1} * {2} = {3:{0}} [{4}]".format(
-                self._df, self.self._multiplier, self._pascalValue, _result, self._units))
+                self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)

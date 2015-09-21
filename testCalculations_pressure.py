@@ -34,10 +34,12 @@ class TestCalculations_pressure(unittest.TestCase):
             tenC = sc_Pressure.vaporPressure_fromTemperature(10.0)
             twentyC = sc_Pressure.vaporPressure_fromTemperature(20.0)
             thirtyC = sc_Pressure.vaporPressure_fromTemperature(30.0)
+            negOneC = sc_Pressure.vaporPressure_fromTemperature(-1)
 
             self.assertEquals(round(tenC, 0), 1228.0)
             self.assertEquals(round(twentyC, 0), 2339.0)
             self.assertEquals(round(thirtyC, 0), 4244.0)
+            self.assertEquals(round(negOneC, 2), 562.51)
             # ------------------------------------
             log.printTestSuccess(testName)
         except:
@@ -106,7 +108,7 @@ class TestCalculations_pressure(unittest.TestCase):
 
     def test_pascalsTo_kiloPascals(self):
         """
-        Is the vapor pressure deficit correctly calculated?
+        Conversion from Pascals to kiloPascals
         """
         testName = "test_pascalsTo_kiloPascals"
         try:
@@ -127,7 +129,7 @@ class TestCalculations_pressure(unittest.TestCase):
 
     def test_pascalsTo_hectoPascals(self):
         """
-        Is the vapor pressure deficit correctly calculated?
+        Conversion from Pascals to hectoPascals
         """
         testName = "test_pascalsTo_hectoPascals"
         try:
