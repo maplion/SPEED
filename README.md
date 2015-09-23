@@ -72,6 +72,9 @@ As a result of wanting more control over my result values and the number of deci
 
 >Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
 
+**Solution:**
+
+
 ----------
 
 ### Module 6 ###

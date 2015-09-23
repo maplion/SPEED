@@ -11,15 +11,18 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
+import sys
+import getopt
 import speedcalc
+import speedloader
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-sc_Pressure = speedcalc.Pressure(units="kPa")
-
-# TODO: Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
+sc_Pressure = speedcalc.Pressure()
+sl = speedloader.SpeedLoader()
+sl_dc = speedloader.DryCreek()
 
 
 def getSatVaporPressure(temperature):
@@ -63,4 +66,37 @@ def getVPD(temperature, relativeHumidity):
     return _result
 
 
-print(getVPD(50, 65))
+class Usage(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+
+def main(argv=None):
+    """
+
+    Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
+    """
+    if argv is None:
+        argv = sys.argv
+    try:
+        try:
+            opts, args = getopt.getopt(argv[1:], "h", ["help"])
+        except getopt.error, msg:
+            raise Usage(msg)
+
+        filename = sl.gui_openFileDialog()
+        sl_dc.weatherStationData(filename)
+        # TODO: Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
+
+        temp = getVPD(50, 65)
+        temp = sc_Pressure.pascalsTo_kiloPascals(temp)
+        print(temp)
+
+    except Usage, err:
+        print >>sys.stderr, err.msg
+        print >>sys.stderr, "for help use --help"
+        return 2
+
+if __name__ == "__main__":
+    sys.exit(main())
+
