@@ -30,7 +30,7 @@ class SpeedCalc(object):  # superclass, inherits from default object
         """
         The Constructor
         """
-        self._inputString = 'None'
+        self._inputString = None
 
     def isInteger(self, string):
         """
@@ -62,8 +62,8 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._numberOfDecimals = numberOfDecimals
 
         # Initialize Instance Attributes that are used later
-        self._meters = 'None'
-        self._millimeters = 'None'
+        self._meters = None
+        self._millimeters = None
 
     def meterToMillimeter(self, meters):
         """
@@ -120,10 +120,10 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._numberOfDecimals = numberOfDecimals
 
         # Initialize Instance Attributes that are used later
-        self._seconds = 'None'
-        self._minutes = 'None'
-        self._hours = 'None'
-        self._days = 'None'
+        self._seconds = None
+        self._minutes = None
+        self._hours = None
+        self._days = None
 
     def secondToMinute(self, seconds):
         """
@@ -280,9 +280,9 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._numberOfDecimals = numberOfDecimals
 
         # Initialize Instance Attributes that are used later
-        self._energyFluxValue = 'None'
-        self._massFluxValue = 'None'
-        self._waterDensity = 'None'
+        self._energyFluxValue = None
+        self._massFluxValue = None
+        self._waterDensity = None
 
     def energyFluxToWaterEvaporated(self, energyFluxValue, waterDensity=1000.0):
         """
@@ -355,13 +355,13 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._numberOfDecimals = numberOfDecimals
 
         # Initialize Instance Attributes that are used later
-        self._T = 'None'
-        self._relativeHumidity = 'None'
-        self._saturationVaporPressure = 'None'
-        self._vaporPressure = 'None'
-        self._pascalValue = 'None'
-        self._multiplier = 'None'
-        self._units = 'None'
+        self._T = None
+        self._relativeHumidity = None
+        self._saturationVaporPressure = None
+        self._vaporPressure = None
+        self._pascalValue = None
+        self._multiplier = None
+        self._units = None
 
     def vaporPressure_fromTemperature(self, temperature, phase="liquid", units="Pa"):
         """

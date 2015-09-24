@@ -84,13 +84,24 @@ def main(argv=None):
         except getopt.error, msg:
             raise Usage(msg)
 
-        filename = sl.gui_openFileDialog()
-        sl_dc.weatherStationData(filename)
-        # TODO: Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
+        #filename = sl.openFileDialog_gui()
+        filename = u"C:/Users/MapLion/Documents/BSU_BoiseStateUniversity/GEOS597/Module 5/LDP_HrlySummary_2014.csv"
+        data, headers = sl_dc.weatherStationData_csv(filename)
+        dateIndex, dateTitle = sl_dc.getColumnIndexAndName("Date", headers)
+        precipIndex, precipTitle = sl_dc.getColumnIndexAndName("Precipitation", headers)
+        temperatureIndex, temperatureTitle = sl_dc.getColumnIndexAndName("Temp", headers)
 
-        temp = getVPD(50, 65)
-        temp = sc_Pressure.pascalsTo_kiloPascals(temp)
-        print(temp)
+        dateData = sl_dc.getColumn(dateIndex, data)
+        dates = sl_dc.convertDate(dateData)
+        precipData = sl_dc.getColumn(precipIndex, data)
+        temperatureData = sl_dc.getColumn(temperatureIndex, data)
+
+        # for i in range(1, len(precipData)):
+        #     print temperatureData[i]
+        #     print precipData[i]
+        #     vpd = getVPD(temperatureData[i], precipData[i])
+        #     vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
+        #     print(vpd)
 
     except Usage, err:
         print >>sys.stderr, err.msg
