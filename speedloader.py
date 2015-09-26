@@ -8,7 +8,7 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import time
-from Tkinter import Tk
+import Tkinter as tk
 from tkFileDialog import askopenfilename
 
 __author__ = "Ryan Dammrose"
@@ -26,6 +26,9 @@ class SpeedLoader(object):
         # Initialize Variables
         self._myList = None
         self._myString = None
+        self._root = None
+        self._fields = None
+        self.entries = None
 
     def openFileDialog_gui(self):
         """
@@ -33,8 +36,10 @@ class SpeedLoader(object):
 
         @returns: path and filename
         Reference: http://stackoverflow.com/questions/3579568/choosing-a-file-in-python-with-simple-dialog
+        Reference: http://www.blog.pythonlibrary.org/2012/07/26/tkinter-how-to-show-hide-a-window/
         """
-        Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
+        self._root = tk.Tk()
+        self._root.withdraw()  # we don't want a full GUI, so keep the root window from appearing
         _filename = askopenfilename()  # show an "Open" dialog box and return the path to the selected file
         return _filename
 
@@ -54,6 +59,37 @@ class SpeedLoader(object):
         self._myList = myList
         self._myString = myString.lower()
         return [i for i, val in enumerate(self._myList) if self._myString in val.lower()]
+
+    def makeForm(self, root, fields):
+        """
+        """
+        self._root = root
+        self._fields = fields
+        entries = []
+        for field in self._fields:
+            row = tk.Frame(self._root)
+            lab = tk.Label(row, width=15, text=field, anchor='w')
+            ent = tk.Entry(row)
+            row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+            lab.pack(side=tk.LEFT)
+            ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
+            entries.append((field, ent))
+        return entries
+
+    def fetch(self, entries, lastCall="false"):
+        """
+        """
+        self.entries = entries
+        _result = {}
+        for entry in self.entries:
+            field = entry[0]
+            text = entry[1].get()
+            print('%s: "%s"' % (field, text))
+            _result[entry[0]] = entry[1].get()
+        if lastCall == "true":
+            self._root.destroy()
+        self.entries = _result
+
 
 class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
     """
