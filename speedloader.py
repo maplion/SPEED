@@ -64,7 +64,8 @@ class SpeedLoader(object):
     def getEntries_gui(self):
         """
         Returns the gui form _entries
-        @return gui form _entries
+
+        @return: gui form _entries
         """
         return self._entries
 

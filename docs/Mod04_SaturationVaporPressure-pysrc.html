@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Mod04_SaturationVaporPressure</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/maplion/SPEED">SPEED</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;Mod04_SaturationVaporPressure
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="Mod04_SaturationVaporPressure-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="Mod04_SaturationVaporPressure-module.html">Module Mod04_SaturationVaporPressure</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">SPEED: Module 04: Saturation Vapor Pressure calculations from temperature</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">GitHub repository: https://github.com/maplion/SPEED</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">@author: Ryan Dammrose aka MapLion</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">matplotlib</tt><tt class="py-op">.</tt><tt class="py-name">pyplot</tt> <tt class="py-keyword">as</tt> <tt class="py-name">plt</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module speedcalc=speedcalc-module.html"><a title="speedcalc" class="py-name" href="#" onclick="return doclink('link-0', 'speedcalc', 'link-0');">speedcalc</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable Mod02_HelloWorld.__author__=Mod02_HelloWorld-module.html#__author__,Variable Mod03_ConversionEx.__author__=Mod03_ConversionEx-module.html#__author__,Variable Mod04_SaturationVaporPressure.__author__=Mod04_SaturationVaporPressure-module.html#__author__,Variable Mod05_VaporPressureDeficit.__author__=Mod05_VaporPressureDeficit-module.html#__author__,Variable allCalculationsTests.__author__=allCalculationsTests-module.html#__author__,Variable speedcalc.__author__=speedcalc-module.html#__author__,Variable speedloader.__author__=speedloader-module.html#__author__,Variable testCalculations_ET.__author__=testCalculations_ET-module.html#__author__,Variable testCalculations_length.__author__=testCalculations_length-module.html#__author__,Variable testCalculations_pressure.__author__=testCalculations_pressure-module.html#__author__,Variable testLogging.__author__=testLogging-module.html#__author__"><a title="Mod02_HelloWorld.__author__
+Mod03_ConversionEx.__author__
+Mod04_SaturationVaporPressure.__author__
+Mod05_VaporPressureDeficit.__author__
+allCalculationsTests.__author__
+speedcalc.__author__
+speedloader.__author__
+testCalculations_ET.__author__
+testCalculations_length.__author__
+testCalculations_pressure.__author__
+testLogging.__author__" class="py-name" href="#" onclick="return doclink('link-1', '__author__', 'link-1');">__author__</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Ryan Dammrose"</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-name">__copyright__</tt> <tt class="py-op">=</tt> <tt class="py-string">"Copyright 2015"</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">"MIT"</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable Mod04_SaturationVaporPressure.sc_Pressure=Mod04_SaturationVaporPressure-module.html#sc_Pressure,Variable Mod05_VaporPressureDeficit.sc_Pressure=Mod05_VaporPressureDeficit-module.html#sc_Pressure,Variable testCalculations_pressure.sc_Pressure=testCalculations_pressure-module.html#sc_Pressure"><a title="Mod04_SaturationVaporPressure.sc_Pressure
+Mod05_VaporPressureDeficit.sc_Pressure
+testCalculations_pressure.sc_Pressure" class="py-name" href="#" onclick="return doclink('link-2', 'sc_Pressure', 'link-2');">sc_Pressure</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="speedcalc" class="py-name" href="#" onclick="return doclink('link-3', 'speedcalc', 'link-0');">speedcalc</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Class speedcalc.Pressure=speedcalc.Pressure-class.html"><a title="speedcalc.Pressure" class="py-name" href="#" onclick="return doclink('link-4', 'Pressure', 'link-4');">Pressure</a></tt><tt class="py-op">(</tt><tt class="py-name">numberOfDecimals</tt><tt class="py-op">=</tt><tt class="py-number">3</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable Mod04_SaturationVaporPressure.vaporPressureList=Mod04_SaturationVaporPressure-module.html#vaporPressureList"><a title="Mod04_SaturationVaporPressure.vaporPressureList" class="py-name" href="#" onclick="return doclink('link-5', 'vaporPressureList', 'link-5');">vaporPressureList</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable Mod04_SaturationVaporPressure.temperatureList=Mod04_SaturationVaporPressure-module.html#temperatureList"><a title="Mod04_SaturationVaporPressure.temperatureList" class="py-name" href="#" onclick="return doclink('link-6', 'temperatureList', 'link-6');">temperatureList</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable Mod04_SaturationVaporPressure.temperature=Mod04_SaturationVaporPressure-module.html#temperature"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-7', 'temperature', 'link-7');">temperature</a></tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">15.0</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-keyword">while</tt> <tt id="link-8" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-8', 'temperature', 'link-7');">temperature</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-number">35.01</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable Mod04_SaturationVaporPressure.vaporPressure=Mod04_SaturationVaporPressure-module.html#vaporPressure"><a title="Mod04_SaturationVaporPressure.vaporPressure" class="py-name" href="#" onclick="return doclink('link-9', 'vaporPressure', 'link-9');">vaporPressure</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="Mod04_SaturationVaporPressure.sc_Pressure
+Mod05_VaporPressureDeficit.sc_Pressure
+testCalculations_pressure.sc_Pressure" class="py-name" href="#" onclick="return doclink('link-10', 'sc_Pressure', 'link-2');">sc_Pressure</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method speedcalc.Pressure.vaporPressure_fromTemperature()=speedcalc.Pressure-class.html#vaporPressure_fromTemperature"><a title="speedcalc.Pressure.vaporPressure_fromTemperature" class="py-name" href="#" onclick="return doclink('link-11', 'vaporPressure_fromTemperature', 'link-11');">vaporPressure_fromTemperature</a></tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-12', 'temperature', 'link-7');">temperature</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt id="link-13" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressure" class="py-name" href="#" onclick="return doclink('link-13', 'vaporPressure', 'link-9');">vaporPressure</a></tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="Mod04_SaturationVaporPressure.sc_Pressure
+Mod05_VaporPressureDeficit.sc_Pressure
+testCalculations_pressure.sc_Pressure" class="py-name" href="#" onclick="return doclink('link-14', 'sc_Pressure', 'link-2');">sc_Pressure</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method speedcalc.Pressure.pascalsTo_kiloPascals()=speedcalc.Pressure-class.html#pascalsTo_kiloPascals"><a title="speedcalc.Pressure.pascalsTo_kiloPascals" class="py-name" href="#" onclick="return doclink('link-15', 'pascalsTo_kiloPascals', 'link-15');">pascalsTo_kiloPascals</a></tt><tt class="py-op">(</tt><tt id="link-16" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressure" class="py-name" href="#" onclick="return doclink('link-16', 'vaporPressure', 'link-9');">vaporPressure</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">"T = {0} deg. C, esat = {1} kPa"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-17', 'temperature', 'link-7');">temperature</a></tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressure" class="py-name" href="#" onclick="return doclink('link-18', 'vaporPressure', 'link-9');">vaporPressure</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt id="link-19" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressureList" class="py-name" href="#" onclick="return doclink('link-19', 'vaporPressureList', 'link-5');">vaporPressureList</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressure" class="py-name" href="#" onclick="return doclink('link-20', 'vaporPressure', 'link-9');">vaporPressure</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="Mod04_SaturationVaporPressure.temperatureList" class="py-name" href="#" onclick="return doclink('link-21', 'temperatureList', 'link-6');">temperatureList</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-22" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-22', 'temperature', 'link-7');">temperature</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt id="link-23" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-23', 'temperature', 'link-7');">temperature</a></tt> <tt class="py-op">=</tt> <tt class="py-name">round</tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="Mod04_SaturationVaporPressure.temperature" class="py-name" href="#" onclick="return doclink('link-24', 'temperature', 'link-7');">temperature</a></tt> <tt class="py-op">+</tt> <tt class="py-number">0.01</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-name">plt</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="Mod04_SaturationVaporPressure.temperatureList" class="py-name" href="#" onclick="return doclink('link-25', 'temperatureList', 'link-6');">temperatureList</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name"><a title="Mod04_SaturationVaporPressure.vaporPressureList" class="py-name" href="#" onclick="return doclink('link-26', 'vaporPressureList', 'link-5');">vaporPressureList</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-name">plt</tt><tt class="py-op">.</tt><tt class="py-name">xlabel</tt><tt class="py-op">(</tt><tt class="py-string">"Temperature [Celsius Degrees]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-name">plt</tt><tt class="py-op">.</tt><tt class="py-name">ylabel</tt><tt class="py-op">(</tt><tt class="py-string">"Saturation vapor pressure (e*) [kPa]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-comment">#plt.show()</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="https://github.com/maplion/SPEED">SPEED</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Sep 26 00:18:55 2015
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

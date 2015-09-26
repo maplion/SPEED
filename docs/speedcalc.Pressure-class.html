@@ -95,9 +95,9 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">printFormula</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">formula</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
         <span class="summary-sig-arg">numberOfDecimals</span>=<span class="summary-sig-default">6</span>)</span><br />
-      Initializes superclass SpeedCalc</td>
+      Initializes subclass Pressure</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.__init__">source&nbsp;code</a></span>
             
@@ -114,13 +114,127 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#vaporPressure_fromTemperature" class="summary-sig-name">vaporPressure_fromTemperature</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">temperatureCelsius</span>,
-        <span class="summary-sig-arg">waterPhase</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">liquid</code><code class="variable-quote">'</code></span>,
-        <span class="summary-sig-arg">resultPascal</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span><br />
-      Calculates Saturation Vapor Pressure from a given Temperature in 
-      Celsius.</td>
+        <span class="summary-sig-arg">temperature</span>,
+        <span class="summary-sig-arg">phase</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">liquid</code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">units</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span><br />
+      Calculates Vapor Pressure from a given Temperature in Celsius.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressure_fromTemperature">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#relativeHumidity" class="summary-sig-name">relativeHumidity</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">vaporPressure</span>,
+        <span class="summary-sig-arg">saturationVaporPressure</span>,
+        <span class="summary-sig-arg">units</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span><br />
+      Calculates the relative humidity from the vapor pressure (e) and 
+      saturation vapor pressure (e*)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.relativeHumidity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#vaporPressure_fromRelativeHumidity" class="summary-sig-name">vaporPressure_fromRelativeHumidity</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">relativeHumidity</span>,
+        <span class="summary-sig-arg">saturationVaporPressure</span>,
+        <span class="summary-sig-arg">units</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span><br />
+      Calculates the vapor pressure using the relative humidity equation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressure_fromRelativeHumidity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#vaporPressureDeficit" class="summary-sig-name">vaporPressureDeficit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">saturationVaporPressure</span>,
+        <span class="summary-sig-arg">vaporPressure</span>,
+        <span class="summary-sig-arg">units</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span><br />
+      Calculates the vapor pressure deficit (VPD).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressureDeficit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#pascalsTo_kiloPascals" class="summary-sig-name">pascalsTo_kiloPascals</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pascalValue</span>)</span><br />
+      Converts pascals to kilopascals [kPa]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.pascalsTo_kiloPascals">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#pascalsTo_hectoPascals" class="summary-sig-name">pascalsTo_hectoPascals</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pascalValue</span>)</span><br />
+      Converts pascals to hectopascals [hPa]</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.pascalsTo_hectoPascals">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="speedcalc.Pressure-class.html#dewPointTemperature" class="summary-sig-name">dewPointTemperature</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">vaporPressure</span>)</span><br />
+      Calculates the dew point temperature from the given vapor pressure</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#Pressure.dewPointTemperature">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -144,6 +258,27 @@ object --+
       <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="speedcalc.SpeedCalc-class.html">SpeedCalc</a></th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="isInteger"></a><span class="summary-sig-name">isInteger</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">string</span>)</span><br />
+      Checks if a string is an integer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="speedcalc-pysrc.html#SpeedCalc.isInteger">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 </table>
@@ -198,7 +333,7 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">printFormula</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">formula</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">false</code><code class="variable-quote">'</code></span>,
         <span class="sig-arg">numberOfDecimals</span>=<span class="sig-default">6</span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
@@ -207,8 +342,14 @@ object --+
     </td>
   </tr></table>
   
-  <p>Initializes superclass SpeedCalc</p>
+  <p>Initializes subclass Pressure</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>formula</code></strong> - set formula to true to have the calculations print the formulas 
+          as they are calculated</li>
+        <li><strong class="pname"><code>numberOfDecimals</code></strong> - sets the number of decimals the result values will return</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
     </dt>
@@ -223,28 +364,225 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">vaporPressure_fromTemperature</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">temperatureCelsius</span>,
-        <span class="sig-arg">waterPhase</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">liquid</code><code class="variable-quote">'</code></span>,
-        <span class="sig-arg">resultPascal</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span>
+        <span class="sig-arg">temperature</span>,
+        <span class="sig-arg">phase</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">liquid</code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">units</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressure_fromTemperature">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Calculates Saturation Vapor Pressure from a given Temperature in 
-  Celsius.</p>
+  <p>Calculates Vapor Pressure from a given Temperature in Celsius. For 
+  Saturation Vapor Pressure, put in the temperature. For actual vapor 
+  Pressure, enter the Dewpoint Temperature.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>temperatureCelsius</code></strong> - Degrees Celsius</li>
-        <li><strong class="pname"><code>waterPhase</code></strong> - takes &quot;liquid&quot; and &quot;ice&quot; as parameters; 
+        <li><strong class="pname"><code>temperature</code></strong> - Degrees Celsius</li>
+        <li><strong class="pname"><code>phase</code></strong> - takes &quot;liquid&quot; and &quot;ice&quot; as parameters; 
           defaults to &quot;liquid&quot;</li>
-        <li><strong class="pname"><code>resultPascal</code></strong> - takes &quot;Pa&quot;, &quot;hPa&quot;, and &quot;kPa&quot;; 
-          defaults to &quot;Pa&quot;</li>
+        <li><strong class="pname"><code>units</code></strong> - display units; defaults in Pa</li>
     </ul></dd>
     <dt>Returns:</dt>
-        <dd>saturation vapor pressure (e*) in Pascals (Pa)</dd>
+        <dd>saturation vapor pressure (e*) in Pascals (Pa)
+          <p>Formula:</p>
+<pre class="literalblock">
+   liquid:
+   611.0 * exp(temperature * 17.27)/(temperature + 237.3)  [Pa]
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="relativeHumidity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">relativeHumidity</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">vaporPressure</span>,
+        <span class="sig-arg">saturationVaporPressure</span>,
+        <span class="sig-arg">units</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.relativeHumidity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates the relative humidity from the vapor pressure (e) and 
+  saturation vapor pressure (e*)</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vaporPressure</code></strong> - The vapor pressure (e) in Pa</li>
+        <li><strong class="pname"><code>saturationVaporPressure</code></strong> - The saturation vapor pressure (e*) in Pa</li>
+        <li><strong class="pname"><code>units</code></strong> - display units; defaults in Pa</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>returns the relative humidity
+          <p>Formula:</p>
+<pre class="literalblock">
+   relativeHumidity = vaporPressure/saturationVaporPressure
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="vaporPressure_fromRelativeHumidity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">vaporPressure_fromRelativeHumidity</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">relativeHumidity</span>,
+        <span class="sig-arg">saturationVaporPressure</span>,
+        <span class="sig-arg">units</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressure_fromRelativeHumidity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates the vapor pressure using the relative humidity 
+  equation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>relativeHumidity</code></strong> - The relative humidity value in decimal form (e.g. 50% =&gt; 0.5) 
+          [divides by 100 if not]</li>
+        <li><strong class="pname"><code>saturationVaporPressure</code></strong> - The saturation vapor pressure (often symbolized as 
+          &quot;e*&quot;) in Pa</li>
+        <li><strong class="pname"><code>units</code></strong> - display units; defaults in Pa</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>returns the vapor pressure in Pa
+          <p>Formula:</p>
+<pre class="literalblock">
+   vaporPressure_fromRelativeHumidity = relativeHumidity * saturationVaporPressure
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="vaporPressureDeficit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">vaporPressureDeficit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">saturationVaporPressure</span>,
+        <span class="sig-arg">vaporPressure</span>,
+        <span class="sig-arg">units</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">Pa</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.vaporPressureDeficit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates the vapor pressure deficit (VPD).</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>saturationVaporPressure</code></strong> - The saturation vapor pressure (e*) in Pa</li>
+        <li><strong class="pname"><code>vaporPressure</code></strong> - The vapor pressure (e) in Pa</li>
+        <li><strong class="pname"><code>units</code></strong> - display units; defaults in Pa</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>returns the vapor pressure deficit in Pa
+          <p>Formula:</p>
+<pre class="literalblock">
+   vaporPressureDeficit = saturationVaporPressure - vaporPressure
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pascalsTo_kiloPascals"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pascalsTo_kiloPascals</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pascalValue</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.pascalsTo_kiloPascals">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts pascals to kilopascals [kPa]</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pascalValue</code></strong> - the pascal value to convert
+          <p>Formula:</p>
+<pre class="literalblock">
+   0.001 * pascalValue = kiloPascals
+</pre></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pascalsTo_hectoPascals"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">pascalsTo_hectoPascals</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pascalValue</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.pascalsTo_hectoPascals">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Converts pascals to hectopascals [hPa]</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pascalValue</code></strong> - the pascal value to convert
+          <p>Formula:</p>
+<pre class="literalblock">
+   0.01 * pascalValue = kiloPascals
+</pre></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="dewPointTemperature"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">dewPointTemperature</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">vaporPressure</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="speedcalc-pysrc.html#Pressure.dewPointTemperature">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Calculates the dew point temperature from the given vapor pressure</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vaporPressure</code></strong> - the actual vapor pressure [at a given temperature]</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>dew point temperature
+          <p>Formula:</p>
+<pre class="literalblock">
+   dewPoint = (ln(vaporPressure) - 6.415)/(0.0999-0.00421 * ln(vaporPressure))
+</pre></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -277,7 +615,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Sep 11 01:32:18 2015
+    Generated by Epydoc 3.0.1 on Sat Sep 26 00:18:54 2015
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
