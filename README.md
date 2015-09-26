@@ -73,7 +73,16 @@ As a result of wanting more control over my result values and the number of deci
 >Compute values of VPD for a 24 hour period at a meteorological station in the Dry Creek Experimental Watershed by using a for loop and making the appropriate call to the getVPD function
 
 **Solution:**
+For this Module, I decided to build out some tools.  I divided the Module up into three parts:
 
+1.  *Data Loading*: Since it is likely we will be processing more data from the Dry Creek Experimental Watershed, I wanted to develop a tool that would allow me to parse the data from (potentially) any csv file from the website [http://earth.boisestate.edu/drycreek/](http://earth.boisestate.edu/drycreek/ "Dry Creek Experimental Watershed Link").  It was assumed that they are standardized csv files with a standard header length; that appeared to remain true through the few files I downloaded.  
+To this end, the speedloader.py module was created, which has the intent of using both GUI and/or command line tools to pull data into a module.
+
+2. *Processing Data and Calculations*:  The next part involved extending features within the speedcalc module to support the calculations necessary for Vapor Pressure Deficit.  Additionally, there was a need to filter the processed data by a given date, so those features were added as well into the main() portion of Mod05.
+
+3. *Data output and display*: For this module, I chose to delve into the GUI world a bit since I haven't done it in Python.  I chose to use the Tkinter Module.  It's not really all that flashy and not the easiest to use, but it gets the job done.  I intend to add command line tools as well since lately I prefer more scriptable options, but for now, it is just GUI-driven.  The final output is written to a textbox instead of the regular interpreter command line.
+
+Similar to my time investment into the first Module to organize and build up tools, this took a lot of time.  I am hoping to be able to reuse the efforts put forth here in future modules.  
 
 ----------
 
