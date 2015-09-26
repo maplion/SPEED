@@ -78,6 +78,10 @@ def main(argv=None):
 
     main() function style Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
     """
+    # TODO: Create Command Line Switch (gui/console)
+    # TODO: Create Command Line Tools (parse command line)
+    # TODO: Create Command Line Validation
+    # TODO: Create Standalone executable.
     if argv is None:
         argv = sys.argv
     try:
