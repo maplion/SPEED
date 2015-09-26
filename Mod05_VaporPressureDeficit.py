@@ -74,8 +74,9 @@ class Usage(Exception):
 
 def main(argv=None):
     """
+    This is the main function for Module 05
 
-    Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
+    main() function style Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
     """
     if argv is None:
         argv = sys.argv
@@ -107,9 +108,6 @@ def main(argv=None):
         root.mainloop()
 
         # Set Date
-        # day = 11
-        # month = 7
-        # year = 2014
         entries = sl.getEntries_gui()
         day = entries['Day']
         month = entries['Month']
