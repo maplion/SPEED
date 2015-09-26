@@ -114,7 +114,7 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
     Subclass for SpeedLoader created for the purpose
     of organization within the SpeedLoader superclass;
     These are loads specifically for data coming from the
-    Dry Creek Experimental Watershed (DCEW)
+    Dry Creek Experimental Watershed (DCEW): http://earth.boisestate.edu/drycreek/
     """
 
     def __init__(self):
