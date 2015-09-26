@@ -138,8 +138,7 @@ def main(argv=None):
         S.config(command=T.yview)
         T.config(yscrollcommand=S.set)
 
-        # Calculate VPD
-        # Start count at 21 for numbering to match Excel files, calculate VPD and print result
+        # Calculate VPD and print result; start count at 21 for numbering to match csv line numbers when read in Excel
         recordCount = 0
         i = 21
         for date, relativeHumidity, temp in zip(dates, relativeHumidityData, temperatureData):
