@@ -367,7 +367,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         Calculates Vapor Pressure from a given Temperature in Celsius.
         For Saturation Vapor Pressure, put in the temperature.
-        For vapor Pressure, enter the Dewpoint Temperature.
+        For actual vapor Pressure, enter the Dewpoint Temperature.
 
         @param temperature: Degrees Celsius
         @param phase: takes "liquid" and "ice" as parameters; defaults to "liquid"
@@ -438,7 +438,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._saturationVaporPressure = saturationVaporPressure
         self._units = units
 
-        if self.isInteger(str(self._relativeHumidity)):
+        if self._relativeHumidity > 1:
             self._relativeHumidity /= 100.0
 
         _vaporPressure = self._relativeHumidity * self._saturationVaporPressure
@@ -508,3 +508,21 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)
+
+    def dewPointTemperature(self, vaporPressure):
+        """
+        Calculates the dew point temperature from the given vapor pressure
+
+        @param vaporPressure: the actual vapor pressure [at a given temperature]
+        @return: dew point temperature
+
+        Formula::
+            dewPoint = (ln(vaporPressure) - 6.415)/(0.0999-0.00421 * ln(vaporPressure))
+        """
+        self._vaporPressure = vaporPressure
+
+        _result = (math.log1p(vaporPressure) - 6.415)/(0.0999-0.00421 * math.log1p(vaporPressure))
+        if self._formula == "true":
+            print ("(ln({1}) - 6.415)/(0.0999-0.00421 * ln({1})) = {2:{0}} [Celsius]".format(
+                self._df, self._vaporPressure, _result))
+        return _result

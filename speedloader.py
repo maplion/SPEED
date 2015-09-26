@@ -125,17 +125,13 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
         self._dataRows = dataRows
         _column = []
         for row in dataRows:
-            for value in row.split(','):
-                # if value == -6999:
-                #     value = None
-                _column.append(value)
-                print _column[self._index]
-        return _column[self._index]
+            parsedRow = row.split(',')
+            _column.append(parsedRow[self._index])
+        return _column
 
     def convertDate(self, dates):
         self._dates = dates
-        _structDate = []
+        _date = []
         for date in dates:
-            _structDate.append(time.strptime(date, '%d/%m/%Y %H'))
-            print _structDate
-        return _structDate
+            _date.append(time.strptime(date, '%m/%d/%Y %H:%M'))
+        return _date

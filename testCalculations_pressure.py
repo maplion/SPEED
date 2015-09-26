@@ -147,6 +147,24 @@ class TestCalculations_pressure(unittest.TestCase):
         except:
             log.printTestFailure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
+
+    def test_dewPointTemperature(self):
+        """
+        Conversion from Pascals to hectoPascals
+        """
+        testName = "test_dewPointTemperature"
+        try:
+            log.printTestBegin(testName)
+            # ------------------------------------
+            vaporPressure = 1543  # RH = 0.66, satVaporPressure ~= 2339
+            dewPointTemp = sc_Pressure.dewPointTemperature(vaporPressure)
+
+            self.assertEquals(round(dewPointTemp, 3), 13.439)
+            # ------------------------------------
+            log.printTestSuccess(testName)
+        except:
+            log.printTestFailure(testName)
+            self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 
 
@@ -161,4 +179,5 @@ def suite():
     _suite.addTest(TestCalculations_pressure('test_vaporPressureDeficit'))
     _suite.addTest(TestCalculations_pressure('test_pascalsTo_kiloPascals'))
     _suite.addTest(TestCalculations_pressure('test_pascalsTo_hectoPascals'))
+    _suite.addTest(TestCalculations_pressure('test_dewPointTemperature'))
     return _suite
