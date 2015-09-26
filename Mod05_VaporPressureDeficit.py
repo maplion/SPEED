@@ -98,9 +98,9 @@ def main(argv=None):
         root = sl._root
         root.update()
         root.deiconify()
-        ents = sl.makeForm(root, fields)
-        root.bind('<Return>', (lambda event, e=ents: sl.fetch(e)))
-        b1 = tk.Button(root, text='Go', command=(lambda e=ents: sl.fetch(e, lastCall="true")))
+        ents = sl.makeForm_gui(root, fields)
+        root.bind('<Return>', (lambda event, e=ents: sl.fetch_gui(e)))
+        b1 = tk.Button(root, text='Go', command=(lambda e=ents: sl.fetch_gui(e, lastCall="true")))
         b1.pack(side=tk.LEFT, padx=5, pady=5)
         b2 = tk.Button(root, text='Quit', command=root.quit)
         b2.pack(side=tk.LEFT, padx=5, pady=5)
@@ -110,7 +110,7 @@ def main(argv=None):
         # day = 11
         # month = 7
         # year = 2014
-        entries = sl.entries
+        entries = sl.getEntries_gui()
         day = entries['Day']
         month = entries['Month']
         year = entries['Year']
@@ -142,6 +142,7 @@ def main(argv=None):
 
         # Calculate VPD
         # Start count at 21 for numbering to match Excel files, calculate VPD and print result
+        recordCount = 0
         i = 21
         for date, relativeHumidity, temp in zip(dates, relativeHumidityData, temperatureData):
             if date[0] == year and date[1] == month and date[2] == day:
@@ -150,7 +151,10 @@ def main(argv=None):
                 outputLine = str(i) + ". " + time.strftime('%m/%d/%Y', date) + "\t\t\tRH: " + str(relativeHumidity) +\
                     "\t\tT: " + temp + "\t\t=> VPD: " + str(vpd) + "\n"
                 T.insert(tk.END, outputLine)
+                recordCount += 1
             i += 1
+        if recordCount == 0:
+            T.insert(tk.END, "No records found for date given.")
         root.mainloop()  # Note: destroying root and creating a new one with second mainloop isn't ideal, but it works.
 
     except Usage, err:

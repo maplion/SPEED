@@ -28,7 +28,7 @@ class SpeedLoader(object):
         self._myString = None
         self._root = None
         self._fields = None
-        self.entries = None
+        self._entries = None
 
     def openFileDialog_gui(self):
         """
@@ -60,12 +60,24 @@ class SpeedLoader(object):
         self._myString = myString.lower()
         return [i for i, val in enumerate(self._myList) if self._myString in val.lower()]
 
-    def makeForm(self, root, fields):
+    def getEntries_gui(self):
         """
+        Returns the gui form _entries
+        @return gui form _entries
+        """
+        return self._entries
+
+    def makeForm_gui(self, root, fields):
+        """
+        Creates a gui frame
+
+        @param root: the root gui object
+        @param fields: the fields to build in the gui
+        @return: void
         """
         self._root = root
         self._fields = fields
-        entries = []
+        _entries = []
         for field in self._fields:
             row = tk.Frame(self._root)
             lab = tk.Label(row, width=15, text=field, anchor='w')
@@ -73,22 +85,27 @@ class SpeedLoader(object):
             row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
             lab.pack(side=tk.LEFT)
             ent.pack(side=tk.RIGHT, expand=tk.YES, fill=tk.X)
-            entries.append((field, ent))
-        return entries
+            _entries.append((field, ent))
+        return _entries
 
-    def fetch(self, entries, lastCall="false"):
+    def fetch_gui(self, entries, lastCall="false"):
         """
+        Fetches the data from the gui frame; closes out window if it is the last call
+
+        @param entries: the user's _entries into the form
+        @param lastCall: if set to true, will close out the window
+        @return: void
         """
-        self.entries = entries
+        self._entries = entries
         _result = {}
-        for entry in self.entries:
+        for entry in self._entries:
             field = entry[0]
             text = entry[1].get()
-            print('%s: "%s"' % (field, text))
+            # print('%s: "%s"' % (field, text))
             _result[entry[0]] = entry[1].get()
         if lastCall == "true":
             self._root.destroy()
-        self.entries = _result
+        self._entries = _result
 
 
 class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
