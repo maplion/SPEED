@@ -22,6 +22,7 @@ class SpeedLoader(object):
         """
         SpeedLoader Constructor
         """
+        # TODO: Consider refactoring GUI Entry elements into a separate module and class
 
         # Initialize Variables
         self._myList = None
@@ -130,8 +131,8 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
 
     def weatherStationData_csv(self, filename):
         """
-        @param filename:
-        @return:
+        @param filename: the full path plus the file name
+        @return: returns a list of the data and their headers
         """
         self._filename = filename
 

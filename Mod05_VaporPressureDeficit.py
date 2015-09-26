@@ -155,6 +155,7 @@ def main(argv=None):
             i += 1
         if recordCount == 0:
             T.insert(tk.END, "No records found for date given.")
+        T.config(state=tk.DISABLED)  # Make out textbox readonly
         root.mainloop()  # Note: destroying root and creating a new one with second mainloop isn't ideal, but it works.
 
     except Usage, err:
