@@ -129,9 +129,13 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
         self._index = None
         self._dataRows = None
         self._dates = None
+        self._string = None
+        self._tableHeaders = None
 
     def weatherStationData_csv(self, filename):
         """
+        Extracts Dry Creek Experimental Watershed weather station data (in the format downloaded from the site)
+
         @param filename: the full path plus the file name
         @return: returns a list of the data and their headers
         """
@@ -140,7 +144,7 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
         with open(self._filename) as _csvfile:
             # Skip Headers
             _lines_after_header = _csvfile.readlines()[19:]
-            _csvfile.close()
+            _csvfile.close()  # Usually not necesary with "with", but ensuring closure
 
         # for row in _lines_after_header:
         #     print row

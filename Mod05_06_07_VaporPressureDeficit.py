@@ -12,7 +12,7 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import sys
-# import getopt
+import getopt
 import time
 import Tkinter as tk
 import speedcalc
@@ -74,51 +74,71 @@ class Usage(Exception):
 
 def main(argv=None):
     """
-    This is the main function for Module 05
+    This is the main function for Module 05, 06, 07
 
     main() function style Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
     """
     # TODO: Create Command Line Switch (gui/console)
     # TODO: Create Command Line Tools (parse command line)
     # TODO: Create Command Line Validation
+    # TODO: Create Output to file from Command Line
     # TODO: Create Standalone executable.
+
+    # Declare local main Variables
+    gui = "false"
+    filename = None
+    root = None  # root window for tkinter
+    text = None  # Text
+    day = None
+    month = None
+    year = None
+
     if argv is None:
         argv = sys.argv
+        gui = "true"
     try:
-        # try:
-        #     opts, args = getopt.getopt(argv[1:], "h", ["help"])
-        # except getopt.error, msg:
-        #     raise Usage(msg)
+        try:
+            opts, args = getopt.getopt(argv[1:], "h", ["help"])
+        except getopt.error, msg:
+            raise Usage(msg)
 
         # Get File
-        filename = sl.openFileDialog_gui()
+        if gui:
+            filename = sl.openFileDialog_gui()
+        else:
+            pass
+
         # filename = u"C:/Users/MapLion/Documents/BSU_BoiseStateUniversity/GEOS597/Module 5/LDP_HrlySummary_2014.csv"
 
-        # Check if fileDialog was cancelled
+        # Check if fileDialog was cancelled and exit if it was
         if filename == '':
             sys.exit()
 
-        # Date entry form (reference: http://www.python-course.eu/tkinter_entry_widgets.php)
-        fields = 'Month', 'Day', 'Year'
-        root = sl._root
-        root.update()
-        root.deiconify()
-        ents = sl.makeForm_gui(root, fields)
-        root.bind('<Return>', (lambda event, e=ents: sl.fetch_gui(e)))
-        b1 = tk.Button(root, text='Go', command=(lambda e=ents: sl.fetch_gui(e, lastCall="true")))
-        b1.pack(side=tk.LEFT, padx=5, pady=5)
-        b2 = tk.Button(root, text='Quit', command=root.quit)
-        b2.pack(side=tk.LEFT, padx=5, pady=5)
-        root.mainloop()
+        if gui:
+            # Date entry form for GUI (reference: http://www.python-course.eu/tkinter_entry_widgets.php)
+            fields = 'Month', 'Day', 'Year'
+            root = sl._root
+            root.update()
+            root.deiconify()
+            ents = sl.makeForm_gui(root, fields)
+            root.bind('<Return>', (lambda event, e=ents: sl.fetch_gui(e)))
+            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sl.fetch_gui(e, lastCall="true")))
+            b1.pack(side=tk.LEFT, padx=5, pady=5)
+            b2 = tk.Button(root, text='Quit', command=root.quit)
+            b2.pack(side=tk.LEFT, padx=5, pady=5)
+            root.mainloop()
 
-        # Set Date
-        entries = sl.getEntries_gui()
-        day = entries['Day']
-        month = entries['Month']
-        year = entries['Year']
-        day = int(day)
-        month = int(month)
-        year = int(year)
+            # Set Date
+            entries = sl.getEntries_gui()
+            day = entries['Day']
+            month = entries['Month']
+            year = entries['Year']
+            day = int(day)
+            month = int(month)
+            year = int(year)
+
+        else:
+            pass
 
         # TODO: Add Validation: Validate Date
 
@@ -134,30 +154,58 @@ def main(argv=None):
         relativeHumidityData = sl_dc.getColumn(relativeHumidityIndex, data)
         temperatureData = sl_dc.getColumn(temperatureIndex, data)
 
-        root = tk.Tk()
-        S = tk.Scrollbar(root)
-        T = tk.Text(root, height=50, width=100)
-        S.pack(side=tk.RIGHT, fill=tk.Y)
-        T.pack(side=tk.LEFT, fill=tk.Y)
-        S.config(command=T.yview)
-        T.config(yscrollcommand=S.set)
+        if gui:
+            # Create Textbox output box for GUI
+            root = tk.Tk()
+            scrollbar = tk.Scrollbar(root)
+            text = tk.Text(root, height=50, width=100)
+            scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+            text.pack(side=tk.LEFT, fill=tk.Y)
+            scrollbar.config(command=text.yview)
+            text.config(yscrollcommand=scrollbar.set)
+        else:
+            pass
 
         # Calculate VPD and print result; start count at 21 for numbering to match csv line numbers when read in Excel
-        recordCount = 0
-        i = 21
+        # for visual reference
+
+        # Print Headers
+        if gui:
+            text.insert(tk.END, "\t Date\t     " + relativeHumidityTitle + "\t\t" + temperatureTitle +
+                        "\t\t\tVapor Pressure Deficit (kPa)\n")
+            text.insert(tk.END, "------------------------------------------------------------------------------------" +
+                                "------\n")
+        else:
+            print("\t Date\t     " + relativeHumidityTitle + "\t\t" + temperatureTitle +
+                  "\t\t\tVapor Pressure Deficit (kPa)\n")
+            print("------------------------------------------------------------------------------------" +
+                  "----------------------------\n")
+        recordCount = 0  # found record count
+        i = 21  # line count
         for date, relativeHumidity, temp in zip(dates, relativeHumidityData, temperatureData):
             if date[0] == year and date[1] == month and date[2] == day:
                 vpd = getVPD(float(temp), float(relativeHumidity))
                 vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
-                outputLine = str(i) + ". " + time.strftime('%m/%d/%Y', date) + "\t\t\tRH: " + str(relativeHumidity) +\
-                    "\t\tT: " + temp + "\t\t=> VPD: " + str(vpd) + "\n"
-                T.insert(tk.END, outputLine)
+                outputLine = str(i) + ". " + time.strftime('%m/%d/%Y', date) + "\t\t\t RH: " + str(relativeHumidity) +\
+                    "\t\t     T: " + temp + "\t\t\t=> VPD: " + str(vpd) + "\n"
+
+                if gui:
+                    text.insert(tk.END, outputLine)
+                else:
+                    print outputLine
+
                 recordCount += 1
             i += 1
         if recordCount == 0:
-            T.insert(tk.END, "No records found for date given.")
-        T.config(state=tk.DISABLED)  # Make out textbox readonly
-        root.mainloop()  # Note: destroying root and creating a new one with second mainloop isn't ideal, but it works.
+            if gui:
+                text.insert(tk.END, "No records found for the date given.")
+            else:
+                print "No records found for the date given."
+        if gui:
+            text.config(state=tk.DISABLED)  # Make output textbox readonly
+            root.mainloop()  # Note: destroying root and creating a new one with second mainloop isn't ideal.
+        else:
+            pass
 
     except Usage, err:
         print >>sys.stderr, err.msg

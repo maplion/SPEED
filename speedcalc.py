@@ -297,9 +297,9 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         @param energyFluxValue: energy flux rate in W/m^2
         @param waterDensity: density value for water; defaults to 1000 kg/m^3
-            
+
         @returns: Amount of Water Evaporated (in mm/day)
-        
+
         Formula::
             (energyFluxValue W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * waterDensity kg)
         OR  massFluxValue kg/(m^2*s) / 2.26E6 J
