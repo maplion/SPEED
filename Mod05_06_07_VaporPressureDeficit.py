@@ -17,13 +17,14 @@ import time
 import Tkinter as tk
 import speedcalc
 import speedloader
+import speedgui
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
 sc_Pressure = speedcalc.Pressure()
-sl = speedloader.SpeedLoader()
+sg = speedgui.SpeedGUI()
 sl_dc = speedloader.DryCreek()
 
 
@@ -96,6 +97,8 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
         gui = "true"
+    else:
+        pass
     try:
         try:
             opts, args = getopt.getopt(argv[1:], "h", ["help"])
@@ -104,7 +107,7 @@ def main(argv=None):
 
         # Get File
         if gui:
-            filename = sl.openFileDialog_gui()
+            filename = sg.openFileDialog()
         else:
             pass
 
@@ -117,19 +120,19 @@ def main(argv=None):
         if gui:
             # Date entry form for GUI (reference: http://www.python-course.eu/tkinter_entry_widgets.php)
             fields = 'Month', 'Day', 'Year'
-            root = sl._root
+            root = sg._root
             root.update()
             root.deiconify()
-            ents = sl.makeForm_gui(root, fields)
-            root.bind('<Return>', (lambda event, e=ents: sl.fetch_gui(e)))
-            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sl.fetch_gui(e, lastCall="true")))
+            ents = sg.makeForm(root, fields)
+            root.bind('<Return>', (lambda event, e=ents: sg.fetch(e)))
+            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, lastCall="true")))
             b1.pack(side=tk.LEFT, padx=5, pady=5)
             b2 = tk.Button(root, text='Quit', command=root.quit)
             b2.pack(side=tk.LEFT, padx=5, pady=5)
             root.mainloop()
 
             # Set Date
-            entries = sl.getEntries_gui()
+            entries = sg.getEntries()
             day = entries['Day']
             month = entries['Month']
             year = entries['Year']
