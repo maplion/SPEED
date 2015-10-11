@@ -97,7 +97,7 @@ Since I unwittingly did most of this Module already, I used this Module as an op
 
 If the program is run without arguments, it will initiate the GUI.  Otherwise, it takes arguments in the following format:
 
--i <filename> -ipath <file path>(optional) -d <specific date in mm/dd/yyyy>(optional) -o <outputfile>(optional -- not yet implemented) -opath <output file path>(optional)  
+-i <filename> -ipath <file path>(optional) -d <specific date in mm/dd/yyyy>(optional) -o <outputfile>(optional -- not yet implemented) -opath <output file path>(optional -- not yet implemented)  
 
 A "Show All" option was added that allows one to view calculations for an entire file instead of just a single day.
 
