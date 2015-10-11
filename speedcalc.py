@@ -53,7 +53,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Length calculations.
     """
 
-    def __init__(self, formula="false", numberOfDecimals=6):
+    def __init__(self, formula=False, numberOfDecimals=6):
         """
         Initializes subclass Length
         """
@@ -79,7 +79,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._meters = meters
         _result = self._meters * 1000.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} m * 1000.0 = {2:{0}} mm".format(self._df, self._meters, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -96,7 +96,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._millimeters = millimeters
         _result = self._millimeters / 1000.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} m / 1000.0 = {2:{0}} mm".format(self._df, self._millimeters, _result))
         return round(_result, self._numberOfDecimals)
 #############################################################################################################
@@ -109,7 +109,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Time calculations.
     """
 
-    def __init__(self, formula="false", numberOfDecimals=6):
+    def __init__(self, formula=False, numberOfDecimals=6):
         """
         Initializes subclass Time
 
@@ -139,7 +139,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._seconds = seconds
         _result = self._seconds / 60.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} s / 60.0 = {2:{0}} min".format(self._df, seconds, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -156,7 +156,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._minutes = minutes
         _result = self._minutes * 60.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} min * 60.0 = {2:{0}} s".format(self._df, self._minutes, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -173,7 +173,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._minutes = minutes
         _result = self._minutes / 60.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} min / 60.0 = {2:{0}} hr".format(self._df, self._minutes, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -190,7 +190,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._hours = hours
         _result = self._hours * 60.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} min * 60.0 = {2:{0}} min".format(self._df, self._hours, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -207,7 +207,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._seconds = seconds
         _result = self._seconds / 3600.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} s / 3600.0 = {2:{0}} hr".format(self._df, self._seconds, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -224,7 +224,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._hours = hours
         _result = self._hours * 3600.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} hr * 3600.0 = {2:{0}} s".format(self._df, self._hours, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -241,7 +241,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._seconds = seconds
         _result = self._seconds / 86400.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} s / 86400.0 = {2:{0}} days".format(self._df, self._seconds, _result))
         return round(_result, self._numberOfDecimals)
 
@@ -258,7 +258,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self._days = days
         _result = self._days * 86400.0
-        if self._formula == "true":
+        if self._formula:
             print ("{1:{0}} days * 86400.0 = {2:{0}} s".format(self._df, self._days, _result))
         return round(_result, self._numberOfDecimals)
 #############################################################################################################
@@ -271,7 +271,7 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for ET calculations.
     """
 
-    def __init__(self, formula="false", numberOfDecimals=6):
+    def __init__(self, formula=False, numberOfDecimals=6):
         """
         Initializes subclass ET
         """
@@ -307,7 +307,7 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._energyFluxValue = energyFluxValue
         self._waterDensity = waterDensity  # Density of water in kg/m^3
         _result = ((self._energyFluxValue * 3600.0 * 24.0 * 1000) / (2.26e6 * self._waterDensity))
-        if self._formula == "true":
+        if self._formula:
             print ("({1:{0}} W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * {3} kg "
                    "= {2:{0}} mm/day".format(self._df, self._energyFluxValue, _result, self._waterDensity))
         return round(_result, self._numberOfDecimals)
@@ -329,7 +329,7 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._massFluxValue = massFluxValue
         self._waterDensity = waterDensity  # Density of water in kg/m^3
         _result = self._massFluxValue * (1.0/self._waterDensity) * 1000 * 3600 * 24
-        if self._formula == "true":
+        if self._formula:
             print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr "
                    "= {2:{0}} mm/day".format(self._df, self._massFluxValue, _result, self._waterDensity))
         return round(_result, self._numberOfDecimals)
@@ -343,7 +343,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Pressure calculations.
     """
 
-    def __init__(self, formula="false", numberOfDecimals=6):
+    def __init__(self, formula=False, numberOfDecimals=6):
         """
         Initializes subclass Pressure
 
@@ -394,7 +394,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             _eStar = 611.0 * math.exp((_CONST1 * self._T)/(self._T + _CONST2))
 
         _result = _eStar
-        if self._formula == "true":
+        if self._formula:
             print ("Phase: {5}\n611.0 * exp(({2} * {1} [C])/({1} [C] + {3}) = {6:{0}} [{4}]".format(
                 self._df, self._T, _CONST1, _CONST2, self._units, _phase, _result))
         return round(_result, self._numberOfDecimals)
@@ -418,7 +418,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         _relativeHumidity = self._vaporPressure / self._saturationVaporPressure
 
         _result = _relativeHumidity
-        if self._formula == "true":
+        if self._formula:
             print ("{1} / {2} = {3:{0}} [{4}]".format(
                 self._df, self._vaporPressure, self._saturationVaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
@@ -445,7 +445,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         _vaporPressure = self._relativeHumidity * self._saturationVaporPressure
 
         _result = _vaporPressure
-        if self._formula == "true":
+        if self._formula:
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._relativeHumidity, self._saturationVaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
@@ -469,7 +469,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         _vaporPressureDeficit = self._saturationVaporPressure - self._vaporPressure
 
         _result = _vaporPressureDeficit
-        if self._formula == "true":
+        if self._formula:
             print ("{1} - {2} = {3:{0}} [{4}]".format(
                 self._df, self._saturationVaporPressure, self._vaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
@@ -487,7 +487,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._multiplier = 0.001
         self._pascalValue = pascalValue
         _result = self._multiplier * self._pascalValue
-        if self._formula == "true":
+        if self._formula:
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)
@@ -505,7 +505,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._multiplier = 0.01
         self._pascalValue = pascalValue
         _result = self._multiplier * self._pascalValue
-        if self._formula == "true":
+        if self._formula:
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)
@@ -523,7 +523,7 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._vaporPressure = vaporPressure
 
         _result = (math.log1p(vaporPressure) - 6.415)/(0.0999-0.00421 * math.log1p(vaporPressure))
-        if self._formula == "true":
+        if self._formula:
             print ("(ln({1}) - 6.415)/(0.0999-0.00421 * ln({1})) = {2:{0}} [Celsius]".format(
                 self._df, self._vaporPressure, _result))
         return _result
