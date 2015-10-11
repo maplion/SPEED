@@ -76,7 +76,7 @@ class SpeedGUI(object):
             _entries.append((field, ent))
         return _entries
 
-    def fetch(self, entries, lastCall="false"):
+    def fetch(self, entries, lastCall=False):
         """
         Fetches the data from the gui frame; closes out window if it is the last call
 
@@ -88,6 +88,6 @@ class SpeedGUI(object):
         _result = {}
         for entry in self._entries:
             _result[entry[0]] = entry[1].get()
-        if lastCall == "true":
+        if lastCall:
             self._root.destroy()
         self._entries = _result

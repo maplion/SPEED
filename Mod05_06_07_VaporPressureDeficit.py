@@ -80,14 +80,16 @@ def main(argv=None):
 
     main() function style Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
     """
-    # TODO: Create Command Line Switch (gui/console)
-    # TODO: Create Command Line Tools (parse command line)
-    # TODO: Create Command Line Validation
+
+    # TODO: Check for output directory and create them if they don't exist
+    # TODO: Create Command Line Validation; Add Date Validation
     # TODO: Create Output to file from Command Line
     # TODO: Create Standalone executable.
 
     # Declare local main Variables
-    gui = "false"
+    if argv is None:
+        argv = sys.argv
+    gui = False
     filename = None
     root = None  # root window for tkinter
     text = None  # Text
@@ -95,18 +97,19 @@ def main(argv=None):
     month = None
     year = None
     showAll = False
+    arguments = None
 
     try:
-        if argv is None:
-            gui = "true"
+        if len(argv) == 1:
+            gui = True
         else:
-            s_cli.argparse(argv)
+            arguments = s_cli.argParse(argv)
 
         # Get File
         if gui:
             filename = sg.openFileDialog()
         else:
-            pass
+            filename = arguments.inputFilePath + "/" + arguments.file
 
         # filename = u"C:/Users/MapLion/Documents/BSU_BoiseStateUniversity/GEOS597/Module 5/LDP_HrlySummary_2014.csv"
 
@@ -125,7 +128,7 @@ def main(argv=None):
             checkVar = tk.IntVar()
             checkbox = tk.Checkbutton(root, text="Show All:", variable=checkVar)
             checkbox.pack(side=tk.LEFT, padx=5, pady=5)
-            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, lastCall="true")))
+            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, lastCall=True)))
             b1.pack(side=tk.LEFT, padx=5, pady=5)
             b2 = tk.Button(root, text='Quit', command=root.quit)
             b2.pack(side=tk.LEFT, padx=5, pady=5)
@@ -145,7 +148,15 @@ def main(argv=None):
             showAll = checkVar.get()
 
         else:
-            pass
+            if arguments.date is None:
+                showAll = True
+            else:
+                dayPieces = arguments.date.split('/')
+                print arguments.date
+                print dayPieces
+                day = int(dayPieces[1])
+                month = int(dayPieces[0])
+                year = int(dayPieces[2])
 
         # parse file
         data, headers = sl_dc.weatherStationData_csv(filename)
@@ -163,7 +174,7 @@ def main(argv=None):
             # Create Textbox output box for GUI
             root = tk.Tk()
             scrollbar = tk.Scrollbar(root)
-            text = tk.Text(root, height=50, width=100)
+            text = tk.Text(root, height=50, width=130)
             scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             text.pack(side=tk.LEFT, fill=tk.Y)
             scrollbar.config(command=text.yview)
@@ -176,15 +187,19 @@ def main(argv=None):
 
         # Print Headers
         if gui:
-            text.insert(tk.END, "\t Date\t     " + relativeHumidityTitle + "\t\t" + temperatureTitle +
-                        "\t\t\tVapor Pressure Deficit (kPa)\n")
-            text.insert(tk.END, "------------------------------------------------------------------------------------" +
-                                "------\n")
+            header = "Line\t   Date\t\t     " + relativeHumidityTitle + "\t\t\t\t      " + temperatureTitle \
+                     + "\t\t\t\t   Vapor Pressure Deficit (kPa)\n"
+            headerLineBreak = "------------------------------------------------------------------------------------" \
+                              + "----------------------------------------------\n"
+            text.insert(tk.END, header)
+            text.insert(tk.END, headerLineBreak)
         else:
-            print("\t Date\t     " + relativeHumidityTitle + "\t\t" + temperatureTitle +
-                  "\t\t\tVapor Pressure Deficit (kPa)\n")
-            print("------------------------------------------------------------------------------------" +
-                  "----------------------------\n")
+            header = "Line\t   Date\t\t\t " + relativeHumidityTitle + "\t\t  " + temperatureTitle \
+                     + "\t\tVapor Pressure Deficit (kPa)\n"
+            headerLineBreak = "------------------------------------------------------------------------------------" \
+                              + "----------------\n"
+            print(header)
+            print(headerLineBreak)
         recordCount = 0  # found record count
         i = 21  # line count
         for date, relativeHumidity, temp in zip(dates, relativeHumidityData, temperatureData):
@@ -199,16 +214,29 @@ def main(argv=None):
                 else:
                     vpd = getVPD(float(temp), float(relativeHumidity))
                     vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
+                    relativeHumidity = "{0:0.2f}".format(float(relativeHumidity))
+                    if float(temp) < 0:
+                        temp = "{0:0.3f}".format(float(temp))
+                    else:
+                        temp = " {0:0.3f}".format(float(temp))
+                    vpd = "{0:0.2f}".format(float(vpd)) # Limits VPD to 2 decimals outside of speedcalc for formatting
 
                 # Set up printout line
-                outputLine = str(i) + ". " + time.strftime('%m/%d/%Y', date) + "\t\t\t RH: " + str(relativeHumidity) +\
-                    "\t\t     T: " + temp + "\t\t\t=> VPD: " + str(vpd) + "\n"
+                if gui:
+                    tabs = "\t"
+                else:
+                    if i < 100:
+                        tabs = "\t\t"
+                    else:
+                        tabs = "\t"
+                outputLine = str(i) + "." + tabs + time.strftime('%m/%d/%Y', date) + "\t\t\tRH: " + relativeHumidity +\
+                    "\t\t\t\tT: " + temp + "\t\t\t\t=> VPD: " + str(vpd) + "\n"
 
                 # Print to GUI or console depending on how program is run
                 if gui:
                     text.insert(tk.END, outputLine)
                 else:
-                    print outputLine
+                    print outputLine,
                 recordCount += 1
             i += 1
         if recordCount == 0:
@@ -229,4 +257,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
-

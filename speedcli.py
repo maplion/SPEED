@@ -7,6 +7,7 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
+import os
 import argparse
 
 __author__ = "Ryan Dammrose"
@@ -16,15 +17,49 @@ __license__ = "MIT"
 
 class SpeedCLI(object):
 
-    def __init__(self):
+    def __init__(self, description="SPEED Program"):
         """
         SpeedCLI Constructor
         """
 
         # Initialize Variables
+        self._argv = None
+        self._args = None
+        self._description = description
+        self._parser = None
+        self._defaultInputDataFilePath = "/data"
+        self._defaultOutputDataFilePath = "/output"
 
-    def argparse(self):
+        # Setup argParse
+        self._parser = argparse.ArgumentParser(description=self._description)
+
+        self._parser.add_argument("-i", action="store", dest="file",
+                                  help="The name of the file from which to load data.")
+        self._parser.add_argument("-d", action="store", dest="date",
+                                  help="If desired, choose a specific date to read from the file (e.g. 01/01/2014)")
+        self._parser.add_argument("-ipath", action="store", dest="inputFilePath",
+                                  default=self._defaultInputDataFilePath, help="The path to the file")
+        self._parser.add_argument("-o", action="store", dest="outputFile",
+                                  help="If desired, supply the name of a file to print console output to.")
+        self._parser.add_argument("-opath", action="store", dest="outputFilePath",
+                                  default=self._defaultOutputDataFilePath,
+                                  help="The path if you want the output file to go "
+                                       "somewhere other than the default output folder.")
+
+    def argParse(self, args):
         """
-        :return:
+        Parses incoming arguments and returns an argparse object to use in the rest of the program.
+
+        @param args: Incoming Arguments
+        @returns: argparse parsed argument object
         """
-        pass
+        self._args = args
+        self._inputFilePath = None
+        _results = self._parser.parse_args(args[1:])
+        if _results.inputFilePath == self._defaultInputDataFilePath:
+            _head, _tail = os.path.split(args[0])
+            _results.inputFilePath = _head + self._defaultInputDataFilePath
+        if _results.outputFilePath == self._defaultOutputDataFilePath:
+            _head, _tail = os.path.split(args[0])
+            _results.outputFilePath = _head + self._defaultOutputDataFilePath
+        return _results

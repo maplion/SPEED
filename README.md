@@ -87,12 +87,38 @@ Similar to my time investment into the first Module to organize and build up too
 ----------
 
 ### Module 6 ###
-banana banana banana
+**Requirements:**
+>**Step 01**: Modify the Python script you submitted in Module 05.05 so that: (1) the script takes as command line input the name of a text file, and (2) reads that text file and computes VPD, printing the output to the screen using the "print" function. Assume that the text file is formatted as a comma-separated variable (CSV) file. The first column is the air temperature (in °C) and the second column contains the relative humidity (in %). The rows of the CSV file represent successive hours of observation. The test CSV file to use is linked below.
+
+>**Step 02**: Verify that your code works by posting a screen shot of the code being called with the text file as input and successfully executing and printing output to the screen as a reply to your initial post.
+
+**Solution:**
+Since I unwittingly did most of this Module already, I used this Module as an opportunity to flesh out some of the command line tools that I desired to finish in the previous Module.  
+
+If the program is run without arguments, it will initiate the GUI.  Otherwise, it takes arguments in the following format:
+
+-i <filename> -ipath <file path>(optional) -d <specific date in mm/dd/yyyy>(optional) -o <outputfile>(optional -- not yet implemented) -opath <output file path>(optional)  
+
+A "Show All" option was added that allows one to view calculations for an entire file instead of just a single day.
+
+To account for when there is a -6999 for no data, I added logic to print out "No Data" for the VPD when -6999 is encountered in the data and print out "No Data" for whichever element is missing.
+
+Formatting was updated to be more uniform.  Formatting was created specifically for the CLI.
 
 ----------
 
 ### Module 7 ###
-banana banana banana
+**Requirements:**
+>In this activity we will continue to expand the Python code that you started in Programming Activity 05.05 and expanded in Programming Activity 06.05. In this Programming Activity you will save the functions that you created in Programming Activity 05.05 as a Python module, which you will then call from a script that reads as input the name of a comma-separated variable (CSV) formatted text file from the command line. The script will then call the functions from inside your module and compute the hourly vapor pressure deficit (VPD) based on the hourly values of air temperature (in °C) and relative humidity (in %) read from the text file. 
+
+>**Step 01**: Take the Python functions you coded for Programming Activity 05.05 and move them into a file as a Python module.
+
+>**Step 02**: Write another Python script that takes as input at the command line the name of a CSV file containing hourly values of air temperature and relative humidity. Assume that the first column of the file in the CSV file is air temperature data (in °C) and the second column contains relative humidity data (in %). The rows of the CSV file, again, represent successive hours of observation. Your script should read in the hourly observations of air temperature and relative humidity, and use the functions in your Python module to compute the corresponding hourly vapor pressure deficit and writing it to the screen using the "print" Python function. The CSV file is provided below.
+
+>**Step 03**: Post a screen shot of the script being called and the code successfully executing (i.e., the printout of the hourly values of VPD). 
+
+**Solution:**
+As with Module 6, the requirements for this module were really achieved in what I did in Module 5.
 
 ----------
 

@@ -8,6 +8,7 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import time
+import sys
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -67,11 +68,14 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
         @return: returns a list of the data and their headers
         """
         self._filename = filename
-
-        with open(self._filename) as _csvfile:
-            # Skip Headers
-            _lines_after_header = _csvfile.readlines()[19:]
-            _csvfile.close()  # Usually not necesary with "with", but ensuring closure
+        try:
+            with open(self._filename) as _csvfile:
+                # Skip Headers
+                _lines_after_header = _csvfile.readlines()[19:]
+                _csvfile.close()  # Usually not necesary with "with", but ensuring closure
+        except IOError, e:
+            print(e)
+            sys.exit()
 
         # for row in _lines_after_header:
         #     print row
