@@ -27,6 +27,13 @@ class SpeedGUI(object):
         self._fields = None
         self._entries = None
 
+    def getRoot(self):
+        """
+        Gets the root window
+        @returns root
+        """
+        return self._root
+
     def openFileDialog(self):
         """
         Opens a basic file dialog that browses to a file
@@ -80,9 +87,6 @@ class SpeedGUI(object):
         self._entries = entries
         _result = {}
         for entry in self._entries:
-            field = entry[0]
-            text = entry[1].get()
-            # print('%s: "%s"' % (field, text))
             _result[entry[0]] = entry[1].get()
         if lastCall == "true":
             self._root.destroy()

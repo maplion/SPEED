@@ -12,12 +12,12 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import sys
-import getopt
 import time
 import Tkinter as tk
 import speedcalc
 import speedloader
 import speedgui
+import speedcli
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -26,6 +26,7 @@ __license__ = "MIT"
 sc_Pressure = speedcalc.Pressure(numberOfDecimals=2)
 sg = speedgui.SpeedGUI()
 sl_dc = speedloader.DryCreek()
+s_cli = speedcli.SpeedCLI(description="SPEED Vapor Pressure Deficit Command Line Interface")
 
 
 def getSatVaporPressure(temperature):
@@ -93,17 +94,13 @@ def main(argv=None):
     day = None
     month = None
     year = None
+    showAll = False
 
-    if argv is None:
-        argv = sys.argv
-        gui = "true"
-    else:
-        pass
     try:
-        try:
-            opts, args = getopt.getopt(argv[1:], "h", ["help"])
-        except getopt.error, msg:
-            raise Usage(msg)
+        if argv is None:
+            gui = "true"
+        else:
+            s_cli.argparse(argv)
 
         # Get File
         if gui:
@@ -120,30 +117,35 @@ def main(argv=None):
         if gui:
             # Date entry form for GUI (reference: http://www.python-course.eu/tkinter_entry_widgets.php)
             fields = 'Month', 'Day', 'Year'
-            root = sg._root
+            root = sg.getRoot()
             root.update()
             root.deiconify()
             ents = sg.makeForm(root, fields)
             root.bind('<Return>', (lambda event, e=ents: sg.fetch(e)))
+            checkVar = tk.IntVar()
+            checkbox = tk.Checkbutton(root, text="Show All:", variable=checkVar)
+            checkbox.pack(side=tk.LEFT, padx=5, pady=5)
             b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, lastCall="true")))
             b1.pack(side=tk.LEFT, padx=5, pady=5)
             b2 = tk.Button(root, text='Quit', command=root.quit)
             b2.pack(side=tk.LEFT, padx=5, pady=5)
             root.mainloop()
 
+            # An imperfect way to ensure a clean exit when "Quit" is clicked in the GUI.
+            if sg.getEntries() is None:
+                sys.exit()
             # Set Date
             entries = sg.getEntries()
             day = entries['Day']
             month = entries['Month']
             year = entries['Year']
-            day = int(day)
-            month = int(month)
-            year = int(year)
+            day = int(0 if day == '' or day is None else day)
+            month = int(0 if month == '' or month is None else month)
+            year = int(0 if year == '' or year is None else year)
+            showAll = checkVar.get()
 
         else:
             pass
-
-        # TODO: Add Validation: Validate Date
 
         # parse file
         data, headers = sl_dc.weatherStationData_csv(filename)
@@ -186,17 +188,27 @@ def main(argv=None):
         recordCount = 0  # found record count
         i = 21  # line count
         for date, relativeHumidity, temp in zip(dates, relativeHumidityData, temperatureData):
-            if date[0] == year and date[1] == month and date[2] == day:
-                vpd = getVPD(float(temp), float(relativeHumidity))
-                vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
+            if (date[0] == year and date[1] == month and date[2] == day) or showAll:
+                # Check for No Data flag and convert printout if found, otherwise calculate VPD
+                if float(temp) == -6999 or float(relativeHumidity) == -6999:
+                    vpd = "No Data"
+                    if float(temp) == -6999:
+                        temp = "No Data"
+                    if float(relativeHumidity) == -6999:
+                        relativeHumidity = "No Data"
+                else:
+                    vpd = getVPD(float(temp), float(relativeHumidity))
+                    vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
+
+                # Set up printout line
                 outputLine = str(i) + ". " + time.strftime('%m/%d/%Y', date) + "\t\t\t RH: " + str(relativeHumidity) +\
                     "\t\t     T: " + temp + "\t\t\t=> VPD: " + str(vpd) + "\n"
 
+                # Print to GUI or console depending on how program is run
                 if gui:
                     text.insert(tk.END, outputLine)
                 else:
                     print outputLine
-
                 recordCount += 1
             i += 1
         if recordCount == 0:
