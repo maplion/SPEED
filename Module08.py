@@ -10,8 +10,6 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import sys
-import numpy as np
 from matplotlib.pylab import *
 import speedcli
 
@@ -21,6 +19,7 @@ __license__ = "MIT"
 
 s_cli = speedcli.SpeedCLI(description="SPEED First, Second, and Third Order Polynomial from Array Data")
 
+
 class Usage(Exception):
     def __init__(self, msg):
         self.msg = msg
@@ -29,8 +28,6 @@ class Usage(Exception):
 def main(argv=None):
     """
     This is the main function for Module 08
-
-    main() function style Reference: https://www.artima.com/weblogs/viewpost.jsp?thread=4829
     """
 
     outputFilePath = None
@@ -50,7 +47,7 @@ def main(argv=None):
         if arguments.outputFile is None:
             arguments.outputFile = "RDD_Module08.jpg"
 
-        if not arguments.outputFile is None:
+        if arguments.outputFile is not None:
             outputFilePath = arguments.outputFilePath + "/" + arguments.outputFile
 
         # Read csv file - x is Elevation and y is annual precipitation in millimeters
@@ -65,7 +62,7 @@ def main(argv=None):
         third_order_poly = np.polyfit(x_elevation, y_annual_precip, 3)
         third_order_poly = np.poly1d(third_order_poly)
 
-        l = np.linspace(min(x_elevation),max(x_elevation),50)
+        l = np.linspace(min(x_elevation), max(x_elevation), 50)
 
         # Plots
         plot(x_elevation, y_annual_precip, 'bo', label='input data')
