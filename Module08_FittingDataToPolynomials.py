@@ -71,6 +71,7 @@ def main(argv=None):
         xlabel('Elevation (m)')
         ylabel('Annual Precipitation (mm)')
         legend(['SNOTEL Data', 'First order', 'Second order', 'Third order'], loc='lower right')
+        title('Ryan Dammrose Module 08: Polynomial Fitting')
         savefig(outputFilePath, dpi=300)
         show()
 
