@@ -70,7 +70,7 @@ def main(argv=None):
         plot(l, first_order_poly(l), 'r-', l, second_order_poly(l), 'g-', l, third_order_poly(l), 'b-')
         xlabel('Elevation (m)')
         ylabel('Annual Precipitation (mm)')
-        legend(['SNOTEL Data', 'First order', 'Second order', 'Third order'], loc='upper left')
+        legend(['SNOTEL Data', 'First order', 'Second order', 'Third order'], loc='lower right')
         savefig(outputFilePath, dpi=300)
         show()
 
