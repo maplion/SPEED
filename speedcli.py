@@ -25,6 +25,8 @@ class SpeedCLI(object):
         # Initialize Variables
         self._argv = None
         self._args = None
+        self._path = None
+        self._inputFilePath = None
         self._description = description
         self._parser = None
         self._defaultInputDataFilePath = "/data"
@@ -54,12 +56,23 @@ class SpeedCLI(object):
         @returns: argparse parsed argument object
         """
         self._args = args
-        self._inputFilePath = None
         _results = self._parser.parse_args(args[1:])
         if _results.inputFilePath == self._defaultInputDataFilePath:
             _head, _tail = os.path.split(args[0])
             _results.inputFilePath = _head + self._defaultInputDataFilePath
+            self.createDirectory(_results.inputFilePath)
         if _results.outputFilePath == self._defaultOutputDataFilePath:
             _head, _tail = os.path.split(args[0])
             _results.outputFilePath = _head + self._defaultOutputDataFilePath
+            self.createDirectory(_results.outputFilePath)
         return _results
+
+    def createDirectory(self, path):
+        """
+        Checks if a directory exists; if it does not, creates it.
+
+        @param path: Path of directory to be created
+        """
+        self._path = path
+        if not os.path.exists(self._path):
+            os.makedirs(self._path)

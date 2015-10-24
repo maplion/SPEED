@@ -123,7 +123,26 @@ As with Module 6, the requirements for this module were really achieved in what 
 ----------
 
 ### Module 8 ###
-banana banana banana
+> Step 01: Write a Python script that takes as input (at the command line) the name of a comma-separated variable (CSV) file containing 2 columns and an arbitrary number of rows. The file in question is linked above. The first column is the predictor variable, and the second column is the response variable. The Python script should read that file and store each column in a separate python array. 
+
+> Hint: see the I/O (input / output) section of the online numpy documentation
+
+> Step 02: Use the numpy polyfit function to determine the coefficients of a first, second, and third order polynomial function to the data
+
+> Step 03: Create a plot that shows the fit polynomial functions (first, second, and third order) as lines and the original X and y data as points on the same plot
+
+> Step 04: Post the produced plot as a reply to your initial discussion board post.
+
+**Solution:**
+For this Module, I reused the speedcli for the command-line arguments.  I added a small function to create directories for the default locations if they did not exist.
+
+The Module08 program expects an input from the command-line interface, for example:
+
+```
+python Module08.py -i <inputFileName> -o <outputFileName>(optional) -ipath <pathToInputFile>(optional) -opath <pathForOutputFile>(optional)
+```
+
+The default output is in .jpg format with the name "RDD_Module08.jpg" and defaults into the output directory (will be created if it is not found).  One can change the output name with the -o argument.  The output path can also be changed with the -opath argument.
 
 ----------
 

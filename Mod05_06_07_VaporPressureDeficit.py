@@ -90,7 +90,6 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
     gui = False
-    filename = None
     root = None  # root window for tkinter
     text = None  # Text
     day = None
@@ -219,7 +218,7 @@ def main(argv=None):
                         temp = "{0:0.3f}".format(float(temp))
                     else:
                         temp = " {0:0.3f}".format(float(temp))
-                    vpd = "{0:0.2f}".format(float(vpd)) # Limits VPD to 2 decimals outside of speedcalc for formatting
+                    vpd = "{0:0.2f}".format(float(vpd))  # Limits VPD to 2 decimals outside of speedcalc for formatting
 
                 # Set up printout line
                 if gui:
