@@ -15,6 +15,7 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import math
+import numpy as np
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -292,7 +293,7 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         evaporated per day (mm/day).
 
         In other words, it is a conversion of the evaporation of water in units of
-        power per unit area of earth surface to volume of water evaporated per unit area
+        power per unit _area of earth surface to volume of water evaporated per unit _area
         of earth surface, per unit time.
 
         @param energyFluxValue: energy flux rate in W/m^2
@@ -527,3 +528,134 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("(ln({1}) - 6.415)/(0.0999-0.00421 * ln({1})) = {2:{0}} [Celsius]".format(
                 self._df, self._vaporPressure, _result))
         return _result
+
+
+class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
+    """
+    Subclass for Polygon, created for Module 09.
+    """
+
+    def __init__(self, x_coords, y_coords, formula=False, numberOfDecimals=6):
+        """
+        Initializes subclass Polygon
+        """
+        super(SpeedCalc, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._formula = formula
+        self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Attributes that are used later
+        self._x_coords = None
+        self._y_coords = None
+        self._area = None
+        self._centroid_x = None
+        self._centroid_y = None
+        self._perimeter = None
+
+        # Validate polygon coordinates
+        self.validatePolygon(x_coords, y_coords)
+
+        # Set area, centroid, and perimeter of polygon
+        self.setPolyArea()
+        self.setPolyCentroid()
+        self.setPolyPerimeter()
+
+    def validatePolygon(self, x_coords, y_coords):
+        """
+        Checks if coordinates given make a valid polygon by summing the coordinates and seeing if they are equal.
+
+        @param x_coords: x coordinates of Polygon
+        @param y_coords: y coordinates of Polygon
+        """
+        self._x_coords = x_coords
+        self._y_coords = y_coords
+
+        try:
+            if (np.sum(self._x_coords) != np.sum(self._y_coords)) or (len(self._x_coords) != len(self._y_coords)):
+                raise ValueError("Invalid Polygon Coordinates Given (e.g. sum(x) does not equal sum(y), or number of"
+                                 "coordinates for x and y does not match.")
+        except ValueError as e:
+            raise e
+
+    def setPolyArea(self):
+        """
+        Calculates and sets Polygon Area
+        """
+        _arrayLength = len(self._x_coords) - 1
+
+        i = 0
+        _calcSum = float(0)
+        while i < _arrayLength:
+            _calc = self._x_coords[i] * self._y_coords[i + 1] - self._y_coords[i] * self._x_coords[i + 1]
+            _calcSum += _calc
+            i += 1
+            if i == _arrayLength:
+                _calc = self._x_coords[i] * self._y_coords[0] - self._y_coords[i] * self._x_coords[0]
+                _calcSum += _calc
+        self._area = abs(_calcSum)/2
+
+    def setPolyCentroid(self):
+        """
+        Calculates and sets Polygon Centroid (x, y)
+        """
+        _arrayLength = len(self._x_coords) - 1
+
+        i = 0
+        _calcSum_x = float(0)
+        _calcSum_y = float(0)
+        while i < _arrayLength:
+            _calc_x = (self._x_coords[i] + self._x_coords[i + 1]) * (self._x_coords[i] * self._y_coords[i + 1] -
+                                                                     self._x_coords[i + 1] * self._y_coords[i])
+            _calc_y = (self._y_coords[i] + self._y_coords[i + 1]) * (self._x_coords[i] * self._y_coords[i + 1] -
+                                                                     self._x_coords[i + 1] * self._y_coords[i])
+            _calcSum_x += _calc_x
+            _calcSum_y += _calc_y
+            i += 1
+            if i == _arrayLength:
+                _calc_x = (self._x_coords[i] + self._x_coords[0]) * (self._x_coords[i] * self._y_coords[0] -
+                                                                     self._x_coords[0] * self._y_coords[i])
+                _calc_y = (self._y_coords[i] + self._y_coords[0]) * (self._x_coords[i] * self._y_coords[0] -
+                                                                     self._x_coords[0] * self._y_coords[i])
+                _calcSum_x += _calc_x
+                _calcSum_y += _calc_y
+
+        self._centroid_x = (1/(6 * self._area)) * abs(_calcSum_x)
+        self._centroid_y = (1/(6 * self._area)) * abs(_calcSum_y)
+
+    def setPolyPerimeter(self):
+        """
+        Calculates and sets Polygon Perimeter
+        """
+        _arrayLength = len(self._x_coords) - 1
+
+        i = 0
+        _calcSum = float(0)
+        while i < _arrayLength:
+            _calc = (self._x_coords[i + 1] - self._x_coords[i])**2 + (self._y_coords[i + 1] - self._y_coords[i])**2
+            _calcSum += math.sqrt(_calc)
+            i += 1
+            if i == _arrayLength:
+                _calc = (self._x_coords[0] - self._x_coords[i])**2 + (self._y_coords[0] - self._y_coords[i])**2
+                _calcSum += math.sqrt(_calc)
+        self._perimeter = _calcSum
+
+    def getPolyArea(self):
+        """
+        Gets the Polygon Area
+        @returns: Polygon Area
+        """
+        return round(self._area, self._numberOfDecimals)
+
+    def getPolyCentroid(self):
+        """
+        Gets the Polygon Centroid
+        @returns: Polygon Centroid
+        """
+        return round(self._centroid_x, self._numberOfDecimals), round(self._centroid_y, self._numberOfDecimals)
+
+    def getPolyPerimeter(self):
+        """
+        Gets the Polygon Perimeter
+        @returns: Polygon Perimeter
+        """
+        return round(self._perimeter, self._numberOfDecimals)

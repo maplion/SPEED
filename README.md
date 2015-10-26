@@ -123,15 +123,15 @@ As with Module 6, the requirements for this module were really achieved in what 
 ----------
 
 ### Module 8 ###
-> Step 01: Write a Python script that takes as input (at the command line) the name of a comma-separated variable (CSV) file containing 2 columns and an arbitrary number of rows. The file in question is linked above. The first column is the predictor variable, and the second column is the response variable. The Python script should read that file and store each column in a separate python array. 
+> **Step 01**: Write a Python script that takes as input (at the command line) the name of a comma-separated variable (CSV) file containing 2 columns and an arbitrary number of rows. The file in question is linked above. The first column is the predictor variable, and the second column is the response variable. The Python script should read that file and store each column in a separate python array. 
 
 > Hint: see the I/O (input / output) section of the online numpy documentation
 
-> Step 02: Use the numpy polyfit function to determine the coefficients of a first, second, and third order polynomial function to the data
+> **Step 02**: Use the numpy polyfit function to determine the coefficients of a first, second, and third order polynomial function to the data
 
-> Step 03: Create a plot that shows the fit polynomial functions (first, second, and third order) as lines and the original X and y data as points on the same plot
+> **Step 03**: Create a plot that shows the fit polynomial functions (first, second, and third order) as lines and the original X and y data as points on the same plot
 
-> Step 04: Post the produced plot as a reply to your initial discussion board post.
+> **Step 04**: Post the produced plot as a reply to your initial discussion board post.
 
 **Solution:**
 For this Module, I reused the speedcli for the command-line arguments.  I added a small function to create directories for the default locations if they did not exist.
@@ -139,7 +139,7 @@ For this Module, I reused the speedcli for the command-line arguments.  I added 
 The Module08 program expects an input from the command-line interface, for example:
 
 ```
-python Module08.py -i <inputFileName> -o <outputFileName>(optional) -ipath <pathToInputFile>(optional) -opath <pathForOutputFile>(optional)
+python Module08_FittingDataToPolynomials.py -i <inputFileName> -o <outputFileName>(optional) -ipath <pathToInputFile>(optional) -opath <pathForOutputFile>(optional)
 ```
 
 The default output is in .jpg format with the name "RDD_Module08.jpg" and defaults into the output directory (will be created if it is not found).  One can change the output name with the -o argument.  The output path can also be changed with the -opath argument.
@@ -147,12 +147,51 @@ The default output is in .jpg format with the name "RDD_Module08.jpg" and defaul
 ----------
 
 ### Module 9 ###
-banana banana banana
+> **Step 01**: Create a Python class with the following attributes:
+
+> The constructor takes as input an array x and an array y that contain, respectively, the x- and y-coordinate pairs of each of the vertices. Note that it's a good idea to error trap whether or not x and y are the same length  (they should be, otherwise noting else will work)
+Parameters that include the number of vertices, the x- and y-coordinates of the polygon arrays, area, centroid x and y coordinates, and perimeter
+
+> - A SetPolyArea function that takes as input the x and y coordinate arrays and computes the polygon area
+- A SetPolyCentroid function that takes as input the x and y coordinate arrays and computes the polygon centroid x and y coordinates
+- A SetPolyPerimeter function that takes as input the x and y coordinate arrays and computes the polygon perimeter
+- A GetPolyArea function that returns the polygon area
+- A GetPolyCentroid function that returns the x- and y- coordinates of the polygon centroid
+- A GetPolyPerimeter function that returns the perimeter of the polygon
+
+> **Step 02**: Write another Python script that defines the x and y arrays as defined below and then creates a new MyPolygon class instance called TodaysPoly. The script should then call the GetPolyArea, GetPolyCentroid, and GetPolyPerimeter functions. It should print the labeled area, centroid coordinates, and perimeter values to the screen.
+
+> **Step 03**: Post a screen shot of the script you created successfully running with the values of the area, centroid coordinates, and perimeter written to the screen as a response to your initial discussion forum post.
+
+> ![](http://i.imgur.com/Gg4FhPb.jpg)
+
+**Solution:**
+To keep things together from the rest of the semester, instead of making a Polygon class named "MyPolygon", I created a "Polygon" subclass that is under the class SpeedCalc within the speedcalc module.
+
+I added the test vertices to the project as a .csv file within the data folder.  The project is designed to be able to load a csv with the vertices of a polygon from the command line, using the format:
+
+```
+python Module09_PolygonClass.py -i <inputFileName> -ipath <pathToInputFile>(optional)
+```
+Tests were made for the calculations of the polygon area, centroid and perimeter.
+
+All polygon validations and calculations are done upon instantiation of the Polygon class object and the information is returned by using the get functions.
 
 ----------
 
 ### Module 10 ###
-banana banana banana
+> **Step 01**: Write the Python script to create an ensemble of random walkers with the following characteristics:
+
+> Number of random walkers = 100
+Number of steps = 500
+Beginning position, x0 = 0
+Average step size = 1
+Standard deviation in step size = 2.5
+Hint: Use numpy arrays to store the position of the jth random walker at the ith step at the ith row and jth column of a 2-dimensional array.
+ 
+> **Step 02**: Create a plot of the trajectory of every random walker during every step of the random walk process. Post that plot as a response to your initial discussion board post for this module. Note: Extra credit will be given to those who figure out how to compute and plot the average location of all random walkers at every step in the random walk process (hint: look at the [numpy mean function](http://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html)).
+
+**Solution:**
 
 ----------
 
