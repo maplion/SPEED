@@ -173,6 +173,10 @@ I added the test vertices to the project as a .csv file within the data folder. 
 ```
 python Module09_PolygonClass.py -i <inputFileName> -ipath <pathToInputFile>(optional)
 ```
+Note that vertices should be in a counterclockwise order.
+
+Note also that while vertices are counterclockwise and one would normally end up with a negative result, absolute values were added to the Area and Centroid-x and Centroid-y values so as to give a more user-friendly result.  As such, the vertices really should be of the positive or first quadrant variety.
+
 Tests were made for the calculations of the polygon area, centroid and perimeter.
 
 All polygon validations and calculations are done upon instantiation of the Polygon class object and the information is returned by using the get functions.
