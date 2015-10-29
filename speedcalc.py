@@ -581,15 +581,12 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         Calculates and sets Polygon Area
         """
-        _arrayLength = len(self._x_coords) - 1
-
-        i = 0
         _calcSum = float(0)
-        while i < _arrayLength:
+        for i in range(len(self._x_coords) - 1):
             _calc = self._x_coords[i] * self._y_coords[i + 1] - self._y_coords[i] * self._x_coords[i + 1]
             _calcSum += _calc
             i += 1
-            if i == _arrayLength:
+            if i == len(self._x_coords) - 1:
                 _calc = self._x_coords[i] * self._y_coords[0] - self._y_coords[i] * self._x_coords[0]
                 _calcSum += _calc
         self._area = abs(_calcSum)/2.0
@@ -598,12 +595,9 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         Calculates and sets Polygon Centroid (x, y)
         """
-        _arrayLength = len(self._x_coords) - 1
-
-        i = 0
         _calcSum_x = float(0)
         _calcSum_y = float(0)
-        while i < _arrayLength:
+        for i in range(len(self._x_coords) - 1):
             _calc_x = (self._x_coords[i] + self._x_coords[i + 1]) * (self._x_coords[i] * self._y_coords[i + 1] -
                                                                      self._x_coords[i + 1] * self._y_coords[i])
             _calc_y = (self._y_coords[i] + self._y_coords[i + 1]) * (self._x_coords[i] * self._y_coords[i + 1] -
@@ -611,7 +605,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
             _calcSum_x += _calc_x
             _calcSum_y += _calc_y
             i += 1
-            if i == _arrayLength:
+            if i == len(self._x_coords) - 1:
                 _calc_x = (self._x_coords[i] + self._x_coords[0]) * (self._x_coords[i] * self._y_coords[0] -
                                                                      self._x_coords[0] * self._y_coords[i])
                 _calc_y = (self._y_coords[i] + self._y_coords[0]) * (self._x_coords[i] * self._y_coords[0] -
@@ -626,15 +620,12 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         Calculates and sets Polygon Perimeter
         """
-        _arrayLength = len(self._x_coords) - 1
-
-        i = 0
         _calcSum = float(0)
-        while i < _arrayLength:
+        for i in range(len(self._x_coords) - 1):
             _calc = (self._x_coords[i + 1] - self._x_coords[i])**2 + (self._y_coords[i + 1] - self._y_coords[i])**2
             _calcSum += math.sqrt(_calc)
             i += 1
-            if i == _arrayLength:
+            if i == len(self._x_coords) - 1:
                 _calc = (self._x_coords[0] - self._x_coords[i])**2 + (self._y_coords[0] - self._y_coords[i])**2
                 _calcSum += math.sqrt(_calc)
         self._perimeter = _calcSum
