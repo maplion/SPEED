@@ -592,7 +592,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
             if i == _arrayLength:
                 _calc = self._x_coords[i] * self._y_coords[0] - self._y_coords[i] * self._x_coords[0]
                 _calcSum += _calc
-        self._area = abs(_calcSum)/2
+        self._area = abs(_calcSum)/2.0
 
     def setPolyCentroid(self):
         """
@@ -619,8 +619,8 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
                 _calcSum_x += _calc_x
                 _calcSum_y += _calc_y
 
-        self._centroid_x = (1/(6 * self._area)) * abs(_calcSum_x)
-        self._centroid_y = (1/(6 * self._area)) * abs(_calcSum_y)
+        self._centroid_x = (1.0/(6.0 * self._area)) * abs(_calcSum_x)
+        self._centroid_y = (1.0/(6.0 * self._area)) * abs(_calcSum_y)
 
     def setPolyPerimeter(self):
         """
