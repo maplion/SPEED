@@ -194,6 +194,27 @@ Hint: Use numpy arrays to store the position of the jth random walker at the ith
 > **Step 02**: Create a plot of the trajectory of every random walker during every step of the random walk process. Post that plot as a response to your initial discussion board post for this module. Note: Extra credit will be given to those who figure out how to compute and plot the average location of all random walkers at every step in the random walk process (hint: look at the [numpy mean function](http://docs.scipy.org/doc/numpy/reference/generated/numpy.mean.html)).
 
 **Solution:**
+For the implementation of this module, I chose to create a new RandomWalker subclass to go into the speedcalc module.  Since it was unclear at the outset whether this was supposed to be a 1-dimensional implementation or 2-dimensional implementation, I chose to make it possible to do either based on the given parameters [Update: it was made clear that it is supposed to be a 1D implementation, but I utilized the 2D implementation from the book to get a better sense of what I am doing for the 1D].
+
+For the parameters, a simple argument list implementation was used instead of argparsing, so order matters.  The format of arguments required is (listed on multiple lines for readability, but should be entered sequentially):
+
+```
+Module10_RandomWalk.py <number of random walkers> 
+	<number of steps> 
+	<average step size>(optional; defaults at 1) 
+	<standard deviation in step size>(optional; defaults at 2.5) 
+	<beginning position>(optional; defaults at 0)
+	<number of dimensions>(optional; defaults to 1)
+```
+
+An example using the given problem set for the Module would look like:
+
+```
+Module10_RandomWalk.py 100 500
+```
+I wasn't sure if I could vectorize my code any further, but I decided to just get it to work.  I struggled more than usual with this particular module.  It takes me a bit to get thinking in terms of matrices and vectors.
+
+I didn't do as many bells and whistles in this particular module as I usually do due to time constraints, but it seems to work as intended.
 
 ----------
 

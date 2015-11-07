@@ -15,7 +15,7 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import math
-import numpy as np
+import numpy
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -571,7 +571,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._y_coords = y_coords
 
         try:
-            if (np.sum(self._x_coords) != np.sum(self._y_coords)) or (len(self._x_coords) != len(self._y_coords)):
+            if (numpy.sum(self._x_coords) != numpy.sum(self._y_coords)) or (len(self._x_coords) != len(self._y_coords)):
                 raise ValueError("Invalid Polygon Coordinates Given (e.g. sum(x) does not equal sum(y), or number of"
                                  "coordinates for x and y does not match.")
         except ValueError as e:
@@ -642,3 +642,80 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         @returns: Polygon Perimeter
         """
         return round(self._perimeter, self._numberOfDecimals)
+
+
+class RandomWalk(SpeedCalc):  # subclass, inherits from SpeedCalc
+    """
+    Subclass for Random Walking, created for Module 10.
+    """
+
+    def __init__(self, numberOfRandomWalkers, numberOfSteps, averageStepSize=1, stdInStepSize=2.5,
+                 beginningPosition=0, formula=False, numberOfDecimals=6):
+        """
+        Initializes subclass Polygon
+        """
+        super(SpeedCalc, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._formula = formula
+        self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Attributes that are used later
+        self._numberOfRandomWalkers = numberOfRandomWalkers
+        self._numberOfSteps = numberOfSteps
+        self._averageStepSize = averageStepSize
+        self._stdInStepSize = stdInStepSize
+        self._beginningPosition = beginningPosition
+
+    def randomWalk_1D(self):
+        """
+        One-dimensional simulation of random walkers
+
+        @returns: Summed total of steps
+        """
+        _moves = numpy.random.normal(self._averageStepSize, self._stdInStepSize,
+                                     size=self._numberOfSteps*self._numberOfRandomWalkers)
+        _moves.shape = (self._numberOfSteps, self._numberOfRandomWalkers)
+        _summed = numpy.zeros((self._numberOfSteps, self._numberOfRandomWalkers))
+
+        # for step in range(self._numberOfSteps):
+        #     this_move = _moves[step, :]
+        #     _summed += numpy.where(this_move > 0, _moves[step, :], 0)
+
+        # TODO: Try to figure out if there is a better, more vectorized way to do this if possible
+        for j in range(self._numberOfRandomWalkers):
+            for i in range(self._numberOfSteps):
+                if i > 0:
+                    _summed[i, j] = _summed[i-1, j] + _moves[i, j]
+                else:
+                    _summed[i, j] = _moves[i, j]
+
+        _averageSteps = numpy.mean(_summed, axis=1)
+        _totalSummed = numpy.vstack([numpy.zeros(self._numberOfRandomWalkers), _summed])
+
+        return _totalSummed, _averageSteps
+
+    def randomWalk_2D(self):
+        """
+        Modified version of random 2D walk from "A Primer in Scientific Programming"
+
+        @returns x positions and y positions of random steps
+        """
+        _xpositions = numpy.zeros(self._numberOfRandomWalkers)
+        _ypositions = numpy.zeros(self._numberOfRandomWalkers)
+        _moves = numpy.random.random_integers(1, 4, size=self._numberOfSteps*self._numberOfRandomWalkers)
+        _moves.shape = (self._numberOfSteps, self._numberOfRandomWalkers)
+
+        # Set Direction Constants
+        _NORTH = 1
+        _SOUTH = 2
+        _WEST = 3
+        _EAST = 4
+
+        for step in range(self._numberOfSteps):
+            this_move = _moves[step, :]
+            _ypositions += numpy.where(this_move == _NORTH, 1, 0)
+            _ypositions -= numpy.where(this_move == _SOUTH, 1, 0)
+            _xpositions += numpy.where(this_move == _EAST, 1, 0)
+            _xpositions -= numpy.where(this_move == _WEST, 1, 0)
+
+        return _xpositions, _ypositions
