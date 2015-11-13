@@ -8,6 +8,8 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import sys
+import time
+# import timeit
 import speedcalc
 import speedloader
 import speedcli
@@ -19,6 +21,7 @@ __license__ = "MIT"
 sl_dc = speedloader.CSV()
 s_cli = speedcli.SpeedCLI(description="SPEED Plant Water Stress Command Line Interface")
 sc_PWS = speedcalc.PlantWaterStress()
+# total_time = timeit.timeit('[v for v in range(10000)]', number=10000)
 
 
 class Usage(Exception):
@@ -34,6 +37,7 @@ def main(argv=None):
     @return: void
     """
 
+    start_time = time.clock()
     # Declare local main Variables
     if argv is None:
         argv = sys.argv
@@ -62,7 +66,14 @@ def main(argv=None):
         # Calculate Plant Water Stress
         PWS = sc_PWS.calculate_PWS(soilMoistureData)
 
-        print PWS
+        end_time = time.clock()
+        execution_time = end_time - start_time
+        print "Plant Water Stress: {0}".format(PWS)
+
+        # Benchmarking
+        # print "Single Execution Time: {0} seconds".format(round(execution_time, 6))
+        # print "Total wall-clock time to execute the statement 10000 times: {0}".format(total_time)
+        # print "Average time per loop: {0}".format(total_time/10000)
 
     except Usage, err:
         print >>sys.stderr, err.msg
