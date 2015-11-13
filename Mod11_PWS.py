@@ -61,7 +61,9 @@ def main(argv=None):
         soilMoistureData = sl_dc.getColumn(soilMoistureIndex, data)
 
         # Calculate Plant Water Stress
-        sc_PWS.calculate_PWS(soilMoistureData)
+        PWS = sc_PWS.calculate_PWS(soilMoistureData)
+
+        print PWS
 
 
     except Usage, err:

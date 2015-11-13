@@ -765,10 +765,8 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         range_end -= 1
         while it.iterindex < range_end:
             _results[it.iterindex] = 0.5 * _change_in_time *\
-                ((numpy.asscalar(it.value) - _water_moisture) * (numpy.asscalar(it_ahead.value) - _water_moisture))
+                ((numpy.asscalar(it.value) - _water_moisture) + (numpy.asscalar(it_ahead.value) - _water_moisture))
             it.iternext()
             it_ahead.iternext()
         _result = numpy.sum(_results)
-        print _result
-        print _soilMoistureDataArray
-        print _results
+        return _result
