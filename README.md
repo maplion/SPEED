@@ -243,7 +243,9 @@ PWS = sum from k=0 to n-1 of 1/2(t at k+1 - t at k) * [(theta(at t k) - theta-st
 - n = number of trapezoids
 - k = trapezoid number/iteration number
 - t at k = time (hour) at given iteration number
-- t at k+1 = time(hour at given next iteration number 
+- t at k+1 = time(hour at given next iteration number
+
+I wanted to use as much numpy as possible to see how fast I could make it with limited vector experience.  To that end, I chose to use iterators to get some experience with Python iterators, specifically nditer.  They are far less intuitive than Java iterators, but I managed to work through the issues and figure them out. 
 
 ----------
 
