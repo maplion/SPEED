@@ -694,28 +694,81 @@ class RandomWalk(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         return _totalSummed, _averageSteps
 
-    def randomWalk_2D(self):
+    # def randomWalk_2D(self):
+    #     """
+    #     Modified version of random 2D walk from "A Primer in Scientific Programming"
+    #
+    #     @returns x positions and y positions of random steps
+    #     """
+    #     _xpositions = numpy.zeros(self._numberOfRandomWalkers)
+    #     _ypositions = numpy.zeros(self._numberOfRandomWalkers)
+    #     _moves = numpy.random.random_integers(1, 4, size=self._numberOfSteps*self._numberOfRandomWalkers)
+    #     _moves.shape = (self._numberOfSteps, self._numberOfRandomWalkers)
+    #
+    #     # Set Direction Constants
+    #     _NORTH = 1
+    #     _SOUTH = 2
+    #     _WEST = 3
+    #     _EAST = 4
+    #
+    #     for step in range(self._numberOfSteps):
+    #         this_move = _moves[step, :]
+    #         _ypositions += numpy.where(this_move == _NORTH, 1, 0)
+    #         _ypositions -= numpy.where(this_move == _SOUTH, 1, 0)
+    #         _xpositions += numpy.where(this_move == _EAST, 1, 0)
+    #         _xpositions -= numpy.where(this_move == _WEST, 1, 0)
+    #
+    #     return _xpositions, _ypositions
+
+class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
+    """
+    Subclass for Random Walking, created for Module 10.
+    """
+
+    def __init__(self, formula=False, numberOfDecimals=6):
         """
-        Modified version of random 2D walk from "A Primer in Scientific Programming"
-
-        @returns x positions and y positions of random steps
+        Initializes subclass Polygon
         """
-        _xpositions = numpy.zeros(self._numberOfRandomWalkers)
-        _ypositions = numpy.zeros(self._numberOfRandomWalkers)
-        _moves = numpy.random.random_integers(1, 4, size=self._numberOfSteps*self._numberOfRandomWalkers)
-        _moves.shape = (self._numberOfSteps, self._numberOfRandomWalkers)
+        super(SpeedCalc, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._formula = formula
+        self._numberOfDecimals = numberOfDecimals
 
-        # Set Direction Constants
-        _NORTH = 1
-        _SOUTH = 2
-        _WEST = 3
-        _EAST = 4
+        # Initialize Instance Attributes that are used later
+        self._soilMoistureData = None
 
-        for step in range(self._numberOfSteps):
-            this_move = _moves[step, :]
-            _ypositions += numpy.where(this_move == _NORTH, 1, 0)
-            _ypositions -= numpy.where(this_move == _SOUTH, 1, 0)
-            _xpositions += numpy.where(this_move == _EAST, 1, 0)
-            _xpositions -= numpy.where(this_move == _WEST, 1, 0)
+    # TODO: write test for this
+    def calculate_PWS(self, soilMoistureData):
+        """
+        Calculates Plant Water Stress using trapezoidal rule
 
-        return _xpositions, _ypositions
+        @param: a list of soil moisture data
+        @return: Plant Water Stress
+        """
+        self._soilMoistureData = soilMoistureData
+
+        # Convert soilMoistureData List into an array
+        _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
+        _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
+        _results = numpy.zeros(_soilMoistureDataArray.size)
+
+        _change_in_time = 1.0  # Hardcoded for 1 hour # TODO: parameterize
+        _water_moisture = 0.17  # Stresses water moisture
+
+        # for x in numpy.nditer(_soilMoistureDataArray, op_flags=['readwrite']):
+        #     x[...] = 0.5 * _change_in_time * ((x[...] - _water_moisture) + (x[...] - _water_moisture))
+
+        it = numpy.nditer(_soilMoistureDataArray)
+        it_ahead = numpy.nditer(_soilMoistureDataArray)
+        it_ahead.iternext()
+        range_start, range_end = it.iterrange
+        range_end -= 1
+        while it.iterindex < range_end:
+            _results[it.iterindex] = 0.5 * _change_in_time *\
+                ((numpy.asscalar(it.value) - _water_moisture) * (numpy.asscalar(it_ahead.value) - _water_moisture))
+            it.iternext()
+            it_ahead.iternext()
+        _result = numpy.sum(_results)
+        print _result
+        print _soilMoistureDataArray
+        print _results

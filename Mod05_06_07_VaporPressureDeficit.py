@@ -25,7 +25,7 @@ __license__ = "MIT"
 
 sc_Pressure = speedcalc.Pressure(numberOfDecimals=2)
 sg = speedgui.SpeedGUI()
-sl_dc = speedloader.DryCreek()
+sl_dc = speedloader.CSV()
 s_cli = speedcli.SpeedCLI(description="SPEED Vapor Pressure Deficit Command Line Interface")
 
 
@@ -165,7 +165,7 @@ def main(argv=None):
 
         # parse column data
         dateData = sl_dc.getColumn(dateIndex, data)
-        dates = sl_dc.convertDate(dateData)
+        dates = sl_dc.convertDate_mdY_HM(dateData)
         relativeHumidityData = sl_dc.getColumn(relativeHumidityIndex, data)
         temperatureData = sl_dc.getColumn(temperatureIndex, data)
 

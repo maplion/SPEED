@@ -116,7 +116,7 @@ speedloader.DryCreek.__init__	speedloader.DryCreek-class.html#__init__
 speedloader.DryCreek.weatherStationData_csv	speedloader.DryCreek-class.html#weatherStationData_csv
 speedloader.SpeedLoader.makeForm_gui	speedloader.SpeedLoader-class.html#makeForm_gui
 speedloader.DryCreek.getColumnIndexAndName	speedloader.DryCreek-class.html#getColumnIndexAndName
-speedloader.DryCreek.convertDate	speedloader.DryCreek-class.html#convertDate
+speedloader.DryCreek.convertDate_mdY_HM	speedloader.DryCreek-class.html#convertDate_mdY_HM
 speedloader.SpeedLoader.argumentParse_cmd	speedloader.SpeedLoader-class.html#argumentParse_cmd
 speedloader.SpeedLoader.getEntries_gui	speedloader.SpeedLoader-class.html#getEntries_gui
 speedloader.SpeedLoader.fetch_gui	speedloader.SpeedLoader-class.html#fetch_gui

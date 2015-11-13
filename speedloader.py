@@ -38,7 +38,7 @@ class SpeedLoader(object):
         return [i for i, val in enumerate(self._myList) if self._myString in val.lower()]
 
 
-class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
+class CSV(SpeedLoader):  # subclass, inherits from SpeedLoader
     """
     Subclass for SpeedLoader created for the purpose
     of organization within the SpeedLoader superclass;
@@ -48,7 +48,7 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
 
     def __init__(self):
         """
-        Initializes subclass DryCreek
+        Initializes subclass CSV
         """
         super(SpeedLoader, self).__init__()
 
@@ -72,7 +72,34 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
             with open(self._filename) as _csvfile:
                 # Skip Headers
                 _lines_after_header = _csvfile.readlines()[19:]
-                _csvfile.close()  # Usually not necesary with "with", but ensuring closure
+                _csvfile.close()  # Usually not necessary with "with", but ensuring closure
+        except IOError, e:
+            print(e)
+            sys.exit()
+
+        # for row in _lines_after_header:
+        #     print row
+
+        _tableHeaders = _lines_after_header[0].split(',')
+        #
+        # for header in _tableHeaders:
+        #     print header
+
+        return _lines_after_header[1:], _tableHeaders
+
+    def standard_csv(self, filename):
+        """
+        Extracts a standard Comma-delimited file
+
+        @param filename: the full path plus the file name
+        @return: returns a list of the data and their headers
+        """
+        self._filename = filename
+        try:
+            with open(self._filename) as _csvfile:
+                # Skip Headers
+                _lines_after_header = _csvfile.readlines()[0:]
+                _csvfile.close()  # Usually not necessary with "with", but ensuring closure
         except IOError, e:
             print(e)
             sys.exit()
@@ -119,9 +146,26 @@ class DryCreek(SpeedLoader):  # subclass, inherits from SpeedLoader
             _column.append(parsedRow[self._index])
         return _column
 
-    def convertDate(self, dates):
+    def convertDate_mdY_HM(self, dates):
+        """
+        Converts a list of date strings into datetime objects
+        @param dates: A list of date strings
+        @return: Converted struct_time of dates
+        """
         self._dates = dates
         _date = []
         for date in dates:
             _date.append(time.strptime(date, '%m/%d/%Y %H:%M'))
+        return _date
+
+    def convertDate_mdY_HMS(self, dates):
+        """
+        Converts a list of date strings into datetime objects
+        @param dates: A list of date strings
+        @return: Converted struct_time of dates
+        """
+        self._dates = dates
+        _date = []
+        for date in dates:
+            _date.append(time.strptime(date, '%m/%d/%Y %H:%M:%S'))
         return _date

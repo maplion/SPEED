@@ -219,7 +219,31 @@ I didn't do as many bells and whistles in this particular module as I usually do
 ----------
 
 ### Module 11 ###
-banana banana banana
+>**Step 01**: Based on the discrete formulation for computing PWS that you developed and posted on the discussion board, write a Python code that:
+
+>Takes as input at the command line the name of a comma-separated text file containing the hourly measured soil moisture values from April 1 at 12am to April 30 at 11pm. The file (linked below) contains a single column and each row is a successive hour of observation. Soil moisture values are in volumetric units, i.e., m3/m3.
+Reads the soil moisture values into a numpy array, and
+Uses the trapezoidal rule as outlined in section A.1.7 of the text to compute the cumulative PWS during the course of the month. Note, use a value of θ* = 0.17
+
+>**Step 02**: Run the code with for the two years of data provided above. Post a screenshot of your successfully running code and the output of your code as a reply to your initial discussion board post. I would suggest that you organize the output in a simple table in BlackBoard, for example:
+
+>|Year|Value of Plant Water Stress|
+|---|---|
+|2007|PWS goes here|
+|2011|PWS goes here|
+
+**Solution:**
+First I utilized a slightly modified version of the CSV import that I used in Modules 5, 6, and 7 to import the csv for each year.  I then ran the soil moisture numbers through a loop to calculate the Plant Water Stress at each hour using the trapezoidal rule formula:
+
+PWS = sum from k=0 to n-1 of 1/2(t at k+1 - t at k) * [(theta(at t k) - theta-star) + (theta(at t at k+1) - theta-star)]
+
+- PWS = Plant Water Stress
+- theta(at time k) = soil moisture at each hour (k)
+- theta(at time k + 1) = soil moisture at each next hour from k
+- n = number of trapezoids
+- k = trapezoid number/iteration number
+- t at k = time (hour) at given iteration number
+- t at k+1 = time(hour at given next iteration number 
 
 ----------
 
