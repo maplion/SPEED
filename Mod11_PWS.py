@@ -8,7 +8,6 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import sys
-import numpy
 import speedcalc
 import speedloader
 import speedcli
@@ -57,14 +56,13 @@ def main(argv=None):
 
         # parse column data
         dateData = sl_dc.getColumn(dateIndex, data)
-        dates = sl_dc.convertDate_mdY_HMS(dateData)
+        # dates = sl_dc.convertDate_mdY_HMS(dateData)
         soilMoistureData = sl_dc.getColumn(soilMoistureIndex, data)
 
         # Calculate Plant Water Stress
         PWS = sc_PWS.calculate_PWS(soilMoistureData)
 
         print PWS
-
 
     except Usage, err:
         print >>sys.stderr, err.msg
