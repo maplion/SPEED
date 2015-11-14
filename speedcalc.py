@@ -736,9 +736,11 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         # Initialize Instance Attributes that are used later
         self._soilMoistureData = None
+        self.changeInTime = None
+        self.waterMoisture = None
 
     # TODO: write test for this
-    def calculate_PWS(self, soilMoistureData):
+    def calculate_PWS(self, soilMoistureData, changeInTime, waterMoisture):
         """
         Calculates Plant Water Stress using trapezoidal rule
 
@@ -746,17 +748,13 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         @return: Plant Water Stress
         """
         self._soilMoistureData = soilMoistureData
+        self.changeInTime = changeInTime
+        self.waterMoisture = waterMoisture
 
         # Convert soilMoistureData List into an array
         _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
         _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
         _results = numpy.zeros(_soilMoistureDataArray.size)
-
-        _change_in_time = 1.0  # Hardcoded for 1 hour # TODO: parameterize
-        _water_moisture = 0.17  # Stresses water moisture
-
-        # for x in numpy.nditer(_soilMoistureDataArray, op_flags=['readwrite']):
-        #     x[...] = 0.5 * _change_in_time * ((x[...] - _water_moisture) + (x[...] - _water_moisture))
 
         it = numpy.nditer(_soilMoistureDataArray)
         it_ahead = numpy.nditer(_soilMoistureDataArray)
@@ -764,8 +762,9 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         range_start, range_end = it.iterrange
         range_end -= 1
         while it.iterindex < range_end:
-            _results[it.iterindex] = 0.5 * _change_in_time *\
-                ((numpy.asscalar(it.value) - _water_moisture) + (numpy.asscalar(it_ahead.value) - _water_moisture))
+            _results[it.iterindex] = 0.5 * self.changeInTime *\
+                ((numpy.asscalar(it.value) - self.waterMoisture) +
+                 (numpy.asscalar(it_ahead.value) - self.waterMoisture))
             it.iternext()
             it_ahead.iternext()
         _result = numpy.sum(_results)

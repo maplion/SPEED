@@ -59,12 +59,14 @@ def main(argv=None):
         soilMoistureIndex, soilMoistureTitle = sl_dc.getColumnIndexAndName("Soil_Moisture", headers)
 
         # parse column data
-        dateData = sl_dc.getColumn(dateIndex, data)
+        # dateData = sl_dc.getColumn(dateIndex, data)
         # dates = sl_dc.convertDate_mdY_HMS(dateData)
         soilMoistureData = sl_dc.getColumn(soilMoistureIndex, data)
 
         # Calculate Plant Water Stress
-        PWS = sc_PWS.calculate_PWS(soilMoistureData)
+        changeInTime = 1.0  # in hours [time at k+1 minus time at k]
+        waterMoisture = 0.17  # theta_star
+        PWS = sc_PWS.calculate_PWS(soilMoistureData, changeInTime, waterMoisture)
 
         end_time = time.clock()
         execution_time = end_time - start_time
