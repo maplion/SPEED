@@ -736,8 +736,8 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         # Initialize Instance Attributes that are used later
         self._soilMoistureData = None
-        self.changeInTime = None
-        self.waterMoisture = None
+        self._timeInterval = None
+        self._waterMoisture = None
 
     # TODO: write test for this
     def calculate_PWS(self, soilMoistureData, changeInTime, waterMoisture):
@@ -748,9 +748,10 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         @return: Plant Water Stress
         """
         self._soilMoistureData = soilMoistureData
-        self.changeInTime = changeInTime
-        self.waterMoisture = waterMoisture
+        self._timeInterval = changeInTime
+        self._waterMoisture = waterMoisture
 
+        # TODO: Refactor
         # Convert soilMoistureData List into an array
         _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
         _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
@@ -762,10 +763,42 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         range_start, range_end = it.iterrange
         range_end -= 1
         while it.iterindex < range_end:
-            _results[it.iterindex] = 0.5 * self.changeInTime *\
-                ((numpy.asscalar(it.value) - self.waterMoisture) +
-                 (numpy.asscalar(it_ahead.value) - self.waterMoisture))
+            _results[it.iterindex] = 0.5 * self._timeInterval * \
+                ((numpy.asscalar(it.value) - self._waterMoisture) +
+                 (numpy.asscalar(it_ahead.value) - self._waterMoisture))
             it.iternext()
             it_ahead.iternext()
         _result = numpy.sum(_results)
         return _result
+
+    def calculate_PWS2(self, soilMoistureData, timeInterval):
+        """
+        Calculate PWS2 using centered difference
+
+        @param: a list of soil moisture data
+        @return: Plant Water Stress 2 array
+        """
+        self._soilMoistureData = soilMoistureData
+        self._timeInterval = timeInterval
+
+        # TODO: Refactor
+        # Convert soilMoistureData List into an array
+        _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
+        _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
+        _results = numpy.zeros(_soilMoistureDataArray.size - 2)
+
+        it_behind = numpy.nditer(_soilMoistureDataArray)
+        it = numpy.nditer(_soilMoistureDataArray)
+        it_ahead = numpy.nditer(_soilMoistureDataArray)
+        it.iternext()
+        it_ahead.iternext()
+        it_ahead.iternext()
+        range_start, range_end = it.iterrange
+        range_end -= 2
+        while it.iterindex < range_end:
+            _results[it.iterindex] = numpy.asscalar(it_ahead.value) - numpy.asscalar(it_behind.value) / \
+                (2 * self._timeInterval)
+            it.iternext()
+            it_ahead.iternext()
+            it_behind.iternext()
+        return _results

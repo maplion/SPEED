@@ -37,6 +37,8 @@ class SpeedCLI(object):
 
         self._parser.add_argument("-i", action="store", dest="file",
                                   help="The name of the file from which to load data.")
+        self._parser.add_argument("-i2", action="store", dest="file2",
+                                  help="The name of the second file from which to load data.")
         self._parser.add_argument("-d", action="store", dest="date",
                                   help="If desired, choose a specific date to read from the file (e.g. 01/01/2014)")
         self._parser.add_argument("-ipath", action="store", dest="inputFilePath",

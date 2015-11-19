@@ -250,7 +250,19 @@ I wanted to use as much numpy as possible to see how fast I could make it with l
 ----------
 
 ### Module 12 ###
-banana banana banana
+>**Step 01**: Based on the centered finite difference approximation for computing PWS2(t) that you developed and posted on the discussion board, write a Python code that:
+
+>- Takes as input at the command line the name of a comma-separated text file containing the hourly measured soil moisture values from April 1 at 12am to April 30 at 11pm. The file (linked above) contains two columns, the date and time in the first and soil moisture in the second. Soil moisture values are in volumetric units, i.e., m3/m3.
+- Reads the soil moisture values into a numpy array, and
+- Computes the time series of PWS2(t). Note that since you are using a centered-difference approximation, the output time series will have two fewer numbers that the original time series of soil moisture. 
+- Creates a labeled plot of PWS2(t)
+
+>**Step 02**: Run the code with for the two years of data provided above. Post the clearly labeled plot of the time series of PWS2(t) for both years (on the same plot) as a reply to your initial discussion board post.
+
+**Solution:**
+The requirements called for the loading of two files at once.  For simplicity, I added a -i2 for my argparser.  Ideally, I would make it so I could input a comma-delimited string and load all files in the string; but that's for another day.
+
+I added the PWS2 calculation to speedcalc and created a basic plot for it.
 
 ----------
 
