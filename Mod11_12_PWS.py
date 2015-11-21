@@ -99,6 +99,7 @@ def main(argv=None):
         title('PWS2 at {0} and {1}'.format(year, year2))
         xlabel('Time(hr)')
         ylabel('PWS2')
+        legend(['PWS2 2007', 'PWS2 2011'])
 
         show()
 
