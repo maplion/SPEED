@@ -262,9 +262,47 @@ I wanted to use as much numpy as possible to see how fast I could make it with l
 **Solution:**
 The requirements called for the loading of two files at once.  For simplicity, I added a -i2 for my argparser.  Ideally, I would make it so I could input a comma-delimited string and load all files in the string; but that's for another day.
 
-I added the PWS2 calculation to speedcalc and created a basic plot for it.
+I added the PWS2 calculation to speedcalc and created a basic plot for it.  I labeled the axes and added a legend.
+
+There were aspects of this particular module that I would have liked to have done differently or more completely, but ended up just meeting the requirements due to time constraints.
 
 ----------
 
 ### Module 13 ###
-banana banana banana
+>In preparation for this programming activity, you developed a finite difference solution to the classic Lotka-Volterra model.
+
+>Now you will go about implementing that finite difference solution, running the Lotka-Volterra model for given parameter values, and presenting the results, which was given as follows:
+
+>![](http://i.imgur.com/cz5AxNN.jpg)
+
+>**Step 01**: Proceed to develop a Python script that implements your finite difference solution to the Lotka-Volterra equations for predator-prey interaction. The script should:
+
+>- Allow you to easily define and change the values of the parameters α, β, γ, and δ; different values of the initial conditions N1 and N2; and different numbers of time steps NT.
+>- Plot and clearly label the simulated predator and prey density over the simulation time
+
+>**Step 02**: Proceed to run the model for NT = 200 (i.e., 200 time steps), with the following parameter values and initial conditions:
+
+>- α = 0.1
+- β = 0.02
+- γ = 0.4
+- δ = 0.02
+- Initial value of N1 = 10
+- Initial value of N2 = 10
+
+>**Step 03**: Post the plot of this simulation as a reply to your initial discussion board post for this module. Also post a bulleted list of 3 observations about the interaction between predator and prey in the simulation.
+
+>**Step 04 (Optional)**: Also run the model for different parameter values and initial conditions than those above (you choose). Post the figure for this simulation beneath the figure and observations for the model run described in **Step 02**.
+
+**Solution:**
+
+----------
+### Module 14 ###
+>In this programming activity you will replicate the spatial autocorrelation analysis of Zhang et al. (2009) using Moran's I, but for an NDVI image from southwest Idaho. Below you will find a link to the NDVI dataset you will be analyzing (available soon).  
+
+>**Step 01**: Use a combination of numpy and PySAL to compute the value of Moran's I at lag distances ranging from 1 pixel (30 m) to 10 pixels (300 m)
+
+>**Step 02**: Your code should create a plot of Moran's I as a function of lag distance from 0 to 300 m.
+
+>**Step 03**: Post the plot of Moran's I as a function of lag distance as a response to your original discussion board post.
+
+**Solution:**
