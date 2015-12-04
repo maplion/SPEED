@@ -289,11 +289,24 @@ There were aspects of this particular module that I would have liked to have don
 - Initial value of N1 = 10
 - Initial value of N2 = 10
 
+>![](http://i.imgur.com/6UDr56u.jpg)
+
+>Figure 1: Solution to the Lotka-Volterra equations using the given parameters and initial conditions
+
+>Hint: If your code produces unrealistic values, your solution may be numerically unstable.  Try decreasing the time step.  
+
+>Considering numerical error and stability is an important part of the modeling process and depends on the equations, parameters, time steps, and numerical methods used (there are entire classes on numerical methods).
+
 >**Step 03**: Post the plot of this simulation as a reply to your initial discussion board post for this module. Also post a bulleted list of 3 observations about the interaction between predator and prey in the simulation.
 
 >**Step 04 (Optional)**: Also run the model for different parameter values and initial conditions than those above (you choose). Post the figure for this simulation beneath the figure and observations for the model run described in **Step 02**.
 
 **Solution:**
+For this Module, I made a PredatorPrey subclass within speedcalc to be able to create a Predator Prey object, for different predator-prey relationships, with set death rates and birth rates.  Then once the object is created, one can call the Lotka_Volterra method to run the equation and pass in initial values and plot the result.
+
+This module did not require external user input, so I didn't not make a command-line interface.  It simply stated that one needed to be easily able to change parameters (was not specified in our out of the code).  I may change that prior to submission to include the ability to enter code from the command line.
+
+For my initial code, I made it so it created a single predator-prey object with the given alpha, beta, gamma, and delta values and then plotted the results starting with two separate sets of initial values.
 
 ----------
 ### Module 14 ###

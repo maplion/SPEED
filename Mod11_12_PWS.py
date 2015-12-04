@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-SPEED: Module 11: Calculating Plant Water Stress
+SPEED: Module 11 and 12: Calculating Plant Water Stress
 
 GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
@@ -31,7 +31,7 @@ class Usage(Exception):
 
 def main(argv=None):
     """
-    This is the main function for Module 11
+    This is the main function for Module 11 and 12
 
     @param argv: incoming arguments
     @return: void

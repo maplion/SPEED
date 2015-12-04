@@ -722,12 +722,12 @@ class RandomWalk(SpeedCalc):  # subclass, inherits from SpeedCalc
 
 class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
-    Subclass for Random Walking, created for Module 10.
+    Subclass for Plant Water Stress, created for Module 11 and Module 12.
     """
 
     def __init__(self, formula=False, numberOfDecimals=6):
         """
-        Initializes subclass Polygon
+        Initializes subclass Plant Water Stress
         """
         super(SpeedCalc, self).__init__()
         self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
@@ -775,7 +775,7 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         Calculate PWS2 using centered difference
 
-        @param: a list of soil moisture data
+        @param soilMoistureData: a list of soil moisture data
         @return: Plant Water Stress 2 array
         """
         self._soilMoistureData = soilMoistureData
@@ -802,3 +802,67 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
             it_ahead.iternext()
             it_behind.iternext()
         return _results
+
+
+class PredatorPrey(SpeedCalc):  # subclass, inherits from SpeedCalc
+    """
+    Subclass for Lotka–Volterra equations and Predator Prey equations,
+    created for Module 13
+    """
+
+    def __init__(self, prey_birthRate_alpha, prey_deathRate_beta, predator_deathRate_gamma, predator_birthRate_delta,
+                 formula=False, numberOfDecimals=6):
+        """
+        Initializes subclass PredatorPrey
+
+        @param: alpha: Prey Birth Rate
+        @param: beta: Prey Death Rate
+        @param: gamma: Predator Death Rate
+        @param: delta: Predator Birth Rate
+        """
+        super(SpeedCalc, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._formula = formula
+        self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Parameters
+        self._prey_birthRate_alpha = prey_birthRate_alpha
+        self._prey_deathRate_beta = prey_deathRate_beta
+        self._predator_deathRate_gamma = predator_deathRate_gamma
+        self._predator_birthRate_delta = predator_birthRate_delta
+
+        # Initialize Instance Attributes that are used later
+        self._prey_initialPopulation = None
+        self._predator_initialPopulation = None
+        self._totalTime = None
+        self._numberOfTimeSteps = None
+
+    def Lotka_Volterra(self, prey_initialPopulation, predator_initialPopulation, totalTime, numberOfTimeSteps):
+        """
+
+        @param prey_initialPopulation: The initial population value of the Prey
+        @param predator_initialPopulation: The initial population value of the Predator
+        @param totalTime: Amount of total time within the model (total time divided by number of time steps
+            determines number of iterations)
+        @param numberOfTimeSteps: The number of totalTime steps the total totalTime will be divided by
+        @return: Time Model Population Array of Predator, Prey, and total number of data points for plotting
+        """
+        self._prey_initialPopulation = prey_initialPopulation
+        self._predator_initialPopulation = predator_initialPopulation
+        self._totalTime = totalTime
+        self._numberOfTimeSteps = numberOfTimeSteps
+
+        _changeInTime = self._totalTime/(float(self._numberOfTimeSteps))  # Set the change in time value
+        _N1 = numpy.zeros(self._numberOfTimeSteps + 1)  # Create Zero array for Prey
+        _N2 = numpy.zeros(self._numberOfTimeSteps + 1)  # Create Zero array for Predator
+        _N1[0] = self._prey_initialPopulation  # Set initial value of prey population
+        _N2[0] = self._predator_initialPopulation  # Set initial value for predator population
+        _dataPointsForPlot = numpy.linspace(0, self._totalTime, self._numberOfTimeSteps + 1)
+
+        # Calculate the Predator and Prey populations, iterated over increments within the given time total
+        for i in range(self._numberOfTimeSteps):
+            _N1[i+1] = _N1[i] + _changeInTime * ((self._prey_birthRate_alpha * _N1[i]) -
+                                                 (self._prey_deathRate_beta * _N1[i] * _N2[i]))
+            _N2[i+1] = _N2[i] + _changeInTime * ((self._predator_birthRate_delta * _N1[i] * _N2[i]) -
+                                                 (self._predator_deathRate_gamma * _N2[i]))
+        return _N1, _N2, _dataPointsForPlot
