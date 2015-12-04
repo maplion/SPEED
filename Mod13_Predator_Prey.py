@@ -12,7 +12,7 @@ from matplotlib.pylab import *
 # import timeit
 import speedcalc
 import speedloader
-import speedcli
+# import speedcli
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
