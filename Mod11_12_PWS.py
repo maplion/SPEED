@@ -103,7 +103,6 @@ def main(argv=None):
 
         show()
 
-
         # Benchmarking
         # print "Single Execution Time: {0} seconds".format(round(execution_time, 6))
         # print "Total wall-clock time to execute the statement 10000 times: {0}".format(total_time)

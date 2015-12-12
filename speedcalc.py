@@ -16,6 +16,8 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import math
 import numpy
+from osgeo import gdal
+from osgeo.gdalconst import GA_ReadOnly, GDT_Float32
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -865,3 +867,75 @@ class PredatorPrey(SpeedCalc):  # subclass, inherits from SpeedCalc
             _N2[i+1] = _N2[i] + _changeInTime * ((self._predator_birthRate_delta * _N1[i] * _N2[i]) -
                                                  (self._predator_deathRate_gamma * _N2[i]))
         return _N1, _N2, _dataPointsForPlot
+
+
+class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
+    """
+    Subclass for GDAL-related spatial statistics
+    """
+
+    def __init__(self, formula=False, numberOfDecimals=6):
+        """
+        Initializes subclass SpatialStatistics
+        """
+        super(SpeedCalc, self).__init__()
+        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._formula = formula
+        self._numberOfDecimals = numberOfDecimals
+
+        # Initialize Instance Parameters
+
+        # Initialize Instance Attributes that are used later
+        self.rasterName = None
+        self.rasterAsArray = None
+        self.gdalRasterData = None
+        self.outputFilename = None
+
+    def readRasterAsArray(self, rasterName):
+        """
+        Reads an input raster into a Numpy array
+
+        :param rasterName:
+        :return:
+        """
+
+        self.rasterName = rasterName
+        self.gdalRasterData = gdal.Open(self.rasterName, GA_ReadOnly)
+        _result = self.gdalRasterData.ReadAsArray()
+
+        return _result
+
+    def saveRasterArrayToGeoTiff(self, rasterAsArray, outputFilename):
+        """
+        Saves raster as Numpy Array out to a GeoTiff file
+        Helpful reference: http://blog.remotesensing.io/2013/03/using-gdal-with-python-basic-intro/
+
+        @param rasterAsArray: The raster as a Numpy array
+        @param outputFilename: The path of the file concatentated with its path as a string
+        :return:
+        """
+        self.rasterAsArray = rasterAsArray
+        self.outputFilename = outputFilename
+        [_cols, _rows] = self.rasterAsArray.shape
+        _transformation = self.gdalRasterData.GetGeoTransform()
+        _projection = self.gdalRasterData.GetProjection()
+        _rasterBand = self.gdalRasterData.GetRasterBand(1)
+        _noDataValue = _rasterBand.GetNoDataValue()
+        _outfilePath = self.outputFilename
+
+        # Create the file, using the information from the original file
+        _outdriver = gdal.GetDriverByName("GTiff")
+        _outdata = _outdriver.Create(str(_outfilePath), _rows, _cols, 1, GDT_Float32)
+
+        # Write the array to the file, which is the original array in this example
+        _outdata.GetRasterBand(1).WriteArray(self.rasterAsArray)
+
+        # Set a no data value if required
+        if _noDataValue is not None:
+            _outdata.GetRasterBand(1).SetNoDataValue(_noDataValue)
+
+        # Georeference the image
+        _outdata.SetGeoTransform(_transformation)
+
+        # Write projection information
+        _outdata.SetProjection(_projection)
