@@ -40,5 +40,6 @@ Thumbs.db
 # Other
 ######################
 temp.py
-/output/*.png
-/output/*.jpg
+output/
+*.jpg
+*.png

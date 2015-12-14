@@ -318,4 +318,16 @@ For my initial code, I made it so it created a single predator-prey object with 
 
 >**Step 03**: Post the plot of Moran's I as a function of lag distance as a response to your original discussion board post.
 
+>**Extra Credit**: Try out your code on the additional NDVI images (ExtraCredit_NDVI.tif and ExtraCredit_NDVI_2.tif) and compare the results. 
+
 **Solution:**
+This module was quite difficult in that the Pysal documentation, while better than some, seems very limited.  They'll show an example with some data in it without explaining what the data does or what the function is doing.  This made trying to understand and troubleshoot the situations quite challenging.
+
+Even so, I forged ahead.  I initially focused on the ingesting of the raster data into a numpy array.  I got that working pretty quickly.  I also added (unused) code that is able to save the raster back out.
+
+After that, I focused on trying to properly calculate Moran's I.  The first challenge was figuring out the proper weights to use.  There was some confusion on my part about what qualified as distance-based weights and I initially had several different weight methods I was trying, but finally settled on distance band weights.  This seemed to work as intended.
+
+After figuring out the weights, I started calculating Moran's I for different distances.  At first, I was getting a lot of weird warnings and divisions by zero.  I discovered that this was due to a way I was using the indexing as a weight value that wasn't correct.  After resolving that, I ended up with a reasonable result.
+
+My confidence in my result was still low, however, when comparing my result to the results of a couple of others that were far along.  I could alter my code to get their output, but their logic didn't make sense to me.
+

@@ -63,25 +63,34 @@ def main(argv=None):
         if arguments.outputFile is None:
             if ".tif" in arguments.file:
                 arguments.file.replace(".tif", "")
-            arguments.outputFile = arguments.file + "_MoransI.tif"
-        outputFilename = arguments.outputFilePath + "/" + arguments.outputFile
+            arguments.outputFile = arguments.file + "_MoransI"
+        outputFilename = arguments.outputFilePath + "/" + arguments.outputFile + ".tif"
         # sc_ss.saveRasterArrayToGeoTiff(rasterArray, outputFilename)
+
+        outputImage = None
+        if ".tif" in arguments.file:
+                outputImage = arguments.outputFilePath + "/" + arguments.file.replace(".tif", "")
 
         end_time = time.clock()
         execution_time = end_time - start_time
         print "Process time: {0}".format(execution_time)
 
-        lag_distance = sc_ss.getLagDistanceForPlot(30, 300)
+        lag_distance = sc_ss.getLagDistanceForPlot(30, 330)
 
+        # Save out image of related NDVI
         figure(1)
+        title('NDVI Image {0}'.format(arguments.file))
+        imshow(rasterArray)
+        savefig(outputImage + "_NDVI.jpg", dpi=300)
+        # show()
+
+        # Save out image of Plot of Lag Distance vs. Moran's I number
+        figure(2)
         plot(lag_distance, Morans_I, 'bo')
-        title('Spatial Autocorrelation of NDVI')
+        title('Spatial Autocorrelation of NDVI for Image {0}'.format(arguments.file))
         xlabel('Lag Distance(m)')
         ylabel('Morans I')
-        show()
-        figure(2)
-        title('NDVI Image')
-        imshow(rasterArray)
+        savefig(outputImage + "_plot.jpg", dpi=300)
         show()
 
         # Benchmarking

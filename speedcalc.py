@@ -960,18 +960,19 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         self.rasterAsArray = rasterAsArray
         self.lagDistance = lagDistance
 
-        _flattened_array = self.rasterAsArray.ravel()
-        _x, _y = numpy.indices((self.rows, self.columns))
-        _x.shape = (self.rows * self.columns, 1)
-        _y.shape = (self.rows * self.columns, 1)
+        # _flattened_array = self.rasterAsArray.ravel()
+        # _x, _y = numpy.indices((self.rows, self.columns))
+        # _x.shape = (self.rows * self.columns, 1)
+        # _y.shape = (self.rows * self.columns, 1)
         # _horizontal_stack = numpy.hstack([_x, _y])
+
         _Morans_I = numpy.zeros(self.lagDistance)
 
         # Get weights based on distance (distance-band method) and calculation Moran's I
-        for i in range(self.lagDistance):
+        for i in range(1, self.lagDistance + 1):
             _wthresh = pysal.threshold_binaryW_from_array(self.rasterAsArray, i)  # distance-based weights
             _mi = pysal.Moran(self.rasterAsArray, _wthresh)  # calculate Moran's I for given distance
-            _Morans_I[i] = _mi.I  # Value of individual result of Moran's I (_mi.I) saved into array
+            _Morans_I[i-1] = _mi.I  # Value of individual result of Moran's I (_mi.I) saved into array
 
         return _Morans_I
 
