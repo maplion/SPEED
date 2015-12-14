@@ -18,6 +18,7 @@ import math
 import numpy
 from osgeo import gdal
 from osgeo.gdalconst import GA_ReadOnly, GDT_Float32
+import pysal
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -883,13 +884,18 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._formula = formula
         self._numberOfDecimals = numberOfDecimals
 
-        # Initialize Instance Parameters
-
         # Initialize Instance Attributes that are used later
         self.rasterName = None
         self.rasterAsArray = None
         self.gdalRasterData = None
         self.outputFilename = None
+        self.columns = None
+        self.rows = None
+        self._w = None
+        self._y = None
+        self.lagDistance = None
+        self.min_distance = None
+        self.max_distance = None
 
     def readRasterAsArray(self, rasterName):
         """
@@ -901,9 +907,12 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         self.rasterName = rasterName
         self.gdalRasterData = gdal.Open(self.rasterName, GA_ReadOnly)
-        _result = self.gdalRasterData.ReadAsArray()
+        self.rows = self.gdalRasterData.RasterYSize
+        self.columns = self.gdalRasterData.RasterXSize
+        self.rasterAsArray = self.gdalRasterData.ReadAsArray()
+        #[self.columns, self.rows] = self.rasterAsArray.shape
 
-        return _result
+        return self.rasterAsArray
 
     def saveRasterArrayToGeoTiff(self, rasterAsArray, outputFilename):
         """
@@ -916,7 +925,6 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self.rasterAsArray = rasterAsArray
         self.outputFilename = outputFilename
-        [_cols, _rows] = self.rasterAsArray.shape
         _transformation = self.gdalRasterData.GetGeoTransform()
         _projection = self.gdalRasterData.GetProjection()
         _rasterBand = self.gdalRasterData.GetRasterBand(1)
@@ -925,7 +933,7 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         # Create the file, using the information from the original file
         _outdriver = gdal.GetDriverByName("GTiff")
-        _outdata = _outdriver.Create(str(_outfilePath), _rows, _cols, 1, GDT_Float32)
+        _outdata = _outdriver.Create(str(_outfilePath), self.rows, self.columns, 1, GDT_Float32)
 
         # Write the array to the file, which is the original array in this example
         _outdata.GetRasterBand(1).WriteArray(self.rasterAsArray)
@@ -939,3 +947,41 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
 
         # Write projection information
         _outdata.SetProjection(_projection)
+
+    def calc_Morans_I(self, rasterAsArray, lagDistance=10):
+        """
+        Calculates the value of Moran's I at given lag distances using Distance Band Weights;
+        Default ranges from 1 pixel to 10 pixels
+        In this particular project, that translates to: 1 pixel (30 m) to 10 pixels (300 m)
+
+        Reference: http://pysal.readthedocs.org/en/latest/users/tutorials/weights.html#distance-band-weights
+        @returns: an array of Moran's I values.
+        """
+        self.rasterAsArray = rasterAsArray
+        self.lagDistance = lagDistance
+
+        _flattened_array = self.rasterAsArray.ravel()
+        _x, _y = numpy.indices((self.rows, self.columns))
+        _x.shape = (self.rows * self.columns, 1)
+        _y.shape = (self.rows * self.columns, 1)
+        # _horizontal_stack = numpy.hstack([_x, _y])
+        _Morans_I = numpy.zeros(self.lagDistance)
+
+        # Get weights based on distance (distance-band method) and calculation Moran's I
+        for i in range(self.lagDistance):
+            _wthresh = pysal.threshold_binaryW_from_array(self.rasterAsArray, i)  # distance-based weights
+            _mi = pysal.Moran(self.rasterAsArray, _wthresh)  # calculate Moran's I for given distance
+            _Morans_I[i] = _mi.I  # Value of individual result of Moran's I (_mi.I) saved into array
+
+        return _Morans_I
+
+    def getLagDistanceForPlot(self, min_distance, max_distance):
+        """
+
+        :param min_distance:
+        :param max_distance:
+        :return:
+        """
+        self.min_distance = min_distance
+        self.max_distance = max_distance
+        return numpy.linspace(self.min_distance, self.max_distance, self.lagDistance)

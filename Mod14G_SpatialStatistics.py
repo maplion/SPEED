@@ -54,6 +54,9 @@ def main(argv=None):
         # Read Raster into an Array
         rasterArray = sc_ss.readRasterAsArray(filename)
 
+        # Read GAL file for a rooks weight matrix
+        Morans_I = sc_ss.calc_Morans_I(rasterArray)
+
         # Process Spatial Statistics
 
         # Save array out to Spatial Raster (GeoTiff)
@@ -62,11 +65,23 @@ def main(argv=None):
                 arguments.file.replace(".tif", "")
             arguments.outputFile = arguments.file + "_MoransI.tif"
         outputFilename = arguments.outputFilePath + "/" + arguments.outputFile
-        sc_ss.saveRasterArrayToGeoTiff(rasterArray, outputFilename)
+        # sc_ss.saveRasterArrayToGeoTiff(rasterArray, outputFilename)
 
         end_time = time.clock()
         execution_time = end_time - start_time
+        print "Process time: {0}".format(execution_time)
 
+        lag_distance = sc_ss.getLagDistanceForPlot(30, 300)
+
+        figure(1)
+        plot(lag_distance, Morans_I, 'bo')
+        title('Spatial Autocorrelation of NDVI')
+        xlabel('Lag Distance(m)')
+        ylabel('Morans I')
+        show()
+        figure(2)
+        title('NDVI Image')
+        imshow(rasterArray)
         show()
 
         # Benchmarking
