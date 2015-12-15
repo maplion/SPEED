@@ -9,7 +9,7 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import time
 from matplotlib.pylab import *
-# import timeit
+import threading
 import speedcalc
 import speedcli
 
@@ -19,12 +19,54 @@ __license__ = "MIT"
 
 sc_ss = speedcalc.SpatialStatistics()
 s_cli = speedcli.SpeedCLI(description="SPEED Spatial Statistics")
-# total_time = timeit.timeit('[v for v in range(10000)]', number=10000)
+
+# Progress bar variables
+stop = False
+kill = False
+
+
+class ProgressBarLoading(threading.Thread):
+    """
+    Self-made animated spinner for the purpose of letting the user know that something
+    is processing; built for an unknown process time with know gauges.
+    """
+
+    def run(self):
+            global stop
+            global kill
+            i = 0
+            while not stop:
+                if (i % 4) == 0:
+                    sys.stdout.write('Loading... /')
+                    time.sleep(0.2)
+                    sys.stdout.write('\r')
+                elif (i % 4) == 1:
+                    sys.stdout.write('Loading... -')
+                    time.sleep(0.2)
+                    sys.stdout.write('\r')
+                elif (i % 4) == 2:
+                    sys.stdout.write('Loading... \\')
+                    time.sleep(0.2)
+                    sys.stdout.write('\r')
+                elif (i % 4) == 3:
+                    sys.stdout.write('Loading... |')
+                    time.sleep(0.2)
+                    sys.stdout.write('\r')
+
+                sys.stdout.flush()
+                time.sleep(0.1)
+                i += 1
+
+            if kill:
+                print 'ABORT!\n\n',
+            else:
+                print 'Done!\n\n',
 
 
 class Usage(Exception):
     def __init__(self, msg):
         self.msg = msg
+
 
 def main(argv=None):
     """
@@ -34,7 +76,13 @@ def main(argv=None):
     @return: void
     """
 
+    # Start time and Progress Bar
     start_time = time.clock()
+    p = ProgressBarLoading()
+    p.start()
+    global stop
+    global kill
+
     # Declare local main Variables
     if argv is None:
         argv = sys.argv
@@ -54,17 +102,15 @@ def main(argv=None):
         # Read Raster into an Array
         rasterArray = sc_ss.readRasterAsArray(filename)
 
-        # Read GAL file for a rooks weight matrix
+       # Process Spatial Statistics
         Morans_I = sc_ss.calc_Morans_I(rasterArray)
-
-        # Process Spatial Statistics
 
         # Save array out to Spatial Raster (GeoTiff)
         if arguments.outputFile is None:
             if ".tif" in arguments.file:
                 arguments.file.replace(".tif", "")
             arguments.outputFile = arguments.file + "_MoransI"
-        outputFilename = arguments.outputFilePath + "/" + arguments.outputFile + ".tif"
+        # outputFilename = arguments.outputFilePath + "/" + arguments.outputFile + ".tif"
         # sc_ss.saveRasterArrayToGeoTiff(rasterArray, outputFilename)
 
         outputImage = None
@@ -73,7 +119,9 @@ def main(argv=None):
 
         end_time = time.clock()
         execution_time = end_time - start_time
-        print "Process time: {0}".format(execution_time)
+        time.sleep(1)
+        stop = True
+        print "\n\nProcess time: {0} seconds".format(round(execution_time, 2))
 
         lag_distance = sc_ss.getLagDistanceForPlot(30, 330)
 
@@ -93,15 +141,14 @@ def main(argv=None):
         savefig(outputImage + "_plot.jpg", dpi=300)
         show()
 
-        # Benchmarking
-        # print "Single Execution Time: {0} seconds".format(round(execution_time, 6))
-        # print "Total wall-clock time to execute the statement 10000 times: {0}".format(total_time)
-        # print "Average time per loop: {0}".format(total_time/10000)
-
     except Usage, err:
         print >>sys.stderr, err.msg
         print >>sys.stderr, "for help use --help"
         return 2
+
+    except KeyboardInterrupt or EOFError:
+        kill = True
+        stop = True
 
 if __name__ == "__main__":
     sys.exit(main())

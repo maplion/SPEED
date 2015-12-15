@@ -329,5 +329,11 @@ After that, I focused on trying to properly calculate Moran's I.  The first chal
 
 After figuring out the weights, I started calculating Moran's I for different distances.  At first, I was getting a lot of weird warnings and divisions by zero.  I discovered that this was due to a way I was using the indexing as a weight value that wasn't correct.  After resolving that, I ended up with a reasonable result.
 
-My confidence in my result was still low, however, when comparing my result to the results of a couple of others that were far along.  I could alter my code to get their output, but their logic didn't make sense to me.
+My confidence in my result was still low, however, when comparing my result to the results of a couple of others that were far along.  
+
+I made some code modifications and got a reasonable result, albeit at a significant performance loss.
+
+To that end, I created a self-made loading spinner to let the user know that something is being processed.
+
+Thanks for a great semester!
 
