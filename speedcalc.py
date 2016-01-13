@@ -37,9 +37,11 @@ class SpeedCalc(object):  # superclass, inherits from default object
         """
         self._inputString = None
 
-    def isInteger(self, string):
+    def is_integer(self, string):
         """
         Checks if a string is an integer.
+        @param string: integer as a string
+        @returns: True if it is an integer and False if it is not
         """
         try:
             self._inputString = string
@@ -57,20 +59,20 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Length calculations.
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass Length
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._meters = None
         self._millimeters = None
 
-    def meterToMillimeter(self, meters):
+    def meter_to_millimeter(self, meters):
         """
         Converts meters to millimeters
 
@@ -87,7 +89,7 @@ class Length(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} m * 1000.0 = {2:{0}} mm".format(self._df, self._meters, _result))
         return round(_result, self._numberOfDecimals)
 
-    def millimeterToMeter(self, millimeters):
+    def millimeter_to_meter(self, millimeters):
         """
         Converts millimeters to meters
 
@@ -113,16 +115,16 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Time calculations.
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass Time
 
-        @param numberOfDecimals: number of decimals when printing formulas
+        @param number_of_decimals: number of decimals when printing formulas
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._seconds = None
@@ -130,7 +132,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._hours = None
         self._days = None
 
-    def secondToMinute(self, seconds):
+    def second_to_minute(self, seconds):
         """
         Converts seconds to minutes
 
@@ -147,7 +149,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} s / 60.0 = {2:{0}} min".format(self._df, seconds, _result))
         return round(_result, self._numberOfDecimals)
 
-    def minuteToSecond(self, minutes):
+    def minute_to_second(self, minutes):
         """
         Converts minutes to seconds
 
@@ -164,7 +166,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} min * 60.0 = {2:{0}} s".format(self._df, self._minutes, _result))
         return round(_result, self._numberOfDecimals)
 
-    def minuteToHour(self, minutes):
+    def minute_to_hour(self, minutes):
         """
         Converts minutes to hours
 
@@ -181,7 +183,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} min / 60.0 = {2:{0}} hr".format(self._df, self._minutes, _result))
         return round(_result, self._numberOfDecimals)
 
-    def hourToMinute(self, hours):
+    def hour_to_minute(self, hours):
         """
         Converts hours to minutes
 
@@ -198,7 +200,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} min * 60.0 = {2:{0}} min".format(self._df, self._hours, _result))
         return round(_result, self._numberOfDecimals)
 
-    def secondToHour(self, seconds):
+    def second_to_hour(self, seconds):
         """
         Converts seconds to hours
 
@@ -215,7 +217,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} s / 3600.0 = {2:{0}} hr".format(self._df, self._seconds, _result))
         return round(_result, self._numberOfDecimals)
 
-    def hourToSecond(self, hours):
+    def hour_to_second(self, hours):
         """
         Converts hours to seconds
 
@@ -232,7 +234,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} hr * 3600.0 = {2:{0}} s".format(self._df, self._hours, _result))
         return round(_result, self._numberOfDecimals)
 
-    def secondToDay(self, seconds):
+    def second_to_day(self, seconds):
         """
         Converts seconds to days
 
@@ -249,7 +251,7 @@ class Time(SpeedCalc):  # subclass, inherits from SpeedCalc
             print ("{1:{0}} s / 86400.0 = {2:{0}} days".format(self._df, self._seconds, _result))
         return round(_result, self._numberOfDecimals)
 
-    def dayToSecond(self, days):
+    def day_to_second(self, days):
         """
         Converts days to seconds
 
@@ -275,21 +277,21 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for ET calculations.
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass ET
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._energyFluxValue = None
         self._massFluxValue = None
         self._waterDensity = None
 
-    def energyFluxToWaterEvaporated(self, energyFluxValue, waterDensity=1000.0):
+    def energy_flux_to_water_evaporated(self, energy_flux_value, water_density=1000.0):
         """
         Converts the values of evapotranspiration (ET) given in units of
         energy flux (W/m^2) to units of equivalent depth of water
@@ -299,39 +301,39 @@ class ET(SpeedCalc):  # subclass, inherits from SpeedCalc
         power per unit _area of earth surface to volume of water evaporated per unit _area
         of earth surface, per unit time.
 
-        @param energyFluxValue: energy flux rate in W/m^2
-        @param waterDensity: density value for water; defaults to 1000 kg/m^3
+        @param energy_flux_value: energy flux rate in W/m^2
+        @param water_density: density value for water; defaults to 1000 kg/m^3
 
         @returns: Amount of Water Evaporated (in mm/day)
 
         Formula::
-            (energyFluxValue W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * waterDensity kg)
+            (energy_flux_value W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * water_density kg)
         OR  massFluxValue kg/(m^2*s) / 2.26E6 J
         """
-        self._energyFluxValue = energyFluxValue
-        self._waterDensity = waterDensity  # Density of water in kg/m^3
+        self._energyFluxValue = energy_flux_value
+        self._waterDensity = water_density  # Density of water in kg/m^3
         _result = ((self._energyFluxValue * 3600.0 * 24.0 * 1000) / (2.26e6 * self._waterDensity))
         if self._formula:
             print ("({1:{0}} W/m^2 * 1 J/s * 3600 s * 24 hr * 1000 mm)/(2.26E6 J/kg * {3} kg "
                    "= {2:{0}} mm/day".format(self._df, self._energyFluxValue, _result, self._waterDensity))
         return round(_result, self._numberOfDecimals)
 
-    def massFluxToWaterEvaporated(self, massFluxValue, waterDensity=1000.0):
+    def mass_flux_to_water_evaporated(self, mass_flux_value, water_density=1000.0):
         """
         Converts the values of evapotranspiration (ET) given in mass flux
         units of kg/(m^2*s) to units of equivalent depth of water
         evaporated per day in mm/day.
 
-        @param massFluxValue: mass flux rate in kg/(m^2*s)
-        @param waterDensity: density value for water; defaults to 1000 kg/m^3
+        @param mass_flux_value: mass flux rate in kg/(m^2*s)
+        @param water_density: density value for water; defaults to 1000 kg/m^3
 
         @returns: Amount of Water Evaporated in mm/day
 
         Formula::
-            massFluxValue * (1.0/waterDensity) * 1000 * 3600 * 24
+            mass_flux_value * (1.0/water_density) * 1000 * 3600 * 24
         """
-        self._massFluxValue = massFluxValue
-        self._waterDensity = waterDensity  # Density of water in kg/m^3
+        self._massFluxValue = mass_flux_value
+        self._waterDensity = water_density  # Density of water in kg/m^3
         _result = self._massFluxValue * (1.0/self._waterDensity) * 1000 * 3600 * 24
         if self._formula:
             print ("({1:{0}} [kg/(m^2*s)] / {3} [kg/m^3]) * 1000 mm * 3600 s * 24 hr "
@@ -347,17 +349,17 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
     These are conversions commonly used for Pressure calculations.
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass Pressure
 
         @param formula: set formula to true to have the calculations print the formulas as they are calculated
-        @param numberOfDecimals: sets the number of decimals the result values will return
+        @param number_of_decimals: sets the number of decimals the result values will return
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._T = None
@@ -368,14 +370,13 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._multiplier = None
         self._units = None
 
-    def vaporPressure_fromTemperature(self, temperature, phase="liquid", units="Pa"):
+    def vapor_pressure_from_temperature(self, temperature, units="Pa"):
         """
         Calculates Vapor Pressure from a given Temperature in Celsius.
         For Saturation Vapor Pressure, put in the temperature.
         For actual vapor Pressure, enter the Dewpoint Temperature.
 
         @param temperature: Degrees Celsius
-        @param phase: takes "liquid" and "ice" as parameters; defaults to "liquid"
         @param units: display units; defaults in Pa
         @return: saturation vapor pressure (e*) in Pascals (Pa)
 
@@ -403,20 +404,20 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
                 self._df, self._T, _CONST1, _CONST2, self._units, _phase, _result))
         return round(_result, self._numberOfDecimals)
 
-    def relativeHumidity(self, vaporPressure, saturationVaporPressure, units="Pa"):
+    def relative_humidity(self, vapor_pressure, saturation_vapor_pressure, units="Pa"):
         """
         Calculates the relative humidity from the vapor pressure (e) and saturation vapor pressure (e*)
 
-        @param vaporPressure:  The vapor pressure (e) in Pa
-        @param saturationVaporPressure: The saturation vapor pressure (e*) in Pa
+        @param vapor_pressure:  The vapor pressure (e) in Pa
+        @param saturation_vapor_pressure: The saturation vapor pressure (e*) in Pa
         @param units: display units; defaults in Pa
         @return: returns the relative humidity
 
         Formula::
-            relativeHumidity = vaporPressure/saturationVaporPressure
+            relative_humidity = vapor_pressure/saturation_vapor_pressure
         """
-        self._vaporPressure = vaporPressure
-        self._saturationVaporPressure = saturationVaporPressure
+        self._vaporPressure = vapor_pressure
+        self._saturationVaporPressure = saturation_vapor_pressure
         self._units = units
 
         _relativeHumidity = self._vaporPressure / self._saturationVaporPressure
@@ -427,20 +428,20 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
                 self._df, self._vaporPressure, self._saturationVaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
 
-    def vaporPressure_fromRelativeHumidity(self, relativeHumidity, saturationVaporPressure, units="Pa"):
+    def vapor_pressure_from_relative_humidity(self, relative_humidity, saturation_vapor_pressure, units="Pa"):
         """
         Calculates the vapor pressure using the relative humidity equation.
 
-        @param relativeHumidity:  The relative humidity value in decimal form (e.g. 50% => 0.5) [divides by 100 if not]
-        @param saturationVaporPressure: The saturation vapor pressure (often symbolized as "e*") in Pa
+        @param relative_humidity:  The relative humidity value in decimal form (e.g. 50% => 0.5) [divides by 100 if not]
+        @param saturation_vapor_pressure: The saturation vapor pressure (often symbolized as "e*") in Pa
         @param units: display units; defaults in Pa
         @return: returns the vapor pressure in Pa
 
         Formula::
-            vaporPressure_fromRelativeHumidity = relativeHumidity * saturationVaporPressure
+            vapor_pressure_from_relative_humidity = relative_humidity * saturation_vapor_pressure
         """
-        self._relativeHumidity = relativeHumidity
-        self._saturationVaporPressure = saturationVaporPressure
+        self._relativeHumidity = relative_humidity
+        self._saturationVaporPressure = saturation_vapor_pressure
         self._units = units
 
         if self._relativeHumidity > 1:
@@ -454,20 +455,20 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
                 self._df, self._relativeHumidity, self._saturationVaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
 
-    def vaporPressureDeficit(self, saturationVaporPressure, vaporPressure, units="Pa"):
+    def vapor_pressure_deficit(self, saturation_vapor_pressure, vapor_pressure, units="Pa"):
         """
         Calculates the vapor pressure deficit (VPD).
 
-        @param saturationVaporPressure: The saturation vapor pressure (e*) in Pa
-        @param vaporPressure: The vapor pressure (e) in Pa
+        @param saturation_vapor_pressure: The saturation vapor pressure (e*) in Pa
+        @param vapor_pressure: The vapor pressure (e) in Pa
         @param units: display units; defaults in Pa
         @return: returns the vapor pressure deficit in Pa
 
         Formula::
-            vaporPressureDeficit = saturationVaporPressure - vaporPressure
+            vapor_pressure_deficit = saturation_vapor_pressure - vapor_pressure
         """
-        self._saturationVaporPressure = saturationVaporPressure
-        self._vaporPressure = vaporPressure
+        self._saturationVaporPressure = saturation_vapor_pressure
+        self._vaporPressure = vapor_pressure
         self._units = units
 
         _vaporPressureDeficit = self._saturationVaporPressure - self._vaporPressure
@@ -478,55 +479,55 @@ class Pressure(SpeedCalc):  # subclass, inherits from SpeedCalc
                 self._df, self._saturationVaporPressure, self._vaporPressure, _result, self._units))
         return round(_result, self._numberOfDecimals)
 
-    def pascalsTo_kiloPascals(self, pascalValue):
+    def pascals_to_kilopascals(self, pascal_value):
         """
         Converts pascals to kilopascals [kPa]
 
-        @param pascalValue: the pascal value to convert
+        @param pascal_value: the pascal value to convert
 
         Formula::
-            0.001 * pascalValue = kiloPascals
+            0.001 * pascal_value = kiloPascals
         """
         self._units = "kPa"
         self._multiplier = 0.001
-        self._pascalValue = pascalValue
+        self._pascalValue = pascal_value
         _result = self._multiplier * self._pascalValue
         if self._formula:
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)
 
-    def pascalsTo_hectoPascals(self, pascalValue):
+    def pascals_to_hectopascals(self, pascal_value):
         """
         Converts pascals to hectopascals [hPa]
 
-        @param pascalValue: the pascal value to convert
+        @param pascal_value: the pascal value to convert
 
         Formula::
-            0.01 * pascalValue = kiloPascals
+            0.01 * pascal_value = kiloPascals
         """
         self._units = "hPa"
         self._multiplier = 0.01
-        self._pascalValue = pascalValue
+        self._pascalValue = pascal_value
         _result = self._multiplier * self._pascalValue
         if self._formula:
             print ("{1} * {2} = {3:{0}} [{4}]".format(
                 self._df, self._multiplier, self._pascalValue, _result, self._units))
         return round(_result, self._numberOfDecimals)
 
-    def dewPointTemperature(self, vaporPressure):
+    def dew_point_temperature(self, vapor_pressure):
         """
         Calculates the dew point temperature from the given vapor pressure
 
-        @param vaporPressure: the actual vapor pressure [at a given temperature]
+        @param vapor_pressure: the actual vapor pressure [at a given temperature]
         @return: dew point temperature
 
         Formula::
-            dewPoint = (ln(vaporPressure) - 6.415)/(0.0999-0.00421 * ln(vaporPressure))
+            dewPoint = (ln(vapor_pressure) - 6.415)/(0.0999-0.00421 * ln(vapor_pressure))
         """
-        self._vaporPressure = vaporPressure
+        self._vaporPressure = vapor_pressure
 
-        _result = (math.log1p(vaporPressure) - 6.415)/(0.0999-0.00421 * math.log1p(vaporPressure))
+        _result = (math.log1p(vapor_pressure) - 6.415) / (0.0999 - 0.00421 * math.log1p(vapor_pressure))
         if self._formula:
             print ("(ln({1}) - 6.415)/(0.0999-0.00421 * ln({1})) = {2:{0}} [Celsius]".format(
                 self._df, self._vaporPressure, _result))
@@ -538,14 +539,14 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
     Subclass for Polygon, created for Module 09.
     """
 
-    def __init__(self, x_coords, y_coords, formula=False, numberOfDecimals=6):
+    def __init__(self, x_coords, y_coords, formula=False, number_of_decimals=6):
         """
         Initializes subclass Polygon
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._x_coords = None
@@ -556,14 +557,14 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._perimeter = None
 
         # Validate polygon coordinates
-        self.validatePolygon(x_coords, y_coords)
+        self.validate_polygon(x_coords, y_coords)
 
         # Set area, centroid, and perimeter of polygon
-        self.setPolyArea()
-        self.setPolyCentroid()
-        self.setPolyPerimeter()
+        self.set_poly_area()
+        self.set_poly_centroid()
+        self.set_poly_perimeter()
 
-    def validatePolygon(self, x_coords, y_coords):
+    def validate_polygon(self, x_coords, y_coords):
         """
         Checks if coordinates given make a valid polygon by summing the coordinates and seeing if they are equal.
 
@@ -580,7 +581,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         except ValueError as e:
             raise e
 
-    def setPolyArea(self):
+    def set_poly_area(self):
         """
         Calculates and sets Polygon Area
         """
@@ -593,7 +594,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
             i += 1
         self._area = abs(_calcSum)/2.0
 
-    def setPolyCentroid(self):
+    def set_poly_centroid(self):
         """
         Calculates and sets Polygon Centroid (x, y)
         """
@@ -612,7 +613,7 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._centroid_x = (1.0/(6.0 * self._area)) * abs(_calcSum_x)
         self._centroid_y = (1.0/(6.0 * self._area)) * abs(_calcSum_y)
 
-    def setPolyPerimeter(self):
+    def set_poly_perimeter(self):
         """
         Calculates and sets Polygon Perimeter
         """
@@ -625,21 +626,21 @@ class Polygon(SpeedCalc):  # subclass, inherits from SpeedCalc
             i += 1
         self._perimeter = _calcSum
 
-    def getPolyArea(self):
+    def get_poly_area(self):
         """
         Gets the Polygon Area
         @returns: Polygon Area
         """
         return round(self._area, self._numberOfDecimals)
 
-    def getPolyCentroid(self):
+    def get_poly_centroid(self):
         """
         Gets the Polygon Centroid
         @returns: Polygon Centroid
         """
         return round(self._centroid_x, self._numberOfDecimals), round(self._centroid_y, self._numberOfDecimals)
 
-    def getPolyPerimeter(self):
+    def get_poly_perimeter(self):
         """
         Gets the Polygon Perimeter
         @returns: Polygon Perimeter
@@ -652,24 +653,24 @@ class RandomWalk(SpeedCalc):  # subclass, inherits from SpeedCalc
     Subclass for Random Walking, created for Module 10.
     """
 
-    def __init__(self, numberOfRandomWalkers, numberOfSteps, averageStepSize=1, stdInStepSize=2.5,
-                 beginningPosition=0, formula=False, numberOfDecimals=6):
+    def __init__(self, number_of_random_walkers, number_of_steps, average_step_size=1, std_in_step_size=2.5,
+                 beginning_position=0, formula=False, number_of_decimals=6):
         """
         Initializes subclass Polygon
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
-        self._numberOfRandomWalkers = numberOfRandomWalkers
-        self._numberOfSteps = numberOfSteps
-        self._averageStepSize = averageStepSize
-        self._stdInStepSize = stdInStepSize
-        self._beginningPosition = beginningPosition
+        self._numberOfRandomWalkers = number_of_random_walkers
+        self._numberOfSteps = number_of_steps
+        self._averageStepSize = average_step_size
+        self._stdInStepSize = std_in_step_size
+        self._beginningPosition = beginning_position
 
-    def randomWalk_1D(self):
+    def random_walk_1d(self):
         """
         One-dimensional simulation of random walkers
 
@@ -723,19 +724,20 @@ class RandomWalk(SpeedCalc):  # subclass, inherits from SpeedCalc
     #
     #     return _xpositions, _ypositions
 
+
 class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
     """
     Subclass for Plant Water Stress, created for Module 11 and Module 12.
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass Plant Water Stress
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self._soilMoistureData = None
@@ -743,19 +745,21 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._waterMoisture = None
 
     # TODO: write test for this
-    def calculate_PWS(self, soilMoistureData, changeInTime, waterMoisture):
+    def calculate_pws(self, soil_moisture_data, change_in_time, water_moisture):
         """
         Calculates Plant Water Stress using trapezoidal rule
 
-        @param: a list of soil moisture data
+        @param soil_moisture_data: a list of soil moisture data
+        @param change_in_time: the change in time
+        @param water_moisture: the amount of water moisture
         @return: Plant Water Stress
         """
-        self._soilMoistureData = soilMoistureData
-        self._timeInterval = changeInTime
-        self._waterMoisture = waterMoisture
+        self._soilMoistureData = soil_moisture_data
+        self._timeInterval = change_in_time
+        self._waterMoisture = water_moisture
 
         # TODO: Refactor
-        # Convert soilMoistureData List into an array
+        # Convert soil_moisture_data List into an array
         _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
         _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
         _results = numpy.zeros(_soilMoistureDataArray.size)
@@ -774,18 +778,19 @@ class PlantWaterStress(SpeedCalc):  # subclass, inherits from SpeedCalc
         _result = numpy.sum(_results)
         return _result
 
-    def calculate_PWS2(self, soilMoistureData, timeInterval):
+    def calculate_pws2(self, soil_moisture_data, time_interval):
         """
         Calculate PWS2 using centered difference
 
-        @param soilMoistureData: a list of soil moisture data
+        @param soil_moisture_data: a list of soil moisture data
+        @param time_interval: the time interval of the data
         @return: Plant Water Stress 2 array
         """
-        self._soilMoistureData = soilMoistureData
-        self._timeInterval = timeInterval
+        self._soilMoistureData = soil_moisture_data
+        self._timeInterval = time_interval
 
         # TODO: Refactor
-        # Convert soilMoistureData List into an array
+        # Convert soil_moisture_data List into an array
         _soilMoistureDataArray = numpy.asarray(self._soilMoistureData)
         _soilMoistureDataArray = _soilMoistureDataArray.astype(float)
         _results = numpy.zeros(_soilMoistureDataArray.size - 2)
@@ -812,26 +817,26 @@ class PredatorPrey(SpeedCalc):  # subclass, inherits from SpeedCalc
     created for Module 13
     """
 
-    def __init__(self, prey_birthRate_alpha, prey_deathRate_beta, predator_deathRate_gamma, predator_birthRate_delta,
-                 formula=False, numberOfDecimals=6):
+    def __init__(self, prey_birth_rate_alpha, prey_death_rate_beta, predator_death_rate_gamma,
+                 predator_birth_rate_delta, formula=False, number_of_decimals=6):
         """
         Initializes subclass PredatorPrey
 
-        @param: alpha: Prey Birth Rate
-        @param: beta: Prey Death Rate
-        @param: gamma: Predator Death Rate
-        @param: delta: Predator Birth Rate
+        @param prey_birth_rate_alpha: Prey Birth Rate
+        @param prey_death_rate_beta: Prey Death Rate
+        @param predator_death_rate_gamma: Predator Death Rate
+        @param predator_birth_rate_delta: Predator Birth Rate
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Parameters
-        self._prey_birthRate_alpha = prey_birthRate_alpha
-        self._prey_deathRate_beta = prey_deathRate_beta
-        self._predator_deathRate_gamma = predator_deathRate_gamma
-        self._predator_birthRate_delta = predator_birthRate_delta
+        self._prey_birthRate_alpha = prey_birth_rate_alpha
+        self._prey_deathRate_beta = prey_death_rate_beta
+        self._predator_deathRate_gamma = predator_death_rate_gamma
+        self._predator_birthRate_delta = predator_birth_rate_delta
 
         # Initialize Instance Attributes that are used later
         self._prey_initialPopulation = None
@@ -839,20 +844,20 @@ class PredatorPrey(SpeedCalc):  # subclass, inherits from SpeedCalc
         self._totalTime = None
         self._numberOfTimeSteps = None
 
-    def Lotka_Volterra(self, prey_initialPopulation, predator_initialPopulation, totalTime, numberOfTimeSteps):
+    def lotka_volterra(self, prey_initial_population, predator_initial_population, total_time, number_of_time_steps):
         """
 
-        @param prey_initialPopulation: The initial population value of the Prey
-        @param predator_initialPopulation: The initial population value of the Predator
-        @param totalTime: Amount of total time within the model (total time divided by number of time steps
+        @param prey_initial_population: The initial population value of the Prey
+        @param predator_initial_population: The initial population value of the Predator
+        @param total_time: Amount of total time within the model (total time divided by number of time steps
             determines number of iterations)
-        @param numberOfTimeSteps: The number of totalTime steps the total totalTime will be divided by
+        @param number_of_time_steps: The number of total_time steps the total total_time will be divided by
         @return: Time Model Population Array of Predator, Prey, and total number of data points for plotting
         """
-        self._prey_initialPopulation = prey_initialPopulation
-        self._predator_initialPopulation = predator_initialPopulation
-        self._totalTime = totalTime
-        self._numberOfTimeSteps = numberOfTimeSteps
+        self._prey_initialPopulation = prey_initial_population
+        self._predator_initialPopulation = predator_initial_population
+        self._totalTime = total_time
+        self._numberOfTimeSteps = number_of_time_steps
 
         _changeInTime = self._totalTime/(float(self._numberOfTimeSteps))  # Set the change in time value
         _N1 = numpy.zeros(self._numberOfTimeSteps + 1)  # Create Zero array for Prey
@@ -875,56 +880,56 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
     Subclass for GDAL-related spatial statistics
     """
 
-    def __init__(self, formula=False, numberOfDecimals=6):
+    def __init__(self, formula=False, number_of_decimals=6):
         """
         Initializes subclass SpatialStatistics
         """
         super(SpeedCalc, self).__init__()
-        self._df = "0." + str(numberOfDecimals) + "f"  # Sets up print format string, e.g. 0.6f
+        self._df = "0." + str(number_of_decimals) + "f"  # Sets up print format string, e.g. 0.6f
         self._formula = formula
-        self._numberOfDecimals = numberOfDecimals
+        self._numberOfDecimals = number_of_decimals
 
         # Initialize Instance Attributes that are used later
         self.rasterName = None
-        self.rasterAsArray = None
+        self.raster_as_array = None
         self.gdalRasterData = None
         self.outputFilename = None
         self.columns = None
         self.rows = None
         self._w = None
         self._y = None
-        self.lagDistance = None
+        self.lag_distance = None
         self.min_distance = None
         self.max_distance = None
 
-    def readRasterAsArray(self, rasterName):
+    def read_raster_as_array(self, raster_name):
         """
         Reads an input raster into a Numpy array
 
-        :param rasterName:
+        :param raster_name:
         :return:
         """
 
-        self.rasterName = rasterName
+        self.rasterName = raster_name
         self.gdalRasterData = gdal.Open(self.rasterName, GA_ReadOnly)
         self.rows = self.gdalRasterData.RasterYSize
         self.columns = self.gdalRasterData.RasterXSize
-        self.rasterAsArray = self.gdalRasterData.ReadAsArray()
-        #[self.columns, self.rows] = self.rasterAsArray.shape
+        self.raster_as_array = self.gdalRasterData.ReadAsArray()
+        # [self.columns, self.rows] = self.raster_as_array.shape
 
-        return self.rasterAsArray
+        return self.raster_as_array
 
-    def saveRasterArrayToGeoTiff(self, rasterAsArray, outputFilename):
+    def save_raster_array_to_geotiff(self, raster_as_array, output_filename):
         """
         Saves raster as Numpy Array out to a GeoTiff file
         Helpful reference: http://blog.remotesensing.io/2013/03/using-gdal-with-python-basic-intro/
 
-        @param rasterAsArray: The raster as a Numpy array
-        @param outputFilename: The path of the file concatentated with its path as a string
+        @param raster_as_array: The raster as a Numpy array
+        @param output_filename: The path of the file concatentated with its path as a string
         :return:
         """
-        self.rasterAsArray = rasterAsArray
-        self.outputFilename = outputFilename
+        self.raster_as_array = raster_as_array
+        self.outputFilename = output_filename
         _transformation = self.gdalRasterData.GetGeoTransform()
         _projection = self.gdalRasterData.GetProjection()
         _rasterBand = self.gdalRasterData.GetRasterBand(1)
@@ -936,7 +941,7 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         _outdata = _outdriver.Create(str(_outfilePath), self.rows, self.columns, 1, GDT_Float32)
 
         # Write the array to the file, which is the original array in this example
-        _outdata.GetRasterBand(1).WriteArray(self.rasterAsArray)
+        _outdata.GetRasterBand(1).WriteArray(self.raster_as_array)
 
         # Set a no data value if required
         if _noDataValue is not None:
@@ -948,35 +953,37 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         # Write projection information
         _outdata.SetProjection(_projection)
 
-    def calc_Morans_I(self, rasterAsArray, lagDistance=10):
+    def calc_morans_i(self, raster_as_array, lag_distance=10):
         """
         Calculates the value of Moran's I at given lag distances using Distance Band Weights;
         Default ranges from 1 pixel to 10 pixels
         In this particular project, that translates to: 1 pixel (30 m) to 10 pixels (300 m)
 
         Reference: http://pysal.readthedocs.org/en/latest/users/tutorials/weights.html#distance-band-weights
+        @param raster_as_array: the raster to use in the calculations as an array
+        @param lag_distance: given lag distance
         @returns: an array of Moran's I values.
         """
-        self.rasterAsArray = rasterAsArray
-        self.lagDistance = lagDistance
+        self.raster_as_array = raster_as_array
+        self.lag_distance = lag_distance
 
-        _flattened_raster_array = self.rasterAsArray.ravel()
+        _flattened_raster_array = self.raster_as_array.ravel()
         _x, _y = numpy.indices((self.rows, self.columns))
         _x.shape = (self.rows * self.columns, 1)
         _y.shape = (self.rows * self.columns, 1)
         _horizontal_stack = numpy.hstack([_x, _y])
 
-        _Morans_I = numpy.zeros(self.lagDistance)
+        _Morans_I = numpy.zeros(self.lag_distance)
 
         # Get weights based on distance (distance-band method) and calculation Moran's I
-        for i in range(1, self.lagDistance + 1):
+        for i in range(1, self.lag_distance + 1):
             _wthresh = pysal.threshold_binaryW_from_array(_horizontal_stack, i)  # distance-based weights
             _mi = pysal.Moran(_flattened_raster_array, _wthresh)  # calculate Moran's I for given distance
             _Morans_I[i-1] = _mi.I  # Value of individual result of Moran's I (_mi.I) saved into array
 
         return _Morans_I
 
-    def getLagDistanceForPlot(self, min_distance, max_distance):
+    def get_lag_distance_for_plot(self, min_distance, max_distance):
         """
 
         :param min_distance:
@@ -985,4 +992,4 @@ class SpatialStatistics(SpeedCalc):  # subclass, inherits from SpeedCalc
         """
         self.min_distance = min_distance
         self.max_distance = max_distance
-        return numpy.linspace(self.min_distance, self.max_distance, self.lagDistance)
+        return numpy.linspace(self.min_distance, self.max_distance, self.lag_distance)

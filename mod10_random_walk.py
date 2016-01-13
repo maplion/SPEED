@@ -55,7 +55,7 @@ def main(argv=None):
             # savefig(outputFilePath, dpi=300)
             show()
         else:
-            totalSummed, averageSteps = sc_rw.randomWalk_1D()
+            totalSummed, averageSteps = sc_rw.random_walk_1d()
 
             # Plots
             for walkers in range(numberOfRandomWalkers):

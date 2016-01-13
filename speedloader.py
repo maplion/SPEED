@@ -7,8 +7,9 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import time
 import sys
+
+from testcalculations import time
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"

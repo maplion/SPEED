@@ -11,19 +11,20 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import sys
-import time
 import Tkinter as tk
+import sys
+
 import speedcalc
-import speedloader
-import speedgui
 import speedcli
+import speedgui
+import speedloader
+from testcalculations import time
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-sc_Pressure = speedcalc.Pressure(numberOfDecimals=2)
+sc_Pressure = speedcalc.Pressure(number_of_decimals=2)
 sg = speedgui.SpeedGUI()
 sl_dc = speedloader.CSV()
 s_cli = speedcli.SpeedCLI(description="SPEED Vapor Pressure Deficit Command Line Interface")
@@ -37,7 +38,7 @@ def getSatVaporPressure(temperature):
     @return: Saturation Vapor Pressure
     """
     _temperature = temperature
-    _result = sc_Pressure.vaporPressure_fromTemperature(_temperature)
+    _result = sc_Pressure.vapor_pressure_from_temperature(_temperature)
     return _result
 
 
@@ -51,7 +52,7 @@ def getVaporPressure(temperature, relativeHumidity):
     _temperature = temperature
     _relativeHumidity = relativeHumidity
     _satVaporPressure = getSatVaporPressure(_temperature)
-    _vaporPressure = sc_Pressure.vaporPressure_fromRelativeHumidity(_relativeHumidity, _satVaporPressure)
+    _vaporPressure = sc_Pressure.vapor_pressure_from_relative_humidity(_relativeHumidity, _satVaporPressure)
     return _satVaporPressure, _vaporPressure
 
 
@@ -65,7 +66,7 @@ def getVPD(temperature, relativeHumidity):
     _temperature = temperature
     _relativeHumidity = relativeHumidity
     _satVaporPressure, _vaporPressure = getVaporPressure(_temperature, _relativeHumidity)
-    _result = sc_Pressure.vaporPressureDeficit(_satVaporPressure, _vaporPressure)
+    _result = sc_Pressure.vapor_pressure_deficit(_satVaporPressure, _vaporPressure)
     return _result
 
 
@@ -102,11 +103,11 @@ def main(argv=None):
         if len(argv) == 1:
             gui = True
         else:
-            arguments = s_cli.argParse(argv)
+            arguments = s_cli.arg_parse(argv)
 
         # Get File
         if gui:
-            filename = sg.openFileDialog()
+            filename = sg.open_file_dialog()
         else:
             filename = arguments.inputFilePath + "/" + arguments.file
 
@@ -119,25 +120,25 @@ def main(argv=None):
         if gui:
             # Date entry form for GUI (reference: http://www.python-course.eu/tkinter_entry_widgets.php)
             fields = 'Month', 'Day', 'Year'
-            root = sg.getRoot()
+            root = sg.get_root()
             root.update()
             root.deiconify()
-            ents = sg.makeForm(root, fields)
+            ents = sg.make_form(root, fields)
             root.bind('<Return>', (lambda event, e=ents: sg.fetch(e)))
             checkVar = tk.IntVar()
             checkbox = tk.Checkbutton(root, text="Show All:", variable=checkVar)
             checkbox.pack(side=tk.LEFT, padx=5, pady=5)
-            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, lastCall=True)))
+            b1 = tk.Button(root, text='Go', command=(lambda e=ents: sg.fetch(e, last_call=True)))
             b1.pack(side=tk.LEFT, padx=5, pady=5)
             b2 = tk.Button(root, text='Quit', command=root.quit)
             b2.pack(side=tk.LEFT, padx=5, pady=5)
             root.mainloop()
 
             # An imperfect way to ensure a clean exit when "Quit" is clicked in the GUI.
-            if sg.getEntries() is None:
+            if sg.get_entries() is None:
                 sys.exit()
             # Set Date
-            entries = sg.getEntries()
+            entries = sg.get_entries()
             day = entries['Day']
             month = entries['Month']
             year = entries['Year']
@@ -212,7 +213,7 @@ def main(argv=None):
                         relativeHumidity = "No Data"
                 else:
                     vpd = getVPD(float(temp), float(relativeHumidity))
-                    vpd = sc_Pressure.pascalsTo_kiloPascals(vpd)
+                    vpd = sc_Pressure.pascals_to_kilopascals(vpd)
                     relativeHumidity = "{0:0.2f}".format(float(relativeHumidity))
                     if float(temp) < 0:
                         temp = "{0:0.3f}".format(float(temp))

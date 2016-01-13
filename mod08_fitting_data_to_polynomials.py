@@ -37,7 +37,7 @@ def main(argv=None):
         if argv is None:
             argv = sys.argv
 
-        arguments = s_cli.argParse(argv)
+        arguments = s_cli.arg_parse(argv)
 
         if arguments.file is None:
             sys.exit("No file was given as an input.")

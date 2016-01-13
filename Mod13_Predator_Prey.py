@@ -7,8 +7,9 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import time
 from matplotlib.pylab import *
+
+from testcalculations import time
 # import timeit
 import speedcalc
 import speedloader
@@ -58,7 +59,7 @@ def main(argv=None):
     #     argv = sys.argv
 
     try:
-        # arguments = s_cli.argParse(argv)
+        # arguments = s_cli.arg_parse(argv)
 
         # get File
         # if arguments.file is None:
@@ -87,14 +88,14 @@ def main(argv=None):
         N2_initial_1 = 10
         totalTime_1 = 200
         timeSteps_1 = 1000
-        N1_1, N2_1, dataPoints_1 = sc_pp.Lotka_Volterra(N1_initial_1, N2_initial_1, totalTime_1, timeSteps_1)
+        N1_1, N2_1, dataPoints_1 = sc_pp.lotka_volterra(N1_initial_1, N2_initial_1, totalTime_1, timeSteps_1)
 
         # Set Different Initial Population, time and time step variables
         N1_initial_2 = 50
         N2_initial_2 = 30
         totalTime_2 = 300
         timeSteps_2 = 1000
-        N1_2, N2_2, dataPoints_2 = sc_pp.Lotka_Volterra(N1_initial_2, N2_initial_2, totalTime_2, timeSteps_2)
+        N1_2, N2_2, dataPoints_2 = sc_pp.lotka_volterra(N1_initial_2, N2_initial_2, totalTime_2, timeSteps_2)
 
         plotResults(N1_1, N2_1, N1_initial_1, N2_initial_1, totalTime_1, timeSteps_1, dataPoints_1)
         plotResults(N1_2, N2_2, N1_initial_2, N2_initial_2, totalTime_2, timeSteps_2, dataPoints_2)

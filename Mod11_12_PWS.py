@@ -7,8 +7,9 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import time
 from matplotlib.pylab import *
+
+from testcalculations import time
 # import timeit
 import speedcalc
 import speedloader
@@ -43,7 +44,7 @@ def main(argv=None):
         argv = sys.argv
 
     try:
-        arguments = s_cli.argParse(argv)
+        arguments = s_cli.arg_parse(argv)
 
         # get File
         if arguments.file is None:
@@ -80,11 +81,11 @@ def main(argv=None):
         # Calculate Plant Water Stress
         timeInterval = 1.0  # in hours [time at k+1 minus time at k]
         waterMoisture = 0.17  # theta_star
-        PWS = sc_PWS.calculate_PWS(soilMoistureData, timeInterval, waterMoisture)
-        PWS_file2 = sc_PWS.calculate_PWS(soilMoistureData2, timeInterval, waterMoisture)
+        PWS = sc_PWS.calculate_pws(soilMoistureData, timeInterval, waterMoisture)
+        PWS_file2 = sc_PWS.calculate_pws(soilMoistureData2, timeInterval, waterMoisture)
 
-        PWS2_file1 = sc_PWS.calculate_PWS2(soilMoistureData, timeInterval)
-        PWS2_file2 = sc_PWS.calculate_PWS2(soilMoistureData2, timeInterval)
+        PWS2_file1 = sc_PWS.calculate_pws2(soilMoistureData, timeInterval)
+        PWS2_file2 = sc_PWS.calculate_pws2(soilMoistureData2, timeInterval)
 
         end_time = time.clock()
         execution_time = end_time - start_time

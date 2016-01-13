@@ -8,21 +8,21 @@ GitHub repository: https://github.com/maplion/SPEED
 """
 
 import unittest
-import testCalculations_time
-import testCalculations_length
-import testCalculations_ET
-import testCalculations_pressure
-import testCalculations_polygon
+from testcalculations import time
+from testcalculations import polygon
+from testcalculations import ET
+from testcalculations import length
+from testcalculations import pressure
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-time_suite = testCalculations_time.suite()
-length_suite = testCalculations_length.suite()
-ET_suite = testCalculations_ET.suite()
-pressure_suite = testCalculations_pressure.suite()
-polygon_suite = testCalculations_polygon.suite()
+time_suite = time.suite()
+length_suite = length.suite()
+ET_suite = ET.suite()
+pressure_suite = pressure.suite()
+polygon_suite = polygon.suite()
 
 """
 Run Tests

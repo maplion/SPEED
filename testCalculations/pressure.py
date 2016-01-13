@@ -9,13 +9,13 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import unittest
 import speedcalc
-import testLogging
+import test_logging
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-log = testLogging.TestLogging("ERROR")
+log = test_logging.TestLogging("ERROR")
 sc_Pressure = speedcalc.Pressure()
 
 # TODO: Make better method comments
@@ -29,21 +29,21 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_vaporPressure_fromTemperature"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
-            tenC = sc_Pressure.vaporPressure_fromTemperature(10.0)
-            twentyC = sc_Pressure.vaporPressure_fromTemperature(20.0)
-            thirtyC = sc_Pressure.vaporPressure_fromTemperature(30.0)
-            negOneC = sc_Pressure.vaporPressure_fromTemperature(-1)
+            tenC = sc_Pressure.vapor_pressure_from_temperature(10.0)
+            twentyC = sc_Pressure.vapor_pressure_from_temperature(20.0)
+            thirtyC = sc_Pressure.vapor_pressure_from_temperature(30.0)
+            negOneC = sc_Pressure.vapor_pressure_from_temperature(-1)
 
             self.assertEquals(round(tenC, 0), 1228.0)
             self.assertEquals(round(twentyC, 0), 2339.0)
             self.assertEquals(round(thirtyC, 0), 4244.0)
             self.assertEquals(round(negOneC, 2), 562.51)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_relativeHumidity(self):
@@ -52,17 +52,17 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_relativeHumidity"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             vaporPressure = 872.0
             saturationVaporPressure = 1228.0
-            relativeHumidity = sc_Pressure.relativeHumidity(vaporPressure, saturationVaporPressure)
+            relativeHumidity = sc_Pressure.relative_humidity(vaporPressure, saturationVaporPressure)
 
             self.assertEquals(round(relativeHumidity, 2), 0.71)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_vaporPressure_fromRelativeHumidity(self):
@@ -71,20 +71,20 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_vaporPressure_fromRelativeHumidity"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             relativeHumidity = 0.71
             saturationVaporPressure = 1228.0
-            vaporPressure = sc_Pressure.vaporPressure_fromRelativeHumidity(relativeHumidity, saturationVaporPressure)
+            vaporPressure = sc_Pressure.vapor_pressure_from_relative_humidity(relativeHumidity, saturationVaporPressure)
 
             self.assertEquals(round(vaporPressure, 2), 871.88)
             relativeHumidity = 71
-            vaporPressure = sc_Pressure.vaporPressure_fromRelativeHumidity(relativeHumidity, saturationVaporPressure)
+            vaporPressure = sc_Pressure.vapor_pressure_from_relative_humidity(relativeHumidity, saturationVaporPressure)
             self.assertEquals(round(vaporPressure, 2), 871.88)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_vaporPressureDeficit(self):
@@ -93,17 +93,17 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_vaporPressureDeficit"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             saturationVaporPressure = 1228.0
             vaporPressure = 872.0
-            vaporPressureDeficit = sc_Pressure.vaporPressureDeficit(saturationVaporPressure, vaporPressure)
+            vaporPressureDeficit = sc_Pressure.vapor_pressure_deficit(saturationVaporPressure, vaporPressure)
 
             self.assertEquals(round(vaporPressureDeficit, 2), 356.00)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_pascalsTo_kiloPascals(self):
@@ -112,19 +112,19 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_pascalsTo_kiloPascals"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             Pressure1 = 1228.0
             Pressure2 = 872.0
-            kPa1 = sc_Pressure.pascalsTo_kiloPascals(Pressure1)
-            kPa2 = sc_Pressure.pascalsTo_kiloPascals(Pressure2)
+            kPa1 = sc_Pressure.pascals_to_kilopascals(Pressure1)
+            kPa2 = sc_Pressure.pascals_to_kilopascals(Pressure2)
 
             self.assertEquals(round(kPa1, 3), 1.228)
             self.assertEquals(round(kPa2, 3), 0.872)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_pascalsTo_hectoPascals(self):
@@ -133,19 +133,19 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_pascalsTo_hectoPascals"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             Pressure1 = 1228.0
             Pressure2 = 872.0
-            hPa1 = sc_Pressure.pascalsTo_hectoPascals(Pressure1)
-            hPa2 = sc_Pressure.pascalsTo_hectoPascals(Pressure2)
+            hPa1 = sc_Pressure.pascals_to_hectopascals(Pressure1)
+            hPa2 = sc_Pressure.pascals_to_hectopascals(Pressure2)
 
             self.assertEquals(round(hPa1, 3), 12.280)
             self.assertEquals(round(hPa2, 3), 8.720)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_dewPointTemperature(self):
@@ -154,16 +154,16 @@ class TestCalculations_pressure(unittest.TestCase):
         """
         testName = "test_dewPointTemperature"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             vaporPressure = 1543  # RH = 0.66, satVaporPressure ~= 2339
-            dewPointTemp = sc_Pressure.dewPointTemperature(vaporPressure)
+            dewPointTemp = sc_Pressure.dew_point_temperature(vaporPressure)
 
             self.assertEquals(round(dewPointTemp, 3), 13.439)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 

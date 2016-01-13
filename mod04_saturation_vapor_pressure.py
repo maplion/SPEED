@@ -14,14 +14,14 @@ __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-sc_Pressure = speedcalc.Pressure(numberOfDecimals=3)
+sc_Pressure = speedcalc.Pressure(number_of_decimals=3)
 
 vaporPressureList = []
 temperatureList = []
 temperature = -15.0
 while temperature < 35.01:
-    vaporPressure = sc_Pressure.vaporPressure_fromTemperature(temperature)
-    vaporPressure = sc_Pressure.pascalsTo_kiloPascals(vaporPressure)
+    vaporPressure = sc_Pressure.vapor_pressure_from_temperature(temperature)
+    vaporPressure = sc_Pressure.pascals_to_kilopascals(vaporPressure)
     print("T = {0} deg. C, esat = {1} kPa".format(temperature, vaporPressure))
     vaporPressureList.append(vaporPressure)
     temperatureList.append(temperature)

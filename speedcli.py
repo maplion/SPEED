@@ -32,7 +32,7 @@ class SpeedCLI(object):
         self._defaultInputDataFilePath = "/data"
         self._defaultOutputDataFilePath = "/output"
 
-        # Setup argParse
+        # Setup arg_parse
         self._parser = argparse.ArgumentParser(description=self._description)
 
         self._parser.add_argument("-i", action="store", dest="file",
@@ -50,7 +50,7 @@ class SpeedCLI(object):
                                   help="The path if you want the output file to go "
                                        "somewhere other than the default output folder.")
 
-    def argParse(self, args):
+    def arg_parse(self, args):
         """
         Parses incoming arguments and returns an argparse object to use in the rest of the program.
 
@@ -62,14 +62,14 @@ class SpeedCLI(object):
         if _results.inputFilePath == self._defaultInputDataFilePath:
             _head, _tail = os.path.split(args[0])
             _results.inputFilePath = _head + self._defaultInputDataFilePath
-            self.createDirectory(_results.inputFilePath)
+            self.create_directory(_results.inputFilePath)
         if _results.outputFilePath == self._defaultOutputDataFilePath:
             _head, _tail = os.path.split(args[0])
             _results.outputFilePath = _head + self._defaultOutputDataFilePath
-            self.createDirectory(_results.outputFilePath)
+            self.create_directory(_results.outputFilePath)
         return _results
 
-    def createDirectory(self, path):
+    def create_directory(self, path):
         """
         Checks if a directory exists; if it does not, creates it.
 

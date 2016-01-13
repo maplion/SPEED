@@ -10,13 +10,13 @@ GitHub repository: https://github.com/maplion/SPEED
 import unittest
 import numpy as np
 import speedcalc
-import testLogging
+import test_logging
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-log = testLogging.TestLogging()
+log = test_logging.TestLogging()
 sc = speedcalc
 
 
@@ -28,7 +28,7 @@ class TestCalculations_Polygon(unittest.TestCase):
         """
         testName = "test_validatePolygon"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             x_coords = np.asarray([550, 455, 491, 609, 645])
             y_coords = np.asarray([450, 519, 631, 631, 510])
@@ -39,9 +39,9 @@ class TestCalculations_Polygon(unittest.TestCase):
             except ValueError as e:
                 pass
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_setPolyArea(self):
@@ -50,7 +50,7 @@ class TestCalculations_Polygon(unittest.TestCase):
         """
         testName = "test_setPolyArea"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             x_coords = np.asarray([0, 10, 10, 0])
             y_coords = np.asarray([10, 10, 0, 0])
@@ -64,9 +64,9 @@ class TestCalculations_Polygon(unittest.TestCase):
             self.assertEqual(poly._area, 100)
             self.assertEqual(round(poly2._area, 0), 23803)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_setPolyCentroid(self):
@@ -75,7 +75,7 @@ class TestCalculations_Polygon(unittest.TestCase):
         """
         testName = "test_setPolyCentroid"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             x_coords = np.asarray([0, 10, 10, 0])
             y_coords = np.asarray([10, 10, 0, 0])
@@ -91,9 +91,9 @@ class TestCalculations_Polygon(unittest.TestCase):
             self.assertEqual(round(poly2._centroid_x, 1), 550.0)
             self.assertEqual(round(poly2._centroid_y, 1), 550.1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_setPolyPerimeter(self):
@@ -102,7 +102,7 @@ class TestCalculations_Polygon(unittest.TestCase):
         """
         testName = "test_setPolyPerimeter"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             x_coords = np.asarray([0, 10, 10, 0])
             y_coords = np.asarray([10, 10, 0, 0])
@@ -117,9 +117,9 @@ class TestCalculations_Polygon(unittest.TestCase):
             self.assertEqual(round(poly2._perimeter, 3), 588.115)
 
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
 ##########################################################################################

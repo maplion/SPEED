@@ -9,13 +9,13 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import unittest
 import speedcalc
-import testLogging
+import test_logging
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-log = testLogging.TestLogging()
+log = test_logging.TestLogging()
 sc_Length = speedcalc.Length()
 
 
@@ -25,34 +25,34 @@ class TestCalculations_length(unittest.TestCase):
         """
         Are meters correctly converted to millimeters?
         """
-        testName = "meterToMillimeter"
+        testName = "meter_to_millimeter"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             meters = 1
-            millimeters = sc_Length.meterToMillimeter(meters)
+            millimeters = sc_Length.meter_to_millimeter(meters)
             self.assertEquals(millimeters, 1000)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def millimeterToMeter(self):
         """
         Are millimeters correctly converted to meters?
         """
-        testName = "millimeterToMeter"
+        testName = "millimeter_to_meter"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             millimeters = 1000
-            meters = sc_Length.millimeterToMeter(millimeters)
+            meters = sc_Length.millimeter_to_meter(millimeters)
             self.assertEquals(meters, 1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 
@@ -62,6 +62,6 @@ def suite():
     Gather all the tests from this module in a test suite.
     """
     _suite = unittest.TestSuite()
-    _suite.addTest(TestCalculations_length('meterToMillimeter'))
-    _suite.addTest(TestCalculations_length('millimeterToMeter'))
+    _suite.addTest(TestCalculations_length('meter_to_millimeter'))
+    _suite.addTest(TestCalculations_length('millimeter_to_meter'))
     return _suite

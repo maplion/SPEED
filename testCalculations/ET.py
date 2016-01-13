@@ -9,13 +9,13 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import unittest
 import speedcalc
-import testLogging
+import test_logging
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-log = testLogging.TestLogging()
+log = test_logging.TestLogging()
 sc_ET = speedcalc.ET()
 
 
@@ -27,15 +27,15 @@ class TestCalculations_ET(unittest.TestCase):
         """
         testName = "test_massFluxToWaterEvaporated"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             ET_mf = 3.0e-5  # mass flux rate in kg/(m^2*s)
-            ET_mm_per_day = sc_ET.massFluxToWaterEvaporated(ET_mf)
+            ET_mm_per_day = sc_ET.mass_flux_to_water_evaporated(ET_mf)
             self.assertEquals(round(ET_mm_per_day, 6), 2.592000)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_energyFluxToWaterEvaporated(self):
@@ -44,18 +44,18 @@ class TestCalculations_ET(unittest.TestCase):
         """
         testName = "test_energyFluxToWaterEvaporated"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             ET_ef = 30  # energy flux rate in W/m^2
             ET_ef_2 = 100  # energy flux rate in W/m^2
-            ET_mm_per_day = sc_ET.energyFluxToWaterEvaporated(ET_ef)
-            ET_mm_per_day_2 = sc_ET.energyFluxToWaterEvaporated(ET_ef_2)
+            ET_mm_per_day = sc_ET.energy_flux_to_water_evaporated(ET_ef)
+            ET_mm_per_day_2 = sc_ET.energy_flux_to_water_evaporated(ET_ef_2)
             self.assertEquals(round(ET_mm_per_day, 2), 1.15)
             self.assertEquals(round(ET_mm_per_day_2, 2), 3.82)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 

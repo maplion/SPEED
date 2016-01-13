@@ -36,7 +36,7 @@ def main(argv=None):
         if argv is None:
             argv = sys.argv
 
-        arguments = s_cli.argParse(argv)
+        arguments = s_cli.arg_parse(argv)
 
         if arguments.file is None:
             sys.exit("No file was given as an input.")
@@ -51,9 +51,9 @@ def main(argv=None):
             sys.exit(e)  # Exit if given coordinates were an invalid polygon
 
         # Print results
-        print("Polygon Area: " + str(TodaysPoly.getPolyArea()))
-        print("Polygon Centroid: " + str(TodaysPoly.getPolyCentroid()))
-        print("Polygon Perimeter: " + str(TodaysPoly.getPolyPerimeter()))
+        print("Polygon Area: " + str(TodaysPoly.get_poly_area()))
+        print("Polygon Centroid: " + str(TodaysPoly.get_poly_centroid()))
+        print("Polygon Perimeter: " + str(TodaysPoly.get_poly_perimeter()))
 
     except Usage, err:
         print >>sys.stderr, err.msg

@@ -12,9 +12,9 @@ The projects were divided up into Modules.  I tried to abstract away, from the M
 In an effort to practice using Python's Docstrings and a Javadoc-like program (in this case, [Epydocs](http://epydoc.sourceforge.net/ "Epydocs")), I have provided generated documentation of my various classes and methods.  It may lag behind the actual code sometimes, but I try to keep it relatively up-to-date.
 
 ## Code Style ##
-While I value [coding standards](http://web.archive.org/web/20111010053227/http://jaynes.colorado.edu/PythonGuidelines.html#module_formatting "Useful Guideline for Python Style") and [I try to hold to PEP8](https://www.python.org/dev/peps/pep-0008/ "Python PEP8 Standards") as much as possible, I do deviate from PEP8, particularly in the naming of classes and functions and arguments passed into them.  
+I value [coding standards](http://web.archive.org/web/20111010053227/http://jaynes.colorado.edu/PythonGuidelines.html#module_formatting "Useful Guideline for Python Style") and [I try to hold to PEP8](https://www.python.org/dev/peps/pep-0008/ "Python PEP8 Standards") as much as possible.
 
-I have my own naming style [more Java/C#-based] that I have developed over time and adhere to and it mostly involves CamelCase [I really think a bunch of underscores looks ugly].  I try to remain consistent and make things readable, regardless of what I choose to do. 
+I try to remain consistent and make things readable, regardless of what I choose to do.
 
 ## Modules ##
 I shall be adding to this document throughout the semester [end of 2015] to document the goals of each Module and what to look for if you download and run it.
@@ -52,7 +52,7 @@ Tests were written for the methods within the ET class to ensure proper calculat
 >Write a Python script to perform the calculation of saturation vapor pressure for values ranging from and air temperature of T = -15 °C to T = 35 °C in increments of 0.01 °C. For each value of temperature, the code should write out the temperature and value of saturation vapor pressure. The print statement should be something like "T = 20 deg. C, esat = 3.169 kPa."
 
 **Solution:**
-For this Module, I created a Pressure class (as a subclass of SpeedCalc) and created a vaporPressure_fromTemperature() method for it.  I used the Clausius-Clapeyron equation to design the method and made parameters not only for temperature, but for the water phase as well [liquid/ice; defaults to liquid] so that one could run the calculation for either phase.  The method defaults in Pascals, but can also currently be calculated in hPa and kPa if desired.
+For this Module, I created a Pressure class (as a subclass of SpeedCalc) and created a vapor_pressure_from_temperature() method for it.  I used the Clausius-Clapeyron equation to design the method and made parameters not only for temperature, but for the water phase as well [liquid/ice; defaults to liquid] so that one could run the calculation for either phase.  The method defaults in Pascals, but can also currently be calculated in hPa and kPa if desired.
 
 I also wanted to be able to see my results in more than a  console print out, so I incorporated matplotlib and created a plot of the values.
 
@@ -302,7 +302,7 @@ There were aspects of this particular module that I would have liked to have don
 >**Step 04 (Optional)**: Also run the model for different parameter values and initial conditions than those above (you choose). Post the figure for this simulation beneath the figure and observations for the model run described in **Step 02**.
 
 **Solution:**
-For this Module, I made a PredatorPrey subclass within speedcalc to be able to create a Predator Prey object, for different predator-prey relationships, with set death rates and birth rates.  Then once the object is created, one can call the Lotka_Volterra method to run the equation and pass in initial values and plot the result.
+For this Module, I made a PredatorPrey subclass within speedcalc to be able to create a Predator Prey object, for different predator-prey relationships, with set death rates and birth rates.  Then once the object is created, one can call the lotka_volterra method to run the equation and pass in initial values and plot the result.
 
 This module did not require external user input, so I didn't not make a command-line interface.  It simply stated that one needed to be easily able to change parameters (was not specified in our out of the code).  I may change that prior to submission to include the ability to enter code from the command line.
 

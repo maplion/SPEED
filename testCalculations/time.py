@@ -9,13 +9,13 @@ GitHub repository: https://github.com/maplion/SPEED
 
 import unittest
 import speedcalc
-import testLogging
+import test_logging
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
 __license__ = "MIT"
 
-log = testLogging.TestLogging()
+log = test_logging.TestLogging()
 con_Time = speedcalc.Time()
 
 
@@ -27,15 +27,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_secondToMinute"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             seconds = 60
-            minutes = con_Time.secondToMinute(seconds)
+            minutes = con_Time.second_to_minute(seconds)
             self.assertEquals(minutes, 1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_minuteToSecond(self):
@@ -44,15 +44,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_minuteToSecond"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             minutes = 1
-            seconds = con_Time.minuteToSecond(minutes)
+            seconds = con_Time.minute_to_second(minutes)
             self.assertEquals(seconds, 60)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_minuteToHour(self):
@@ -61,15 +61,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_minuteToHour"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             minutes = 60
-            hours = con_Time.minuteToHour(minutes)
+            hours = con_Time.minute_to_hour(minutes)
             self.assertEquals(hours, 1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_hourToMinute(self):
@@ -78,15 +78,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_hourToMinute"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             hours = 1
-            minutes = con_Time.hourToMinute(hours)
+            minutes = con_Time.hour_to_minute(hours)
             self.assertEquals(minutes, 60)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_secondToHour(self):
@@ -95,15 +95,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_secondToHour"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             seconds = 3600
-            hours = con_Time.secondToHour(seconds)
+            hours = con_Time.second_to_hour(seconds)
             self.assertEquals(hours, 1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_hourToSecond(self):
@@ -112,15 +112,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_hourToSecond"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             hours = 1
-            seconds = con_Time.hourToSecond(hours)
+            seconds = con_Time.hour_to_second(hours)
             self.assertEquals(seconds, 3600)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_secondToDay(self):
@@ -129,15 +129,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_secondToDay"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             seconds = 86400
-            days = con_Time.secondToDay(seconds)
+            days = con_Time.second_to_day(seconds)
             self.assertEquals(days, 1)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 
     def test_dayToSecond(self):
@@ -146,15 +146,15 @@ class TestCalculations_time(unittest.TestCase):
         """
         testName = "test_dayToSecond"
         try:
-            log.printTestBegin(testName)
+            log.print_test_begin(testName)
             # ------------------------------------
             days = 1
-            seconds = con_Time.dayToSecond(days)
+            seconds = con_Time.day_to_second(days)
             self.assertEquals(seconds, 86400)
             # ------------------------------------
-            log.printTestSuccess(testName)
+            log.print_test_success(testName)
         except:
-            log.printTestFailure(testName)
+            log.print_test_failure(testName)
             self.fail(msg=testName[testName.rfind("_")+1:] + "() FAILED")
 ##########################################################################################
 

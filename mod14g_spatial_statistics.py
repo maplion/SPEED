@@ -7,11 +7,13 @@ GitHub repository: https://github.com/maplion/SPEED
 @author: Ryan Dammrose aka MapLion
 """
 
-import time
-from matplotlib.pylab import *
 import threading
+
+from matplotlib.pylab import *
+
 import speedcalc
 import speedcli
+from testcalculations import time
 
 __author__ = "Ryan Dammrose"
 __copyright__ = "Copyright 2015"
@@ -89,7 +91,7 @@ def main(argv=None):
 
     try:
         # Parse command line arguments
-        arguments = s_cli.argParse(argv)
+        arguments = s_cli.arg_parse(argv)
 
         # Get File
         if arguments.file is None:
@@ -100,10 +102,10 @@ def main(argv=None):
                 filename += ".tif"
 
         # Read Raster into an Array
-        rasterArray = sc_ss.readRasterAsArray(filename)
+        rasterArray = sc_ss.read_raster_as_array(filename)
 
        # Process Spatial Statistics
-        Morans_I = sc_ss.calc_Morans_I(rasterArray)
+        Morans_I = sc_ss.calc_morans_i(rasterArray)
 
         # Save array out to Spatial Raster (GeoTiff)
         if arguments.outputFile is None:
@@ -111,7 +113,7 @@ def main(argv=None):
                 arguments.file.replace(".tif", "")
             arguments.outputFile = arguments.file + "_MoransI"
         # outputFilename = arguments.outputFilePath + "/" + arguments.outputFile + ".tif"
-        # sc_ss.saveRasterArrayToGeoTiff(rasterArray, outputFilename)
+        # sc_ss.save_raster_array_to_geotiff(rasterArray, outputFilename)
 
         outputImage = None
         if ".tif" in arguments.file:
@@ -123,7 +125,7 @@ def main(argv=None):
         stop = True
         print "\n\nProcess time: {0} seconds".format(round(execution_time, 2))
 
-        lag_distance = sc_ss.getLagDistanceForPlot(30, 330)
+        lag_distance = sc_ss.get_lag_distance_for_plot(30, 330)
 
         # Save out image of related NDVI
         figure(1)
